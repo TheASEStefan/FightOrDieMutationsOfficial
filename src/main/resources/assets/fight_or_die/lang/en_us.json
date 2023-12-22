@@ -1,0 +1,24 @@
+{
+
+  "item.fight_or_die.shiller_spawn_egg": "Shiller Spawn Egg",
+  "item.fight_or_die.malruptor_spawn_egg": "Malruptor Spawn Egg",
+  "item.fight_or_die.margrouper_spawn_egg": "Margrouper Spawn Egg",
+
+
+  "entity.fight_or_die.shiller": "Shiller",
+  "entity.fight_or_die.malruptor": "Malruptor",
+  "entity.fight_or_die.margrouper": "Margrouper",
+
+
+  "subtitles.fight_or_die.entity.malruptor.ambient": "Malruptor shrieks",
+  "subtitles.fight_or_die.entity.malruptor.hurt": "Malruptor hurts",
+  "subtitles.fight_or_die.entity.malruptor.death": "Malruptor dies",
+  "subtitles.fight_or_die.entity.malruptor.infect": "Malruptor infects",
+
+  "subtitles.fight_or_die.entity.margrouper.ambient": "Margrouper screeches",
+  "subtitles.fight_or_die.entity.margrouper.hurt": "Margrouper hurts",
+  "subtitles.fight_or_die.entity.margrouper.death": "Margrouper dies",
+
+
+  "itemGroup.fight_or_die.item": "Fight or Die Mutations"
+}

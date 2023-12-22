@@ -1,0 +1,51 @@
+{
+  "entity.malruptor.ambient": {
+    "sounds": [
+      "fight_or_die:mob/malruptor.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.malruptor.ambient"
+  },
+
+  "entity.malruptor.hurt": {
+    "sounds": [
+      "fight_or_die:mob/malruptor.hurt"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.malruptor.hurt"
+  },
+
+  "entity.malruptor.death": {
+    "sounds": [
+      "fight_or_die:mob/malruptor.death"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.malruptor.death"
+  },
+
+  "entity.malruptor.infect": {
+    "sounds": [
+      "fight_or_die:mob/malruptor.infect"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.malruptor.infect"
+  },
+
+  "entity.margrouper.ambient": {
+    "sounds": [
+      "fight_or_die:mob/margrouper.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.margrouper.ambient"
+  },
+
+  "entity.margrouper.hurt": {
+    "sounds": [
+      "fight_or_die:mob/margrouper.hurt"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.margrouper.hurt"
+  },
+
+  "entity.margrouper.death": {
+    "sounds": [
+      "fight_or_die:mob/margrouper.death"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.margrouper.death"
+  }
+
+}

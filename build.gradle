@@ -8,9 +8,9 @@ plugins {
 }
 
 
-version = '1.20.1-1.0.6'
-group = 'net.workswave.rotted' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'rotted'
+version = '1.0.0-1.20.1'
+group = 'net.teamabyssal.fdm' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'fdm'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -55,10 +55,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'rotted'
+            property 'forge.enabledGameTestNamespaces', 'fdm'
 
             mods {
-                rotted {
+                fdm {
                     source sourceSets.main
                 }
             }
@@ -75,7 +75,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'rotted'
+            property 'forge.enabledGameTestNamespaces', 'fdm'
 
 
 
@@ -83,7 +83,7 @@ minecraft {
 
 
             mods {
-                rotted {
+                fdm {
                     source sourceSets.main
                 }
             }
@@ -99,10 +99,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'rotted'
+            property 'forge.enabledGameTestNamespaces', 'fdm'
 
             mods {
-                rotted {
+                fdm {
                     source sourceSets.main
                 }
             }
@@ -116,10 +116,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'rotted', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'fdm', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                rotted {
+                fdm {
                     source sourceSets.main
                 }
             }
@@ -146,7 +146,7 @@ repositories {
 
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.20.1-47.2.4'
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.18'
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
     // The "userdev" classifier will be requested and setup by ForgeGradle.
