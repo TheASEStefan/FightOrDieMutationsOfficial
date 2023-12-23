@@ -16,11 +16,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.network.NetworkHooks;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.entity.ai.InfectorSearchAreaGoal;
 import net.teamabyssal.entity.ai.InfectorTargettingGoal;
+import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.registry.EntityRegistry;
 import org.jetbrains.annotations.Nullable;
 
@@ -90,19 +92,15 @@ public class Infector extends Monster {
 
 
     public static boolean checkMonsterInfectorRules(EntityType<? extends Infector> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
-        if (FightOrDieMutationsConfig.SERVER.infector_spawn.get()) {
-            if (levelAccessor.dayTime() < (24000L * FightOrDieMutationsConfig.SERVER.infector_days.get())) {
-                return false;
-            }}
 
-        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source);
+        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && PhaseHandler.getPhase() > 0;
     }
 
 
     @Override
     public void die(DamageSource source) {
         if (source == this.damageSources().generic()) {
-            this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + Mth.lerp(0.5, 0, 2), this.getZ(), 0.0D, 0.0D, 0.0D);
+            this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 0.8, this.getZ(), 0.0D, 0.0D, 0.0D);
         }
         super.die(source);
     }

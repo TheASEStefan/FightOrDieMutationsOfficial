@@ -23,6 +23,8 @@ import net.teamabyssal.entity.client.MalruptorRenderer;
 import net.teamabyssal.entity.client.MargrouperRenderer;
 import net.teamabyssal.entity.client.ShillerRenderer;
 import net.teamabyssal.event.SpawnPlacementEvent;
+import net.teamabyssal.handlers.PhaseHandler;
+import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.*;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;

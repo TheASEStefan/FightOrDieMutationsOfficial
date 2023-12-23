@@ -24,6 +24,7 @@ import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.entity.categories.Evolving;
 import net.teamabyssal.entity.categories.Parasite;
+import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EntityRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -96,8 +97,9 @@ public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(
                 new AnimationController<>(this, "controllerRegistrar", 7, event -> {
+                    event.getController().setAnimationSpeed(1.0D);
                     if (event.isMoving()) {
-                        event.getController().setAnimationSpeed(0.8D);
+                        event.getController().setAnimationSpeed(1.8D);
                         return event.setAndContinue(RawAnimation.begin().thenLoop("shiller_walk"));
                     }
                     return event.setAndContinue(RawAnimation.begin().thenLoop("shiller_idle"));
@@ -114,7 +116,7 @@ public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
         if (this.isAlive()) {
             this.setPoints(this.getPoints() + 1);
         }
-        if (this.isAlive() && this.getPoints() == 2400) {
+        if (this.isAlive() && this.getPoints() == 1200) {
             this.level().playSound((Player) null, this.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.0F, 1.0F);
             if (this.level() instanceof ServerLevel server) {
                 server.sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 1, this.getZ(), 5, 0.4, 1.0, 0.4, 0);
@@ -122,6 +124,7 @@ public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
 
             this.discard();
             this.EvolveIntoMalruptor(this);
+            ScoreHandler.setScore(ScoreHandler.getScore() + 2);
         }
 
 

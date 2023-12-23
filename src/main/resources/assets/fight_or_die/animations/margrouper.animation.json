@@ -127,8 +127,36 @@
 					}
 				},
 				"Margrouper": {
+					"rotation": {
+						"vector": ["math.cos(-45+query.anim_time*220)*2", 0, "math.cos(-45+query.anim_time*220)*2"]
+					},
 					"position": {
-						"vector": [0, 3, 0]
+						"vector": [0, "3+math.cos(-45+query.anim_time*140)*0.8", 0]
+					},
+					"scale": {
+						"vector": [1.3, 1.3, 1.3]
+					}
+				}
+			}
+		},
+		"margrouper_air": {
+			"loop": true,
+			"animation_length": 1.29167,
+			"bones": {
+				"Malruptor": {
+					"rotation": {
+						"vector": [-200.66346, -423.92207, -201.75705]
+					},
+					"position": {
+						"vector": [0, 6, -5]
+					}
+				},
+				"Margrouper": {
+					"rotation": {
+						"vector": [88.7003, -46.99707, 89.40992]
+					},
+					"position": {
+						"vector": [0, 8, 0]
 					},
 					"scale": {
 						"vector": [1.3, 1.3, 1.3]
@@ -211,33 +239,11 @@
 					}
 				},
 				"Margrouper": {
-					"position": {
-						"vector": [0, 3, 0]
-					},
-					"scale": {
-						"vector": [1.3, 1.3, 1.3]
-					}
-				}
-			}
-		},
-		"margrouper_air": {
-			"loop": true,
-			"animation_length": 1.29167,
-			"bones": {
-				"Malruptor": {
 					"rotation": {
-						"vector": [-200.66346, -423.92207, -201.75705]
+						"vector": ["math.cos(-45+query.anim_time*220)*2", 0, "math.cos(-45+query.anim_time*220)*2"]
 					},
 					"position": {
-						"vector": [0, 6, -5]
-					}
-				},
-				"Margrouper": {
-					"rotation": {
-						"vector": [88.7003, -46.99707, 89.40992]
-					},
-					"position": {
-						"vector": [0, 8, 0]
+						"vector": [0, "3+math.cos(-45+query.anim_time*140)*0.8", 0]
 					},
 					"scale": {
 						"vector": [1.3, 1.3, 1.3]

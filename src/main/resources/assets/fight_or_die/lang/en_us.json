@@ -9,6 +9,12 @@
   "entity.fight_or_die.malruptor": "Malruptor",
   "entity.fight_or_die.margrouper": "Margrouper",
 
+  "subtitles.fight_or_die.player_phase0": "Weird sounds are coming from afar...",
+  "subtitles.fight_or_die.player_phase1": "Was I here before?...",
+  "subtitles.fight_or_die.player_phase2": "I've been here too much for my own good...",
+  "subtitles.fight_or_die.player_phase3": "What was that?...",
+  "subtitles.fight_or_die.player_phase4": "I'm starting to get scared, I'm being counted down...",
+  "subtitles.fight_or_die.player_phase5": "...",
 
   "subtitles.fight_or_die.entity.malruptor.ambient": "Malruptor shrieks",
   "subtitles.fight_or_die.entity.malruptor.hurt": "Malruptor hurts",

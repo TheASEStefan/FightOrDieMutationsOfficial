@@ -30,6 +30,8 @@ import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Evolving;
 import net.teamabyssal.entity.categories.Infector;
+import net.teamabyssal.handlers.PhaseHandler;
+import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 import org.jetbrains.annotations.Nullable;
@@ -88,27 +90,63 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && level().dayTime() > (24000L * FightOrDieMutationsConfig.SERVER.malruptor_attack_days.get());
+                return super.canUse() && PhaseHandler.getPhase() > 2;
 
             }
         });
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Skeleton.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Creeper.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Spider.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, EnderMan.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Silverfish.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Endermite.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && level().dayTime() > (24000L * FightOrDieMutationsConfig.SERVER.malruptor_attack_days.get());
+                return super.canUse() && PhaseHandler.getPhase() > 1;
+            }
+        });
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Skeleton.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 1;
+            }
+        });
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 2;
+            }
+        });
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 2;
+            }
+        });
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 2;
+            }
+        });
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Endermite.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 1;
+            }
+        });
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Silverfish.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 1;
+            }
+        });
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Spider.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 1;
             }
         });
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Zombie.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && level().dayTime() > (24000L * FightOrDieMutationsConfig.SERVER.malruptor_attack_days.get());
+                return super.canUse() && PhaseHandler.getPhase() > 1;
             }
         });
         this.goalSelector.addGoal(16, new RandomStrollGoal(this, 0.7D, 25, true));
@@ -128,6 +166,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving {
             }
             this.discard();
             this.EvolveIntoMargrouper(this);
+            ScoreHandler.setScore(ScoreHandler.getScore() + 5);
         }
         super.tick();
     }
@@ -198,7 +237,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
-        return SoundRegistry.ENTITY_MARGROUPER_HURT.get();
+        return SoundRegistry.ENTITY_MALRUPTOR_HURT.get();
     }
     @Override
     protected SoundEvent getDeathSound() {
@@ -210,7 +249,15 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving {
         return SoundRegistry.ENTITY_MALRUPTOR_AMBIENT.get();
     }
 
-    public class MalruptorJumpGoal extends Goal {
+    @Override
+    public void die(DamageSource source) {
+        if (Math.random() <= 0.85F && PhaseHandler.getPhase() > 2) {
+            ScoreHandler.setScore(ScoreHandler.getScore() - 1);
+        }
+        super.die(source);
+    }
+
+    public static class MalruptorJumpGoal extends Goal {
         private final Mob mob;
         private LivingEntity target;
         private final float yd;
@@ -233,7 +280,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving {
                     if (!this.mob.onGround()) {
                         return false;
                     } else {
-                        return this.mob.getRandom().nextInt(reducedTickDelay(8)) == 0;
+                        return this.mob.getRandom().nextInt(reducedTickDelay(15)) == 0;
                     }
                 } else {
                     return false;

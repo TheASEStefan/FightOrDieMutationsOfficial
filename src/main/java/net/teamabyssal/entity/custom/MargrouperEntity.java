@@ -23,6 +23,8 @@ import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Evolved;
 import net.teamabyssal.entity.categories.Infector;
+import net.teamabyssal.handlers.PhaseHandler;
+import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.SoundRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -76,12 +78,13 @@ public class MargrouperEntity extends Infector implements GeoEntity, Evolved {
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Zombie.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Skeleton.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Creeper.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Skeleton.class, true));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Spider.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, EnderMan.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EnderMan.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Silverfish.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Endermite.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Witch.class, true));
         this.goalSelector.addGoal(16, new RandomStrollGoal(this, 0.7D, 25, true));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -138,7 +141,15 @@ public class MargrouperEntity extends Infector implements GeoEntity, Evolved {
         return SoundRegistry.ENTITY_MARGROUPER_AMBIENT.get();
     }
 
-    public class MargrouperHuntGoal extends Goal {
+    @Override
+    public void die(DamageSource source) {
+        if (Math.random() <= 0.85F && PhaseHandler.getPhase() > 2) {
+            ScoreHandler.setScore(ScoreHandler.getScore() - 3);
+        }
+        super.die(source);
+    }
+
+    public static class MargrouperHuntGoal extends Goal {
         private final Mob mob;
         private LivingEntity target;
         private final float yd;

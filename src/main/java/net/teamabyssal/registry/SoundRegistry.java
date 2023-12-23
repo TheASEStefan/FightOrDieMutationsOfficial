@@ -29,5 +29,11 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> ENTITY_MARGROUPER_AMBIENT  = soundRegistry("entity.margrouper.ambient");
     public static final RegistryObject<SoundEvent> ENTITY_MARGROUPER_HURT  = soundRegistry("entity.margrouper.hurt");
     public static final RegistryObject<SoundEvent> ENTITY_MARGROUPER_DEATH = soundRegistry("entity.margrouper.death");
+    public static final RegistryObject<SoundEvent> PHASE0 = soundRegistry("player_phase0");
+    public static final RegistryObject<SoundEvent> PHASE1 = soundRegistry("player_phase1");
+    public static final RegistryObject<SoundEvent> PHASE2 = soundRegistry("player_phase2");
+    public static final RegistryObject<SoundEvent> PHASE3 = soundRegistry("player_phase3");
+    public static final RegistryObject<SoundEvent> PHASE4 = soundRegistry("player_phase4");
+    public static final RegistryObject<SoundEvent> PHASE5 = soundRegistry("player_phase5");
 
 }

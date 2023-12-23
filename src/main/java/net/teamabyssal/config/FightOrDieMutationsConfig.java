@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.List;
 
 public class FightOrDieMutationsConfig {
+    public static int globalVariable = 0;
     public static final Server SERVER;
     public static final ForgeConfigSpec SERVER_SPEC;
     public static final DataGen DATAGEN;
@@ -97,4 +98,5 @@ public class FightOrDieMutationsConfig {
         file.load();
         config.setConfig(file);
     }
+
 }

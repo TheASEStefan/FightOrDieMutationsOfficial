@@ -46,6 +46,49 @@
       "fight_or_die:mob/margrouper.death"
     ],
     "subtitle": "subtitles.fight_or_die.entity.margrouper.death"
+  },
+
+  "player_phase0": {
+    "sounds": [
+      "fight_or_die:mob/phase0"
+    ],
+    "subtitle": "subtitles.fight_or_die.player_phase0"
+  },
+
+  "player_phase1": {
+    "sounds": [
+      "fight_or_die:mob/phase1"
+    ],
+    "subtitle": "subtitles.fight_or_die.player_phase1"
+  },
+
+  "player_phase2": {
+    "sounds": [
+      "fight_or_die:mob/phase2"
+    ],
+    "subtitle": "subtitles.fight_or_die.player_phase2"
+  },
+
+  "player_phase3": {
+    "sounds": [
+      "fight_or_die:mob/phase3"
+    ],
+    "subtitle": "subtitles.fight_or_die.player_phase3"
+  },
+
+  "player_phase4": {
+    "sounds": [
+      "fight_or_die:mob/phase4"
+    ],
+    "subtitle": "subtitles.fight_or_die.player_phase4"
+  },
+
+  "player_phase5": {
+    "sounds": [
+      "fight_or_die:mob/phase5"
+    ],
+    "subtitle": "subtitles.fight_or_die.player_phase5"
   }
+
 
 }
