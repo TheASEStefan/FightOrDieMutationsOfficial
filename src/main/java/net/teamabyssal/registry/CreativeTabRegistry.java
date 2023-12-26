@@ -20,6 +20,9 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.MALRUPTOR_SPAWN_EGG.get());
         entries.accept(ItemRegistry.MARGROUPER_SPAWN_EGG.get());
 
+        entries.accept(ItemRegistry.ADDITION_DEVICE.get());
+        entries.accept(ItemRegistry.SUBTRACTION_DEVICE.get());
+
     }).build());
 
     public static void register(IEventBus eventBus) {

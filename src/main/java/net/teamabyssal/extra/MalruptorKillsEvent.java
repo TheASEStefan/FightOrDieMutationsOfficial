@@ -21,22 +21,22 @@ public class MalruptorKillsEvent {
             if (event.getSource().getEntity() instanceof MalruptorEntity) {
             MalruptorEntity malruptorEntity = (MalruptorEntity) event.getSource().getEntity();
             Level world = malruptorEntity.level();
-            if (event.getEntity() != null && (event.getEntity() instanceof Player || event.getEntity() instanceof IronGolem)) {
-                ScoreHandler.setScore(ScoreHandler.getScore() + 10);
-            }
             if (!world.isClientSide && malruptorEntity.isAlive()) {
                 malruptorEntity.setKills(malruptorEntity.getKills() + 1);
                 ScoreHandler.setScore(ScoreHandler.getScore() + 3);
+                if (event.getEntity() != null && (event.getEntity() instanceof Player || event.getEntity() instanceof IronGolem)) {
+                    ScoreHandler.setScore(ScoreHandler.getScore() + 10);
+                }
                }
             }
             else if (event.getSource().getEntity() instanceof MargrouperEntity) {
                 MargrouperEntity margrouperEntity = (MargrouperEntity) event.getSource().getEntity();
                 Level world = margrouperEntity.level();
-                if (event.getEntity() != null && (event.getEntity() instanceof Player || event.getEntity() instanceof IronGolem)) {
-                    ScoreHandler.setScore(ScoreHandler.getScore() + 10);
-                }
                 if (!world.isClientSide && margrouperEntity.isAlive()) {
                     ScoreHandler.setScore(ScoreHandler.getScore() + 3);
+                    if (event.getEntity() != null && (event.getEntity() instanceof Player || event.getEntity() instanceof IronGolem)) {
+                        ScoreHandler.setScore(ScoreHandler.getScore() + 10);
+                    }
                 }
             }
         }

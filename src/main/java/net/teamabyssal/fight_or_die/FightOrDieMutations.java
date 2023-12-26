@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,11 +24,15 @@ import net.teamabyssal.entity.client.MalruptorRenderer;
 import net.teamabyssal.entity.client.MargrouperRenderer;
 import net.teamabyssal.entity.client.ShillerRenderer;
 import net.teamabyssal.event.SpawnPlacementEvent;
+import net.teamabyssal.fdmcommands.PhaseCommand;
+import net.teamabyssal.fdmcommands.PointCommand;
 import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.*;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
+
+import java.io.File;
 
 @Mod(FightOrDieMutations.MODID)
 public class FightOrDieMutations {
@@ -81,6 +86,7 @@ public class FightOrDieMutations {
             EntityRenderers.register(EntityRegistry.SHILLER.get(), ShillerRenderer::new);
             EntityRenderers.register(EntityRegistry.MALRUPTOR.get(), MalruptorRenderer::new);
             EntityRenderers.register(EntityRegistry.MARGROUPER.get(), MargrouperRenderer::new);
+
 
         }
     }

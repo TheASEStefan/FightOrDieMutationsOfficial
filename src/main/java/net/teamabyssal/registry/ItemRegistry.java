@@ -2,12 +2,15 @@ package net.teamabyssal.registry;
 
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
+import net.teamabyssal.item.AdditionDevice;
+import net.teamabyssal.item.SubtractionDevice;
 
 
 public class ItemRegistry {
@@ -19,6 +22,11 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.MALRUPTOR, 0x000000, 0x110202, new Item.Properties()));
     public static final RegistryObject<Item> MARGROUPER_SPAWN_EGG = ITEMS.register("margrouper_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.MARGROUPER, 0x000000, 0x110202, new Item.Properties()));
+
+    public static final RegistryObject<Item> ADDITION_DEVICE = ITEMS.register("addition_device",
+            () -> new AdditionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SUBTRACTION_DEVICE = ITEMS.register("subtraction_device",
+            () -> new SubtractionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 
 
 

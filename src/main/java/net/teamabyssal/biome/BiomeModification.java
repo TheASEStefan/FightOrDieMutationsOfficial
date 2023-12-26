@@ -20,7 +20,7 @@ public class BiomeModification implements BiomeModifier {
 
 
     private static final RegistryObject<Codec<? extends BiomeModifier>> SERIALIZER =
-            RegistryObject.create(new ResourceLocation(FightOrDieMutations.MODID, "fdm_spawns"),
+            RegistryObject.create(new ResourceLocation(FightOrDieMutations.MODID, "fight_or_die_spawns"),
                     ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, FightOrDieMutations.MODID);
 
     public BiomeModification() {

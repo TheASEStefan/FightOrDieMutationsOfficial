@@ -1,7 +1,9 @@
 package net.teamabyssal.extra;
 
+import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
@@ -22,29 +24,46 @@ public class PlayerPhaseEvent {
                 player.sendSystemMessage(Component.literal("Score: " + ScoreHandler.getScore() ));
             }
         }
-
     }
+
     @SubscribeEvent
     public static void PhaseEvent(TickEvent.ServerTickEvent event) {
         if(event.phase == TickEvent.Phase.END) {
-           if (Math.random() < 0.02F) {
-               if (PhaseHandler.getPhase() < 2) {
-                   ScoreHandler.setScore(ScoreHandler.getScore() + 1);
-               }
-               else if (PhaseHandler.getPhase() > 2) {
-                   ScoreHandler.setScore(ScoreHandler.getScore() - 1);
-               }
-           }
-            if (Math.random() < 0.01F) {
-                if (ScoreHandler.getScore() > 0) {
-                    ScoreHandler.setScore(ScoreHandler.getScore() - 1);
+            if (event.getServer().getWorldData().getDifficulty() == Difficulty.NORMAL) {
+                if (Math.random() < 0.02F) {
+                    if (PhaseHandler.getPhase() < 2) {
+                        ScoreHandler.setScore(ScoreHandler.getScore() + 1);
+                    }
+                    else if (PhaseHandler.getPhase() > 2) {
+                        ScoreHandler.setScore(ScoreHandler.getScore() - 1);
+                    }
+                }
+                if (Math.random() < 0.01F) {
+                    if (ScoreHandler.getScore() > 0) {
+                        ScoreHandler.setScore(ScoreHandler.getScore() - 1);
+                    }
+                }
+            }
+            else if (event.getServer().getWorldData().getDifficulty() == Difficulty.HARD) {
+                if (Math.random() < 0.02F) {
+                    if (PhaseHandler.getPhase() < 2) {
+                        ScoreHandler.setScore(ScoreHandler.getScore() + 1);
+                    }
+                    else if (PhaseHandler.getPhase() > 2) {
+                        ScoreHandler.setScore(ScoreHandler.getScore() - 1);
+                    }
+                }
+                if (Math.random() < 0.015F) {
+                    if (PhaseHandler.getPhase() > 1) {
+                        ScoreHandler.setScore(ScoreHandler.getScore() + 1);
+                    }
                 }
             }
         }
     }
     @SubscribeEvent
     public static void SleepEvent(PlayerSleepInBedEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player && event.getEntity() != null && event.getResultStatus() != null) {
+        if (event.getEntity() instanceof ServerPlayer player && event.getEntity() != null) {
             if (PhaseHandler.getPhase() == 0) {
                 ScoreHandler.setScore(ScoreHandler.getScore() + 5);
                 player.sendSystemMessage(Component.literal("5 points have been added."));
