@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -23,7 +24,9 @@ import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.entity.ai.InfectorSearchAreaGoal;
 import net.teamabyssal.entity.ai.InfectorTargettingGoal;
 import net.teamabyssal.handlers.PhaseHandler;
+import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.ItemRegistry;
 import org.jetbrains.annotations.Nullable;
 
 public class Infector extends Monster {
@@ -80,6 +83,9 @@ public class Infector extends Monster {
         if (entity instanceof LivingEntity && Math.random() < 0.3F) {
             ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 0), entity);
         }
+        else if (entity instanceof LivingEntity && Math.random() <= 0.85F) {
+            ((LivingEntity) entity).addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 600, 0), entity);
+        }
         return super.doHurtTarget(entity);
     }
 
@@ -96,6 +102,14 @@ public class Infector extends Monster {
         return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && PhaseHandler.getPhase() > 0;
     }
 
+    @Override
+    protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
+        super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
+        Entity entity = pSource.getEntity();
+        if (Math.random() <= 0.15F) {
+            this.spawnAtLocation(ItemRegistry.INFECTOR_THORAX.get());
+        }
+    }
 
     @Override
     public void die(DamageSource source) {

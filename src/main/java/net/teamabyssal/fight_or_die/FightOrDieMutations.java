@@ -65,6 +65,8 @@ public class FightOrDieMutations {
 
         SoundRegistry.register(modEventBus);
 
+        EffectRegistry.register(modEventBus);
+
         CreativeTabRegistry.register(modEventBus);
 
         final DeferredRegister<Codec<? extends BiomeModifier>> biomeModifiers =

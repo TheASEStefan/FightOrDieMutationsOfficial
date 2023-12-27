@@ -8,9 +8,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -21,7 +21,10 @@ import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.handlers.ScoreHandler;
+import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+
+import javax.crypto.spec.PSource;
 
 public class Parasite extends Monster {
 
@@ -52,6 +55,15 @@ public class Parasite extends Monster {
         }
 
     }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (pSource.getEntity() != null && pSource.getEntity() instanceof LivingEntity entity && Math.random() <= 0.65F) {
+            entity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 600, 0), entity);
+        }
+        return super.hurt(pSource, pAmount);
+    }
+
 
     public int getMaxAirSupply() {
         return Math.max(600, 1200) / 2 ;

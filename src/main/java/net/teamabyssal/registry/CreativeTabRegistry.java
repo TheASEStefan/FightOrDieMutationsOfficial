@@ -22,6 +22,9 @@ public class CreativeTabRegistry {
 
         entries.accept(ItemRegistry.ADDITION_DEVICE.get());
         entries.accept(ItemRegistry.SUBTRACTION_DEVICE.get());
+        entries.accept(ItemRegistry.PARASCORE.get());
+
+        entries.accept(ItemRegistry.INFECTOR_THORAX.get());
 
     }).build());
 

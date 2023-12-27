@@ -10,6 +10,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,10 +30,12 @@ import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
+import net.teamabyssal.entity.categories.Evolved;
 import net.teamabyssal.entity.categories.Evolving;
 import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.handlers.ScoreHandler;
+import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +49,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 
-public class MalruptorEntity extends Infector implements GeoEntity, Evolving {
+public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Evolved {
 
     public static final EntityDataAccessor<Integer> KILLS = SynchedEntityData.defineId(MalruptorEntity.class, EntityDataSerializers.INT);
 

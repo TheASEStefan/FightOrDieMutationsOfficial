@@ -8,8 +8,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.teamabyssal.handlers.ScoreHandler;
+import net.teamabyssal.item.categories.Device;
+import net.teamabyssal.item.categories.Utility;
 
-public class SubtractionDevice extends Item {
+public class SubtractionDevice extends Item implements Device, Utility {
 
     public SubtractionDevice(Properties pProperties) {
         super(pProperties);

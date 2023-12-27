@@ -6,11 +6,14 @@
 
   "item.fight_or_die.addition_device": "Addition Device",
   "item.fight_or_die.subtraction_device": "Subtraction Device",
-
+  "item.fight_or_die.parascore": "Parascore",
+  "item.fight_or_die.infector_thorax": "Infector Thorax",
 
   "entity.fight_or_die.shiller": "Shiller",
   "entity.fight_or_die.malruptor": "Malruptor",
   "entity.fight_or_die.margrouper": "Margrouper",
+
+  "effect.fight_or_die.hive_sickness": "Hive Sickness",
 
   "subtitles.fight_or_die.player_phase0": "Weird sounds are coming from afar...",
   "subtitles.fight_or_die.player_phase1": "Was I here before?...",

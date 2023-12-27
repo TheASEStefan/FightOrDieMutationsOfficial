@@ -1,5 +1,6 @@
 package net.teamabyssal.extra;
 
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -7,6 +8,7 @@ import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.WanderingTrader;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +17,8 @@ import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.entity.categories.Parasite;
 import net.teamabyssal.entity.custom.MalruptorEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
+import net.teamabyssal.handlers.PhaseHandler;
+import net.teamabyssal.registry.EffectRegistry;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
 public class LivingSpawnedModifications {
@@ -48,6 +52,15 @@ public class LivingSpawnedModifications {
             if (!world.isClientSide) {
                 if (Math.random() <= 0.85F) {
                     malruptorEntity.setKills(malruptorEntity.getKills() + malruptorEntity.getRandom().nextInt(15));
+                }
+            }
+        }
+        else if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            Level world = player.level();
+            if (!world.isClientSide) {
+                if (PhaseHandler.getPhase() > 2) {
+                    player.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 1200, 0), player);
                 }
             }
         }

@@ -37,6 +37,7 @@ public class FightOrDieMutationsConfig {
 
 
         public final ForgeConfigSpec.ConfigValue<Integer> mob_cap;
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> hive_sickness;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> dimension_parameters;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> spawns;
         public final ForgeConfigSpec.ConfigValue<Boolean> infector_spawn;
@@ -79,6 +80,17 @@ public class FightOrDieMutationsConfig {
                     Lists.newArrayList("minecraft:is_overworld") , o -> o instanceof String);
             this.spawns = builder.defineList("mob|weight|minimum|maximum",
                     Lists.newArrayList("fight_or_die:shiller|25|1|2", "fight_or_die:malruptor|20|1|2", "fight_or_die:margrouper|12|1|1") , o -> o instanceof String);
+            builder.pop();
+
+            builder.push("Effects");
+            this.hive_sickness = builder.defineList("Mobs that are immune to the hive sickness infection",
+                    Lists.newArrayList(
+                            "minecraft:ghast"
+                            , "minecraft:magma_cube"
+                            , "minecraft:phantom"
+                            , "minecraft:snow_golem"
+                            , "minecraft:stray"
+                            , "minecraft:skeleton" ) , o -> o instanceof String);
             builder.pop();
 
 

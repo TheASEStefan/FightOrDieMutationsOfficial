@@ -3,18 +3,18 @@
   "category": "misc",
   "key":   {
     "#": {
-      "item": "rotted:flusk_viscera"
+      "item": "fight_or_die:infector_thorax"
     },
     "/": {
-      "item": "minecraft:bone"
+      "item": "minecraft:clock"
     }
   },
   "pattern": [
-    " ##",
-    " /#",
-    "/  "
+    " # ",
+    "#/#",
+    " # "
   ],
   "result": {
-    "item": "rotted:visceric_knife"
+    "item": "fight_or_die:parascore"
   }
 }

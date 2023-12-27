@@ -10,10 +10,16 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.item.AdditionDevice;
+import net.teamabyssal.item.Parascore;
 import net.teamabyssal.item.SubtractionDevice;
+import net.teamabyssal.item.categories.BaseItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ItemRegistry {
+    public  static  final List<Item> DROP_LOOT_ITEMS = new ArrayList<>();
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FightOrDieMutations.MODID);
 
     public static final RegistryObject<Item> SHILLER_SPAWN_EGG = ITEMS.register("shiller_spawn_egg",
@@ -27,6 +33,11 @@ public class ItemRegistry {
             () -> new AdditionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SUBTRACTION_DEVICE = ITEMS.register("subtraction_device",
             () -> new SubtractionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> PARASCORE = ITEMS.register("parascore",
+            () -> new Parascore(new Item.Properties().durability(10)));
+    public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("infector_thorax",
+            () -> new BaseItem(new Item.Properties()));
+
 
 
 
