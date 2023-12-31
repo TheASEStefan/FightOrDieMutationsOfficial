@@ -20,9 +20,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.teamabyssal.biome.BiomeModification;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
-import net.teamabyssal.entity.client.MalruptorRenderer;
-import net.teamabyssal.entity.client.MargrouperRenderer;
-import net.teamabyssal.entity.client.ShillerRenderer;
+import net.teamabyssal.entity.client.*;
 import net.teamabyssal.event.SpawnPlacementEvent;
 import net.teamabyssal.fdmcommands.PhaseCommand;
 import net.teamabyssal.fdmcommands.PointCommand;
@@ -88,6 +86,8 @@ public class FightOrDieMutations {
             EntityRenderers.register(EntityRegistry.SHILLER.get(), ShillerRenderer::new);
             EntityRenderers.register(EntityRegistry.MALRUPTOR.get(), MalruptorRenderer::new);
             EntityRenderers.register(EntityRegistry.MARGROUPER.get(), MargrouperRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN.get(), AssimilatedHumanRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadRenderer::new);
 
 
         }

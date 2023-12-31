@@ -12,7 +12,7 @@ public class PhaseCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 
         LiteralArgumentBuilder<CommandSourceStack> phaseCommand = Commands.literal("set_phase")
-                .requires(player -> player.hasPermission(2));
+                .requires(player -> player.hasPermission(3));
         phaseCommand.then((Commands.argument("set_phase", IntegerArgumentType.integer()).executes((ctx) -> {
             return setPhase(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "set_phase"));
         })));

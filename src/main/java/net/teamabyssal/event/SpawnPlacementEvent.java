@@ -5,6 +5,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.teamabyssal.entity.categories.Assimilated;
 import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.entity.categories.Parasite;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
@@ -18,6 +19,7 @@ public class SpawnPlacementEvent {
         event.register(EntityRegistry.SHILLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Parasite::checkMonsterParasiteRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityRegistry.MALRUPTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Infector::checkMonsterInfectorRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityRegistry.MARGROUPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Infector::checkMonsterInfectorRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_HUMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
 
 
     }

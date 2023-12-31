@@ -23,7 +23,7 @@ public class PhaseHandler {
 
     public static int getPhase() {
         if (ScoreHandler.getScore() >= PHASE0 && ScoreHandler.getScore() < PHASE1) {
-            PhaseHandler.phase = 0;
+             PhaseHandler.phase = 0;
         }
         else if (ScoreHandler.getScore() >= PHASE1 && ScoreHandler.getScore() < PHASE2) {
             PhaseHandler.phase = 1;
@@ -74,6 +74,8 @@ public class PhaseHandler {
         }
         PhaseHandler.phase = phase;
     }
+
+
     public static void checkAndNotifyPhaseChange(Player player) {
         int currentPhase = PhaseHandler.getPhase();
 
@@ -121,5 +123,6 @@ public class PhaseHandler {
             }
 
     }
+
 
 }

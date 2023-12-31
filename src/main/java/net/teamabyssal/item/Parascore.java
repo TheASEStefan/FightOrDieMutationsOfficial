@@ -8,14 +8,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ToolAction;
-import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.item.categories.Device;
 import net.teamabyssal.item.categories.Utility;
 
 public class Parascore extends Item implements Device, Utility {
     public Parascore(Properties pProperties) {
-        super(pProperties);
+        super(new Item.Properties().durability(20));
     }
 
     @Override
@@ -26,11 +25,6 @@ public class Parascore extends Item implements Device, Utility {
     @Override
     public boolean isDamageable(ItemStack stack) {
         return true;
-    }
-
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return Math.max(2, 5) + (int) Math.floor(5.25);
     }
 
 

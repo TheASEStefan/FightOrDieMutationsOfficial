@@ -1,0 +1,235 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"pose": {
+			"loop": true,
+			"bones": {
+				"Arm1": {
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Arm2": {
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				}
+			}
+		},
+		"assimilated_human_idle": {
+			"loop": true,
+			"bones": {
+				"Head": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*160)*7", 0, 0]
+					}
+				},
+				"LowerJaw": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*160)*15", 0, 0]
+					}
+				},
+				"Arm1": {
+					"rotation": {
+						"vector": [0, 0, "-22.5+math.cos(-50+query.anim_time*150)*-6"]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Arm2": {
+					"rotation": {
+						"vector": [0, 0, "22.5+math.cos(-50+query.anim_time*150)*6"]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Hand1": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				},
+				"Hand2": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				},
+				"UpperBody": {
+					"rotation": {
+						"vector": [22.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, -1, -2]
+					}
+				}
+			}
+		},
+		"assimilated_human_walk": {
+			"loop": true,
+			"bones": {
+				"Arm1": {
+					"rotation": {
+						"vector": ["4.8031+math.cos(-50+query.anim_time*200)*18", 5.50398, -22.34087]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Arm2": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*200)*-12.8658", 2.98041, 17.9919]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Model": {
+					"position": {
+						"vector": [0, "-0.5+math.cos(-50+query.anim_time*150)*0.5", 0]
+					}
+				},
+				"LowerJaw": {
+					"rotation": {
+						"vector": ["-5+math.cos(-50+query.anim_time*180)*18", 0, 0]
+					}
+				},
+				"Leg1": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*200)*-18", 0, 0]
+					}
+				},
+				"Leg2": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*200)*18", 0, 0]
+					}
+				},
+				"Hand1": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				},
+				"Hand2": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				}
+			}
+		},
+		"assimilated_human_target": {
+			"loop": true,
+			"bones": {
+				"Arm1": {
+					"rotation": {
+						"vector": [-90.02659, "13.2477+math.cos(-50+query.anim_time*220)*3", 55.7552]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Arm2": {
+					"rotation": {
+						"vector": ["-88.5973+math.cos(-50+query.anim_time*220)*3", -14.68539, 32.65521]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Model": {
+					"rotation": {
+						"vector": [2.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, "-0.5+math.cos(-50+query.anim_time*220)*0.7", -2]
+					}
+				},
+				"LowerJaw": {
+					"rotation": {
+						"vector": ["math.sin(-50+query.anim_time*340)*15", 0, 0]
+					}
+				},
+				"Hand1": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				},
+				"Hand2": {
+					"rotation": {
+						"vector": [22.5, 0, 0]
+					}
+				},
+				"Leg1": {
+					"rotation": {
+						"vector": ["-5+math.cos(-50+query.anim_time*280)*-40", 0, 0]
+					}
+				},
+				"Leg2": {
+					"rotation": {
+						"vector": ["-5+math.cos(-50+query.anim_time*280)*40", 0, 0]
+					}
+				},
+				"UpperBody": {
+					"rotation": {
+						"vector": [10, 0, 0]
+					}
+				},
+				"Legs": {
+					"rotation": {
+						"vector": [15, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 1]
+					}
+				}
+			}
+		},
+		"assimilated_human_death": {
+			"animation_length": 1.33333,
+			"bones": {
+				"Arm1": {
+					"rotation": {
+						"vector": [0, 0, -25]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Arm2": {
+					"rotation": {
+						"vector": [0, 0, 25]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Model": {
+					"rotation": {
+						"vector": [0, "math.cos(-50+query.anim_time*3700)*2", 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"1.3333": {
+							"vector": [1.3, 1.1, 1.3]
+						}
+					}
+				},
+				"Hand1": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				},
+				"Hand2": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

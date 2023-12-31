@@ -22,6 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Evolved;
+import net.teamabyssal.entity.categories.Hunter;
 import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.handlers.ScoreHandler;
@@ -37,7 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 
-public class MargrouperEntity extends Infector implements GeoEntity, Evolved {
+public class MargrouperEntity extends Infector implements GeoEntity, Evolved, Hunter {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static boolean hunting = false;
@@ -79,12 +80,27 @@ public class MargrouperEntity extends Infector implements GeoEntity, Evolved {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Zombie.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Skeleton.class, true));
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Spider.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EnderMan.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Silverfish.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Endermite.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Witch.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 2;
+            }
+        });
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 2;
+            }
+        });
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && PhaseHandler.getPhase() > 2;
+            }
+        });
         this.goalSelector.addGoal(16, new RandomStrollGoal(this, 0.7D, 25, true));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));

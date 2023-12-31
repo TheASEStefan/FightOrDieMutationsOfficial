@@ -48,6 +48,41 @@
     "subtitle": "subtitles.fight_or_die.entity.margrouper.death"
   },
 
+  "entity.assimilated_human.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_human.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_human.ambient"
+  },
+
+  "entity.assimilated.hurt": {
+    "sounds": [
+      "fight_or_die:mob/assimilated.hurt"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated.hurt"
+  },
+
+  "entity.explosion": {
+    "sounds": [
+      "fight_or_die:mob/explosion"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.explosion"
+  },
+
+  "entity.head.ambient": {
+    "sounds": [
+      "fight_or_die:mob/head.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.head.ambient"
+  },
+
+  "humanoid.death": {
+    "sounds": [
+      "fight_or_die:mob/humanoid.death"
+    ],
+    "subtitle": "subtitles.fight_or_die.humanoid.death"
+  },
+
   "player_phase0": {
     "sounds": [
       "fight_or_die:mob/phase0"

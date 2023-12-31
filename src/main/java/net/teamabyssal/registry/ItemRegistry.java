@@ -28,13 +28,17 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.MALRUPTOR, 0x000000, 0x110202, new Item.Properties()));
     public static final RegistryObject<Item> MARGROUPER_SPAWN_EGG = ITEMS.register("margrouper_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.MARGROUPER, 0x000000, 0x110202, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_HUMAN_SPAWN_EGG = ITEMS.register("assimilated_human_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN, 0x28283e, 0x345350, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_human_head_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN_HEAD, 0x28283e, 0x345350, new Item.Properties()));
 
     public static final RegistryObject<Item> ADDITION_DEVICE = ITEMS.register("addition_device",
             () -> new AdditionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SUBTRACTION_DEVICE = ITEMS.register("subtraction_device",
             () -> new SubtractionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PARASCORE = ITEMS.register("parascore",
-            () -> new Parascore(new Item.Properties().durability(10)));
+            () -> new Parascore(new Item.Properties().durability(20)));
     public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("infector_thorax",
             () -> new BaseItem(new Item.Properties()));
 

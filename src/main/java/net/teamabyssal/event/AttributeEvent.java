@@ -3,9 +3,7 @@ package net.teamabyssal.event;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.teamabyssal.entity.custom.MalruptorEntity;
-import net.teamabyssal.entity.custom.MargrouperEntity;
-import net.teamabyssal.entity.custom.ShillerEntity;
+import net.teamabyssal.entity.custom.*;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EntityRegistry;
 
@@ -18,6 +16,8 @@ public class AttributeEvent {
         event.put(EntityRegistry.SHILLER.get(), ShillerEntity.createAttributes().build());
         event.put(EntityRegistry.MALRUPTOR.get(), MalruptorEntity.createAttributes().build());
         event.put(EntityRegistry.MARGROUPER.get(), MargrouperEntity.createAttributes().build());
+        event.put(EntityRegistry.ASSIMILATED_HUMAN.get(), AssimilatedHumanEntity.createAttributes().build());
+        event.put(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadEntity.createAttributes().build());
 
     }
 

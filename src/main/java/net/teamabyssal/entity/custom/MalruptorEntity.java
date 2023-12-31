@@ -32,6 +32,7 @@ import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Evolved;
 import net.teamabyssal.entity.categories.Evolving;
+import net.teamabyssal.entity.categories.Hunter;
 import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.handlers.ScoreHandler;
@@ -49,12 +50,12 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 
-public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Evolved {
+public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Evolved, Hunter {
 
     public static final EntityDataAccessor<Integer> KILLS = SynchedEntityData.defineId(MalruptorEntity.class, EntityDataSerializers.INT);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private static boolean jumping = false;
+    private boolean jumping = false;
 
     public MalruptorEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -261,7 +262,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
         super.die(source);
     }
 
-    public static class MalruptorJumpGoal extends Goal {
+    public class MalruptorJumpGoal extends Goal {
         private final Mob mob;
         private LivingEntity target;
         private final float yd;

@@ -40,10 +40,6 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> hive_sickness;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> dimension_parameters;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> spawns;
-        public final ForgeConfigSpec.ConfigValue<Boolean> infector_spawn;
-        public final ForgeConfigSpec.ConfigValue<Integer> infector_days;
-        public final ForgeConfigSpec.ConfigValue<Boolean> shiller_spawn;
-        public final ForgeConfigSpec.ConfigValue<Integer> shiller_days;
         public final ForgeConfigSpec.ConfigValue<Double> shiller_health;
         public final ForgeConfigSpec.ConfigValue<Double> shiller_damage;
         public final ForgeConfigSpec.ConfigValue<Double> malruptor_health;
@@ -51,6 +47,13 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> malruptor_attack_days;
         public final ForgeConfigSpec.ConfigValue<Double> margrouper_health;
         public final ForgeConfigSpec.ConfigValue<Double> margrouper_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_head_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_head_damage;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_human_assimilation;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_villager_assimilation;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_adventurer_assimilation;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("Shiller");
@@ -66,20 +69,21 @@ public class FightOrDieMutationsConfig {
             this.margrouper_health = builder.comment("Default 18").defineInRange("Sets Margrouper's Max health", 18, 8, Double.MAX_VALUE);
             this.margrouper_damage = builder.comment("Default 7").defineInRange("Sets Margrouper's Damage", 7, 3, Double.MAX_VALUE);
             builder.pop();
+            builder.push("Assimilated Human");
+            this.assimilated_human_health = builder.comment("Default 20").defineInRange("Sets Human's Max health", 20, 11, Double.MAX_VALUE);
+            this.assimilated_human_damage = builder.comment("Default 9").defineInRange("Sets Human's Damage", 9, 5, Double.MAX_VALUE);
+            builder.pop();
+            builder.push("Assimilated Human Head");
+            this.assimilated_human_head_health = builder.comment("Default 7").defineInRange("Sets Assimilated Human Head's Max health", 7, 4, Double.MAX_VALUE);
+            this.assimilated_human_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Human Head's Damage", 3, 1, Double.MAX_VALUE);
+            builder.pop();
 
             builder.push("Spawns");
-            // Shiller
-            this.shiller_spawn = builder.comment("Default false").define("Should shillers spawn after a few days?",false);
-            this.shiller_days = builder.comment("Default 2").define("Days before shillers start spawning",2);
-            // Infector ( Malruptor, Margrouper )
-            this.infector_spawn = builder.comment("Default true").define("Should infectors spawn after a few days?",true);
-            this.infector_days = builder.comment("Default 5").define("Days before infectors start spawning",5);
-
             this.mob_cap = builder.comment("Default 60").define("MobCap",60);
             this.dimension_parameters = builder.comment("Default minecraft:is_overworld").defineList("Dictates in what biome the parasites spawn",
                     Lists.newArrayList("minecraft:is_overworld") , o -> o instanceof String);
             this.spawns = builder.defineList("mob|weight|minimum|maximum",
-                    Lists.newArrayList("fight_or_die:shiller|25|1|2", "fight_or_die:malruptor|20|1|2", "fight_or_die:margrouper|12|1|1") , o -> o instanceof String);
+                    Lists.newArrayList("fight_or_die:shiller|25|1|2", "fight_or_die:malruptor|20|1|2", "fight_or_die:margrouper|12|1|1", "fight_or_die:assimilated_human|20|1|2") , o -> o instanceof String);
             builder.pop();
 
             builder.push("Effects");
@@ -91,6 +95,11 @@ public class FightOrDieMutationsConfig {
                             , "minecraft:snow_golem"
                             , "minecraft:stray"
                             , "minecraft:skeleton" ) , o -> o instanceof String);
+            builder.pop();
+            builder.push("Assimilations");
+            this.assimilated_human_assimilation = builder.comment("Default true").define("Should zombies transform into assimilated humans when dying and having the Hive Sickness effect ?",true);
+            this.assimilated_villager_assimilation = builder.comment("Default true").define("Should villagers transform into assimilated villagers when dying and having the Hive Sickness effect ?",true);
+            this.assimilated_adventurer_assimilation = builder.comment("Default true").define("Should players transform into assimilated adventurers when dying and having the Hive Sickness effect ?",true);
             builder.pop();
 
 

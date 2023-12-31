@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,14 +11,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.network.NetworkHooks;
-import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.entity.ai.InfectorSearchAreaGoal;
 import net.teamabyssal.entity.ai.InfectorTargettingGoal;
@@ -83,7 +79,7 @@ public class Infector extends Monster {
         if (entity instanceof LivingEntity && Math.random() < 0.3F) {
             ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 0), entity);
         }
-        else if (entity instanceof LivingEntity && Math.random() <= 0.85F) {
+        if (entity instanceof LivingEntity && Math.random() <= 0.85F) {
             ((LivingEntity) entity).addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 600, 0), entity);
         }
         return super.doHurtTarget(entity);
@@ -106,7 +102,7 @@ public class Infector extends Monster {
     protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
         super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
         Entity entity = pSource.getEntity();
-        if (Math.random() <= 0.15F) {
+        if (Math.random() <= 0.05F) {
             this.spawnAtLocation(ItemRegistry.INFECTOR_THORAX.get());
         }
     }

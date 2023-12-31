@@ -1,0 +1,257 @@
+package net.teamabyssal.entity.custom;
+
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.teamabyssal.config.FightOrDieMutationsConfig;
+import net.teamabyssal.constants.MathHelper;
+import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
+import net.teamabyssal.entity.categories.Evolving;
+import net.teamabyssal.entity.categories.Head;
+import net.teamabyssal.entity.categories.Hunter;
+import net.teamabyssal.handlers.ScoreHandler;
+import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.SoundRegistry;
+import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+import java.util.EnumSet;
+
+public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolving, Hunter {
+    public static final EntityDataAccessor<Integer> KILLS = SynchedEntityData.defineId(AssimilatedHumanHeadEntity.class, EntityDataSerializers.INT);
+    private boolean trying = false;
+
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    public AssimilatedHumanHeadEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
+
+    @Override
+    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+        return false;
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(1, new HeadHuntGoal(this, 0.65F));
+        this.goalSelector.addGoal(16, new RandomStrollGoal(this, 0.7D, 25, true));
+        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
+            @Override
+            protected double getAttackReachSqr(LivingEntity entity) {
+                return 2.0 + entity.getBbWidth() * entity.getBbWidth();
+            }
+        });
+    }
+
+    @Nullable
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMobAttributes()
+                .add(Attributes.ATTACK_KNOCKBACK, 0.05D)
+                .add(Attributes.FOLLOW_RANGE, 32D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_human_head_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_human_head_damage.get())
+                .add(Attributes.ARMOR, 1D);
+
+    }
+    @Override
+    public void tick() {
+        if (this.isAlive() && this.getKills() == 5) {
+
+            this.level().playSound((Player) null, this.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.0F, 1.0F);
+            if (this.level() instanceof ServerLevel server) {
+                server.sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 1, this.getZ(), 5, 0.4, 1.0, 0.4, 0);
+            }
+            this.discard();
+            this.EvolveIntoSimHuman(this);
+            ScoreHandler.setScore(ScoreHandler.getScore() + 2);
+        }
+        super.tick();
+    }
+    private void EvolveIntoSimHuman(Entity entity) {
+        AssimilatedHumanEntity assimilatedHumanEntity = new AssimilatedHumanEntity(EntityRegistry.ASSIMILATED_HUMAN.get(), entity.level());
+        assimilatedHumanEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
+        entity.level().addFreshEntity(assimilatedHumanEntity);
+    }
+
+    public boolean isHunting() {
+        return !this.onGround() && trying;
+    }
+
+    public void setKills(Integer count) {
+        entityData.set(KILLS, count);
+    }
+
+    public int getKills() {
+        return entityData.get(KILLS);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("kills", entityData.get(KILLS));
+    }
+
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        entityData.set(KILLS, tag.getInt("kills"));
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(KILLS, 0);
+    }
+
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerV) {
+        controllerV.add(
+                new AnimationController<>(this, "controllerO", 7, event -> {
+                    if (event.isMoving() && !this.isAggressive()) {
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_walk"));
+                    }
+                    else if (event.isMoving() && this.isAggressive() && this.onGround()) {
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_target"));
+                    }
+                    else if (!event.isMoving() && !this.isAggressive()) {
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_idle"));
+                    }
+                    return PlayState.STOP;
+                }));
+        controllerV.add(
+                new AnimationController<>(this, "controllerN", 7, event -> {
+                    if (this.isHunting()) {
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_air"));
+                    }
+                    return PlayState.STOP;
+                }));
+
+    }
+
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundRegistry.HEAD_AMBIENT.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundRegistry.ENTITY_ASSIMILATED_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundRegistry.ENTITY_ASSIMILATED_HURT.get();
+    }
+
+    protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
+        super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
+        Entity entity = pSource.getEntity();
+
+
+    }
+    public class HeadHuntGoal extends Goal {
+        private final Mob mob;
+        private LivingEntity target;
+        private final float yd;
+
+        public HeadHuntGoal(Mob mob, float v) {
+            this.mob = mob;
+            this.yd = v;
+            this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+        }
+
+        public boolean canUse() {
+            this.target = this.mob.getTarget();
+            if (this.target == null) {
+                return false;
+            } else if (this.mob.isInWater()) {
+                return false;
+            } else {
+                double d0 = this.mob.distanceTo(this.target);
+                if (d0 > 6.0D && d0 < 14.0D) {
+                    if (!this.mob.onGround()) {
+                        return false;
+                    } else {
+                        return this.mob.getRandom().nextInt(reducedTickDelay(15)) == 0;
+                    }
+                } else {
+                    return false;
+                }
+            }
+
+        }
+
+        public boolean canContinueToUse() {
+            return !this.mob.onGround();
+        }
+
+
+        @Override
+        public void tick() {
+            if (this.mob.getTarget() != null) {
+                this.mob.getLookControl().setLookAt(this.target);
+                trying = true;
+
+            }
+        }
+
+        public void start() {
+            Vec3 vec3 = this.mob.getDeltaMovement();
+            Vec3 vec31 = new Vec3(this.target.getX() - this.mob.getX(), 0.0D, this.target.getZ() - this.mob.getZ());
+            if (vec31.lengthSqr() > 1.0E-7D) {
+                vec31 = vec31.normalize().scale(2D).add(vec3.scale(1.5D));
+            }
+
+            this.mob.setDeltaMovement(vec31.x + yd + MathHelper.DELTA / 32, this.yd + (MathHelper.PI / 12), vec31.z + yd);
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+        }
+    }
+}

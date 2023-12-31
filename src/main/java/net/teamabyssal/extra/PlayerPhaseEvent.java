@@ -20,6 +20,9 @@ public class PlayerPhaseEvent {
         if (event.player instanceof ServerPlayer player) {
             Level world = player.level();
             PhaseHandler.checkAndNotifyPhaseChange(player);
+            if (Math.random() < 0.02F) {
+                player.sendSystemMessage(Component.literal("Score: " + ScoreHandler.getScore()));
+            }
         }
     }
 

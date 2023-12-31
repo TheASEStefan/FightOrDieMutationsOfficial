@@ -3,6 +3,8 @@
   "item.fight_or_die.shiller_spawn_egg": "Shiller Spawn Egg",
   "item.fight_or_die.malruptor_spawn_egg": "Malruptor Spawn Egg",
   "item.fight_or_die.margrouper_spawn_egg": "Margrouper Spawn Egg",
+  "item.fight_or_die.assimilated_human_spawn_egg": "Assimilated Human Spawn Egg",
+  "item.fight_or_die.assimilated_human_head_spawn_egg": "Assimilated Human Head Spawn Egg",
 
   "item.fight_or_die.addition_device": "Addition Device",
   "item.fight_or_die.subtraction_device": "Subtraction Device",
@@ -12,6 +14,8 @@
   "entity.fight_or_die.shiller": "Shiller",
   "entity.fight_or_die.malruptor": "Malruptor",
   "entity.fight_or_die.margrouper": "Margrouper",
+  "entity.fight_or_die.assimilated_human": "Assimilated Human",
+  "entity.fight_or_die.assimilated_human_head": "Assimilated Human Head",
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",
 
@@ -30,6 +34,12 @@
   "subtitles.fight_or_die.entity.margrouper.ambient": "Margrouper screeches",
   "subtitles.fight_or_die.entity.margrouper.hurt": "Margrouper hurts",
   "subtitles.fight_or_die.entity.margrouper.death": "Margrouper dies",
+
+  "subtitles.fight_or_die.entity.assimilated_human.ambient": "Assimilated Human growls",
+  "subtitles.fight_or_die.entity.assimilated.hurt" : "Assimilated hurts",
+  "subtitles.fight_or_die.entity.explosion" : "Mutation explodes",
+  "subtitles.fight_or_die.entity.head.ambient" : "Walking Head shrieks",
+  "subtitles.fight_or_die.humanoid.death" : "Human mutation dies",
 
 
   "itemGroup.fight_or_die.item": "Fight or Die Mutations"

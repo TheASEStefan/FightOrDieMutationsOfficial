@@ -9,9 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
-import net.teamabyssal.entity.custom.MalruptorEntity;
-import net.teamabyssal.entity.custom.MargrouperEntity;
-import net.teamabyssal.entity.custom.ShillerEntity;
+import net.teamabyssal.entity.custom.*;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 
 import java.util.ArrayList;
@@ -43,6 +41,16 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(MargrouperEntity::new, PARASITE)
                             .sized(1.4f, 1.4f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "margrouper").toString()));
+    public static final RegistryObject<EntityType<AssimilatedHumanEntity>> ASSIMILATED_HUMAN =
+            ENTITY_TYPES.register("assimilated_human",
+                    () -> EntityType.Builder.of(AssimilatedHumanEntity::new, PARASITE)
+                            .sized(0.8f, 2.2f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human").toString()));
+    public static final RegistryObject<EntityType<AssimilatedHumanHeadEntity>> ASSIMILATED_HUMAN_HEAD =
+            ENTITY_TYPES.register("assimilated_human_head",
+                    () -> EntityType.Builder.of(AssimilatedHumanHeadEntity::new, PARASITE)
+                            .sized(0.7f, 1.2f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human_head").toString()));
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

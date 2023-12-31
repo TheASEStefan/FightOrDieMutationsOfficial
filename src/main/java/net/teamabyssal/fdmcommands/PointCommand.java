@@ -13,7 +13,7 @@ public class PointCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 
         LiteralArgumentBuilder<CommandSourceStack> pointCommand = Commands.literal("set_points")
-                .requires(player -> player.hasPermission(2));
+                .requires(player -> player.hasPermission(3));
         pointCommand.then((Commands.argument("set_points", IntegerArgumentType.integer()).executes((ctx) -> {
             return setPoints(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "set_points"));
         })));
