@@ -1,10 +1,14 @@
 package net.teamabyssal.entity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,11 +23,14 @@ import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Assimilated;
 import net.teamabyssal.entity.categories.Evolving;
+import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.ParticleRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -32,6 +39,8 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
+
+import java.util.List;
 
 public class AssimilatedHumanEntity extends Assimilated implements GeoEntity, Evolving {
 
@@ -51,7 +60,6 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity, Ev
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(16, new RandomStrollGoal(this, 0.7D, 25, true));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -81,13 +89,12 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity, Ev
                 .add(Attributes.ATTACK_KNOCKBACK, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MOVEMENT_SPEED, 0.28D)
                 .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_human_health.get())
                 .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_human_damage.get())
                 .add(Attributes.ARMOR, 4D);
 
     }
-
 
 
 
@@ -103,10 +110,14 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity, Ev
                         event.getController().setAnimationSpeed(2.0D);
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_target"));
                     }
+                    else if (this.isDeadOrDying()) {
+                        return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_human_death"));
+                    }
                     return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_idle"));
                 }));
 
     }
+
 
 
     @Override
@@ -120,6 +131,42 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity, Ev
         if (Math.random() <= 0.25F) {
             this.DropHumanHead(this);
         }
+        else if (Math.random() <= 0.35F) {
+                AABB boundingBox = this.getBoundingBox().inflate(4);
+                List<Entity> entities = this.level().getEntities(this, boundingBox);
+                for (Entity entity : entities) {
+                    if (entity instanceof LivingEntity livingEntity && !(EntityRegistry.PARASITES.contains(entity))) {
+                        if (!livingEntity.hasEffect(MobEffects.POISON)) {
+                            livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0), livingEntity);
+                            livingEntity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 1200, 0), livingEntity);
+                            livingEntity.level().playSound((Player) null, livingEntity.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+                            if (this.level() instanceof ServerLevel server) {
+                                server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
+                            }
+                        }
+                    }
+            }
+        }
+        else if (Math.random() <= 0.15F) {
+            AABB boundingBox = this.getBoundingBox().inflate(4);
+            List<Entity> entities = this.level().getEntities(this, boundingBox);
+            for (Entity entity : entities) {
+                if (entity instanceof LivingEntity livingEntity && !(EntityRegistry.PARASITES.contains(entity))) {
+                    if (!livingEntity.hasEffect(MobEffects.POISON)) {
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0), livingEntity);
+                        livingEntity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 1200, 0), livingEntity);
+                        livingEntity.level().playSound((Player) null, livingEntity.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+                        this.ShillerExplosion(this);
+                        this.ShillerExplosion(this);
+                        this.ShillerExplosion(this);
+                        this.ShillerExplosion(this);
+                        if (this.level() instanceof ServerLevel server) {
+                            server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
+                        }
+                    }
+                }
+            }
+        }
         super.die(source);
     }
 
@@ -127,6 +174,11 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity, Ev
         AssimilatedHumanHeadEntity assimilatedHumanHeadEntity = new AssimilatedHumanHeadEntity(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), entity.level());
         assimilatedHumanHeadEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
         entity.level().addFreshEntity(assimilatedHumanHeadEntity);
+    }
+    private void ShillerExplosion(Entity entity) {
+        ShillerEntity shillerEntity = new ShillerEntity(EntityRegistry.SHILLER.get(), entity.level());
+        shillerEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
+        entity.level().addFreshEntity(shillerEntity);
     }
 
     @Nullable

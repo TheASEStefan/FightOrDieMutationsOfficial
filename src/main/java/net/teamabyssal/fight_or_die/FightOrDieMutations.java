@@ -22,15 +22,10 @@ import net.teamabyssal.biome.BiomeModification;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.client.*;
 import net.teamabyssal.event.SpawnPlacementEvent;
-import net.teamabyssal.fdmcommands.PhaseCommand;
-import net.teamabyssal.fdmcommands.PointCommand;
-import net.teamabyssal.handlers.PhaseHandler;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.*;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
-import java.io.File;
 
 @Mod(FightOrDieMutations.MODID)
 public class FightOrDieMutations {
@@ -61,9 +56,13 @@ public class FightOrDieMutations {
 
         ItemRegistry.register(modEventBus);
 
+        BlockRegistry.register(modEventBus);
+
         SoundRegistry.register(modEventBus);
 
         EffectRegistry.register(modEventBus);
+
+        ParticleRegistry.register(modEventBus);
 
         CreativeTabRegistry.register(modEventBus);
 
@@ -74,6 +73,7 @@ public class FightOrDieMutations {
 
 
     }
+
 
     private void commonSetup(final FMLCommonSetupEvent event) {
 

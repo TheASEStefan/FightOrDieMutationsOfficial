@@ -38,7 +38,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> SUBTRACTION_DEVICE = ITEMS.register("subtraction_device",
             () -> new SubtractionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PARASCORE = ITEMS.register("parascore",
-            () -> new Parascore(new Item.Properties().durability(20)));
+            () -> new Parascore(new Item.Properties()));
     public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("infector_thorax",
             () -> new BaseItem(new Item.Properties()));
 

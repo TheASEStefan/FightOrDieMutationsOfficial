@@ -5,7 +5,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.teamabyssal.handlers.ScoreHandler;
+import net.teamabyssal.registry.WorldDataRegistry;
 
 public class PointCommand {
 
@@ -22,10 +22,12 @@ public class PointCommand {
 
     private static int setPoints(CommandSourceStack commandStack, int points) {
         if (points < 0) {
-            ScoreHandler.setScore(0);
+            WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(commandStack.getLevel());
+            worldDataRegistry.setScore(0);
         }
         else {
-            ScoreHandler.setScore(points);
+            WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(commandStack.getLevel());
+            worldDataRegistry.setScore(points);
         }
 
         return 0;

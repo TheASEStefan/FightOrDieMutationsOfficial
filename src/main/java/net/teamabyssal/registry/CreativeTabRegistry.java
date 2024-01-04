@@ -28,6 +28,9 @@ public class CreativeTabRegistry {
 
         entries.accept(ItemRegistry.INFECTOR_THORAX.get());
 
+        entries.accept(BlockRegistry.HIVE_BLOCK.get());
+        entries.accept(BlockRegistry.HIVE_TUNNEL_BLOCK.get());
+
     }).build());
 
     public static void register(IEventBus eventBus) {

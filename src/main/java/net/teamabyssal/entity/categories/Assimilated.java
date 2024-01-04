@@ -1,8 +1,6 @@
 package net.teamabyssal.entity.categories;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerLevel;
@@ -10,10 +8,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
@@ -21,22 +17,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
-import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.*;
-import net.teamabyssal.handlers.PhaseHandler;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.ParticleRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 
 public class Assimilated extends Monster {
+
     @Nullable
     BlockPos searchPos;
+
 
     public Assimilated(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -90,10 +85,9 @@ public class Assimilated extends Monster {
         return super.doHurtTarget(entity);
     }
 
+
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new AssimilatedSearchAreaGoal(this, 1.2));
-        this.goalSelector.addGoal(1, new AssimilatedTargettingGoal(this));
         this.goalSelector.addGoal(3, new FloatDiveGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
@@ -111,7 +105,10 @@ public class Assimilated extends Monster {
 
     public static boolean checkMonsterAssimilatedRules(EntityType<? extends Assimilated> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
 
-        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && PhaseHandler.getPhase() > 1;
+        WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) levelAccessor.getLevel());
+        int currentPhase = worldDataRegistry.getPhase();
+
+        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && currentPhase > 1;
     }
 
     @Override
@@ -124,23 +121,15 @@ public class Assimilated extends Monster {
 
     @Override
     public void die(DamageSource source) {
-        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 0.8, this.getZ(), 0.0D, 0.0D, 0.0D);
-        if (Math.random() <= 0.85F && PhaseHandler.getPhase() > 2) {
-            ScoreHandler.setScore(ScoreHandler.getScore() - 5);
+        if (this.level() instanceof ServerLevel world) {
+            world.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 3, 0.1, 0.7, 0., 0.3);
+            WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world);
+            int currentScore = worldDataRegistry.getScore();
+            int currentPhase = worldDataRegistry.getPhase();
+            if (Math.random() <= 0.85F && currentPhase > 2) {
+                worldDataRegistry.setScore(currentScore - 5);
+            }
         }
-            AABB boundingBox = this.getBoundingBox().inflate(4);
-            List<Entity> entities = this.level().getEntities(this, boundingBox);
-            for (Entity entity : entities) {
-                if (entity instanceof LivingEntity livingEntity && !(EntityRegistry.PARASITES.contains(entity))) {
-                        if (!livingEntity.hasEffect(MobEffects.POISON)) {
-                            livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0), livingEntity);
-                            if (this.level() instanceof ServerLevel server) {
-                                server.sendParticles(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getX(), this.getY() + 1, this.getZ(), 55, 0.7, 1.1, 0.5, 0.05);
-                            }
-                        }
-                    }
-                }
-
         super.die(source);
     }
 }

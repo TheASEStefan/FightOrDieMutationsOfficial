@@ -20,4 +20,9 @@ public class AssimilatedHumanRenderer extends GeoEntityRenderer<AssimilatedHuman
         super.render(entity, entityYaw, partialTicks, stack, bufferIn, packedLightIn);
         stack.popPose();
     }
+    @Override
+    protected float getDeathMaxRotation(AssimilatedHumanEntity entityLivingBaseIn) {
+        return 0.0F;
+    }
+
 }

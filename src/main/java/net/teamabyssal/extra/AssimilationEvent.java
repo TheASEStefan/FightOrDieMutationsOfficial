@@ -12,21 +12,23 @@ import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.custom.AssimilatedHumanEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
-import net.teamabyssal.handlers.PhaseHandler;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
 public class AssimilationEvent {
     @SubscribeEvent
-    public static void MalruptorKillEvent(LivingDeathEvent event) {
+    public static void AssimilationEventFDM(LivingDeathEvent event) {
         if (event != null && event.getEntity() != null && !event.getEntity().level().isClientSide) {
             Level world = event.getEntity().level();
             double x = event.getEntity().getX();
             double y = event.getEntity().getY();
             double z = event.getEntity().getZ();
             Entity entity = event.getEntity();
+            WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) world);
+            int currentPhase = worldDataRegistry.getPhase();
+            int currentScore = worldDataRegistry.getScore();
 
             if (entity instanceof Zombie zombie && zombie.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_human_assimilation.get()) {
                 AssimilatedHumanEntity assimilatedHumanEntity = EntityRegistry.ASSIMILATED_HUMAN.get().create(world);
@@ -36,11 +38,11 @@ public class AssimilationEvent {
                 assimilatedHumanEntity.playSound(SoundEvents.ZOMBIE_INFECT);
                 if (zombie.level() instanceof ServerLevel server) {
                     server.sendParticles(ParticleTypes.EXPLOSION, zombie.getX(), zombie.getY() + 1, zombie.getZ(), 5, 0.4, 1.0, 0.4, 0);
-                    if (PhaseHandler.getPhase() < 3) {
-                        ScoreHandler.setScore(ScoreHandler.getScore() + 5);
+                    if (currentPhase < 3) {
+                        worldDataRegistry.setScore(currentScore + 5);
                     }
-                    else if (PhaseHandler.getPhase() >= 3) {
-                        ScoreHandler.setScore(ScoreHandler.getScore() + 10);
+                    else if (currentPhase >= 3) {
+                        worldDataRegistry.setScore(currentScore + 10);
                     }
                 }
             }

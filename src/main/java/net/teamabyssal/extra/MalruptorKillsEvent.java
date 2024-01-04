@@ -1,5 +1,6 @@
 package net.teamabyssal.extra;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -9,8 +10,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
 import net.teamabyssal.entity.custom.MalruptorEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
 public class MalruptorKillsEvent {
@@ -20,9 +21,11 @@ public class MalruptorKillsEvent {
         if (event != null && event.getEntity() != null && !event.getEntity().level().isClientSide && event.getSource().getEntity() != null) {
 
             if (EntityRegistry.PARASITES.contains(event.getSource().getEntity()) && event.getEntity() != null) {
-                ScoreHandler.setScore(ScoreHandler.getScore() + 3);
+                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) event.getEntity().level());
+                int currentScore = worldDataRegistry.getScore();
+                worldDataRegistry.setScore(currentScore + 3);
                 if (event.getEntity() instanceof Player || event.getEntity() instanceof IronGolem) {
-                    ScoreHandler.setScore(ScoreHandler.getScore() + 10);
+                    worldDataRegistry.setScore(currentScore + 10);
                 }
             }
 

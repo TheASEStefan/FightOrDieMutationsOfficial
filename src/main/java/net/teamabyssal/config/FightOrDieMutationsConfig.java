@@ -70,8 +70,8 @@ public class FightOrDieMutationsConfig {
             this.margrouper_damage = builder.comment("Default 7").defineInRange("Sets Margrouper's Damage", 7, 3, Double.MAX_VALUE);
             builder.pop();
             builder.push("Assimilated Human");
-            this.assimilated_human_health = builder.comment("Default 20").defineInRange("Sets Human's Max health", 20, 11, Double.MAX_VALUE);
-            this.assimilated_human_damage = builder.comment("Default 9").defineInRange("Sets Human's Damage", 9, 5, Double.MAX_VALUE);
+            this.assimilated_human_health = builder.comment("Default 20").defineInRange("Sets Human's Max health", 20, 10, Double.MAX_VALUE);
+            this.assimilated_human_damage = builder.comment("Default 8").defineInRange("Sets Human's Damage", 8, 4, Double.MAX_VALUE);
             builder.pop();
             builder.push("Assimilated Human Head");
             this.assimilated_human_head_health = builder.comment("Default 7").defineInRange("Sets Assimilated Human Head's Max health", 7, 4, Double.MAX_VALUE);

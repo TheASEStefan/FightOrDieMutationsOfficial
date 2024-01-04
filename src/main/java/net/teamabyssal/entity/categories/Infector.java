@@ -1,9 +1,9 @@
 package net.teamabyssal.entity.categories;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -19,13 +19,11 @@ import net.minecraftforge.network.NetworkHooks;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.entity.ai.InfectorSearchAreaGoal;
 import net.teamabyssal.entity.ai.InfectorTargettingGoal;
-import net.teamabyssal.handlers.PhaseHandler;
-import net.teamabyssal.registry.EffectRegistry;
-import net.teamabyssal.registry.EntityRegistry;
-import net.teamabyssal.registry.ItemRegistry;
+import net.teamabyssal.registry.*;
 import org.jetbrains.annotations.Nullable;
 
 public class Infector extends Monster {
+
 
     @Nullable
     BlockPos searchPos;
@@ -95,7 +93,10 @@ public class Infector extends Monster {
 
     public static boolean checkMonsterInfectorRules(EntityType<? extends Infector> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
 
-        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && PhaseHandler.getPhase() > 0;
+        WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) levelAccessor.getLevel());
+        int currentPhase = worldDataRegistry.getPhase();
+
+        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && currentPhase > 0;
     }
 
     @Override
@@ -109,8 +110,8 @@ public class Infector extends Monster {
 
     @Override
     public void die(DamageSource source) {
-        if (source == this.damageSources().generic()) {
-            this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 0.8, this.getZ(), 0.0D, 0.0D, 0.0D);
+        if (this.level() instanceof ServerLevel server) {
+            server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 3, 0.1, 0.7, 0., 0.3);
         }
         super.die(source);
     }

@@ -1,15 +1,14 @@
 package net.teamabyssal.extra;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.WanderingTrader;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,10 +17,11 @@ import net.teamabyssal.entity.categories.Assimilated;
 import net.teamabyssal.entity.categories.Head;
 import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.entity.categories.Parasite;
+import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
 import net.teamabyssal.entity.custom.MalruptorEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
-import net.teamabyssal.handlers.PhaseHandler;
 import net.teamabyssal.registry.EffectRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
 public class LivingSpawnedModifications {
@@ -29,12 +29,14 @@ public class LivingSpawnedModifications {
     public static void addSpawn(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof LivingEntity entity) {
             Level world = entity.level();
-            if (!world.isClientSide) {
-                if (PhaseHandler.getPhase() > 3 && PhaseHandler.getPhase() < 5) {
+            if (!world.isClientSide && world instanceof ServerLevel serverLevel) {
+                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(serverLevel);
+                int currentPhase = worldDataRegistry.getPhase();
+                if (currentPhase == 4) {
                     entity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 3600, 0), entity);
-                } else if (PhaseHandler.getPhase() > 4 && PhaseHandler.getPhase() < 6) {
+                } else if (currentPhase == 5) {
                     entity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 4800, 0), entity);
-                } else if (PhaseHandler.getPhase() > 5) {
+                } else if (currentPhase > 5) {
                     entity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 6000, 0), entity);
                 }
             }
@@ -73,6 +75,15 @@ public class LivingSpawnedModifications {
             if (!world.isClientSide) {
                 if (Math.random() <= 0.85F) {
                     malruptorEntity.setKills(malruptorEntity.getKills() + malruptorEntity.getRandom().nextInt(15));
+                }
+            }
+        }
+        else if (event.getEntity() instanceof AssimilatedHumanHeadEntity) {
+            AssimilatedHumanHeadEntity assimilatedHumanHeadEntity = (AssimilatedHumanHeadEntity) event.getEntity();
+            Level world = assimilatedHumanHeadEntity.level();
+            if (!world.isClientSide) {
+                if (Math.random() <= 0.85F) {
+                    assimilatedHumanHeadEntity.setKills(assimilatedHumanHeadEntity.getKills() + assimilatedHumanHeadEntity.getRandom().nextInt(2));
                 }
             }
         }

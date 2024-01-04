@@ -29,7 +29,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<ShillerEntity>> SHILLER =
             ENTITY_TYPES.register("shiller",
                     () -> EntityType.Builder.of(ShillerEntity::new, PARASITE)
-                            .sized(0.8f, 0.6f)
+                            .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "shiller").toString()));
     public static final RegistryObject<EntityType<MalruptorEntity>> MALRUPTOR =
             ENTITY_TYPES.register("malruptor",
@@ -44,12 +44,12 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<AssimilatedHumanEntity>> ASSIMILATED_HUMAN =
             ENTITY_TYPES.register("assimilated_human",
                     () -> EntityType.Builder.of(AssimilatedHumanEntity::new, PARASITE)
-                            .sized(0.8f, 2.2f)
+                            .sized(0.8f, 1.9f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human").toString()));
     public static final RegistryObject<EntityType<AssimilatedHumanHeadEntity>> ASSIMILATED_HUMAN_HEAD =
             ENTITY_TYPES.register("assimilated_human_head",
                     () -> EntityType.Builder.of(AssimilatedHumanHeadEntity::new, PARASITE)
-                            .sized(0.7f, 1.2f)
+                            .sized(0.7f, 0.8f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human_head").toString()));
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

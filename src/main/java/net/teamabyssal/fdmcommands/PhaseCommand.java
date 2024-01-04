@@ -5,7 +5,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.teamabyssal.handlers.PhaseHandler;
+import net.teamabyssal.registry.WorldDataRegistry;
 
 public class PhaseCommand {
 
@@ -21,11 +21,13 @@ public class PhaseCommand {
 
     private static int setPhase(CommandSourceStack commandStack, int phase) {
             if (phase > 5 || phase < 0) {
-                PhaseHandler.setPhase(0);
+                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(commandStack.getLevel());
+                worldDataRegistry.setPhase(0);
 
             }
             else if (phase >= 0 && phase <= 5) {
-                PhaseHandler.setPhase(phase);
+                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(commandStack.getLevel());
+                worldDataRegistry.setPhase(phase);
 
             }
 

@@ -18,19 +18,21 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.MathHelper;
+import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Evolving;
 import net.teamabyssal.entity.categories.Head;
 import net.teamabyssal.entity.categories.Hunter;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.SoundRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -44,12 +46,13 @@ import java.util.EnumSet;
 
 public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolving, Hunter {
     public static final EntityDataAccessor<Integer> KILLS = SynchedEntityData.defineId(AssimilatedHumanHeadEntity.class, EntityDataSerializers.INT);
-    private boolean trying = false;
-
+    private static boolean hunting = false;
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedHumanHeadEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.moveControl = new WallMovementControl(this);
+        this.navigation = new WallClimberNavigation(this, pLevel);
     }
 
     @Override
@@ -61,7 +64,6 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new HeadHuntGoal(this, 0.65F));
-        this.goalSelector.addGoal(16, new RandomStrollGoal(this, 0.7D, 25, true));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -82,7 +84,7 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
                 .add(Attributes.ATTACK_KNOCKBACK, 0.05D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MOVEMENT_SPEED, 0.28D)
                 .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_human_head_health.get())
                 .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_human_head_damage.get())
                 .add(Attributes.ARMOR, 1D);
@@ -95,10 +97,12 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
             this.level().playSound((Player) null, this.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.0F, 1.0F);
             if (this.level() instanceof ServerLevel server) {
                 server.sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 1, this.getZ(), 5, 0.4, 1.0, 0.4, 0);
+                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(server);
+                int currentScore = worldDataRegistry.getScore();
+                worldDataRegistry.setScore(currentScore + 2);
             }
             this.discard();
             this.EvolveIntoSimHuman(this);
-            ScoreHandler.setScore(ScoreHandler.getScore() + 2);
         }
         super.tick();
     }
@@ -108,9 +112,7 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
         entity.level().addFreshEntity(assimilatedHumanEntity);
     }
 
-    public boolean isHunting() {
-        return !this.onGround() && trying;
-    }
+
 
     public void setKills(Integer count) {
         entityData.set(KILLS, count);
@@ -118,6 +120,9 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
 
     public int getKills() {
         return entityData.get(KILLS);
+    }
+    public boolean isHunting() {
+        return !this.onGround() && hunting;
     }
 
     @Override
@@ -191,9 +196,8 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
         super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
         Entity entity = pSource.getEntity();
 
-
     }
-    public class HeadHuntGoal extends Goal {
+    public static class HeadHuntGoal extends Goal {
         private final Mob mob;
         private LivingEntity target;
         private final float yd;
@@ -234,7 +238,7 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
         public void tick() {
             if (this.mob.getTarget() != null) {
                 this.mob.getLookControl().setLookAt(this.target);
-                trying = true;
+                hunting = true;
 
             }
         }

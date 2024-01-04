@@ -1,9 +1,6 @@
 package net.teamabyssal.entity.custom;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -24,9 +21,8 @@ import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Evolved;
 import net.teamabyssal.entity.categories.Hunter;
 import net.teamabyssal.entity.categories.Infector;
-import net.teamabyssal.handlers.PhaseHandler;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.SoundRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -86,22 +82,21 @@ public class MargrouperEntity extends Infector implements GeoEntity, Evolved, Hu
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && PhaseHandler.getPhase() > 2;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && PhaseHandler.getPhase() > 2;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && PhaseHandler.getPhase() > 2;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
-        this.goalSelector.addGoal(16, new RandomStrollGoal(this, 0.7D, 25, true));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 10));
@@ -159,8 +154,13 @@ public class MargrouperEntity extends Infector implements GeoEntity, Evolved, Hu
 
     @Override
     public void die(DamageSource source) {
-        if (Math.random() <= 0.85F && PhaseHandler.getPhase() > 2) {
-            ScoreHandler.setScore(ScoreHandler.getScore() - 3);
+        if (this.level() instanceof ServerLevel world) {
+            WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world);
+            int currentScore = worldDataRegistry.getScore();
+            int currentPhase = worldDataRegistry.getPhase();
+            if (Math.random() <= 0.85F && currentPhase > 2) {
+                worldDataRegistry.setScore(currentScore - 3);
+            }
         }
         super.die(source);
     }

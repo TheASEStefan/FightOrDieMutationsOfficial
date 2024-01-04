@@ -1,8 +1,8 @@
 package net.teamabyssal.entity.categories;
 
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -16,13 +16,14 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
-import net.teamabyssal.handlers.PhaseHandler;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.ParticleRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 
 
 public class Head extends Monster {
+
 
 
     public Head(EntityType<? extends Monster> type, Level level) {
@@ -94,10 +95,14 @@ public class Head extends Monster {
 
     @Override
     public void die(DamageSource source) {
-        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 0.3F, this.getZ(), 0.0D, 0.0D, 0.0D);
-        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 0.4F, this.getZ() + 0.1F, 0.0D, 0.0D, 0.0D);
-        if (Math.random() <= 0.85F && PhaseHandler.getPhase() > 2) {
-            ScoreHandler.setScore(ScoreHandler.getScore() - 1);
+        if (this.level() instanceof ServerLevel world) {
+            world.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 3, 0.1, 0.7, 0., 0.3);
+            WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world);
+            int currentScore = worldDataRegistry.getScore();
+            int currentPhase = worldDataRegistry.getPhase();
+            if (Math.random() <= 0.85F && currentPhase > 2) {
+                worldDataRegistry.setScore(currentScore - 1);
+            }
         }
 
         super.die(source);

@@ -11,6 +11,9 @@
   "item.fight_or_die.parascore": "Parascore",
   "item.fight_or_die.infector_thorax": "Infector Thorax",
 
+  "block.fight_or_die.hive_block": "Hive Block",
+  "block.fight_or_die.hive_tunnel_block": "Hive Tunnel",
+
   "entity.fight_or_die.shiller": "Shiller",
   "entity.fight_or_die.malruptor": "Malruptor",
   "entity.fight_or_die.margrouper": "Margrouper",

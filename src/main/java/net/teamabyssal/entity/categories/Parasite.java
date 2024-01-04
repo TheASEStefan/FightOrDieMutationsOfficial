@@ -1,15 +1,13 @@
 package net.teamabyssal.entity.categories;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.util.Mth;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
@@ -17,16 +15,16 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
-import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
-import net.teamabyssal.handlers.PhaseHandler;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.ParticleRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 
 import javax.crypto.spec.PSource;
 
 public class Parasite extends Monster {
+
 
     public Parasite(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -80,13 +78,16 @@ public class Parasite extends Monster {
 
     public static boolean checkMonsterParasiteRules(EntityType<? extends Parasite> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
 
-        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && PhaseHandler.getPhase() >= 0;
+        WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) levelAccessor.getLevel());
+        int currentPhase = worldDataRegistry.getPhase();
+
+        return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(levelAccessor, pos, source) && checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, pos, source) && currentPhase >= 0;
     }
 
     @Override
     public void die(DamageSource source) {
-        if (source == this.damageSources().generic()) {
-            this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 0.5, this.getZ(), 0.0D, 0.0D, 0.0D);
+        if (this.level() instanceof ServerLevel server) {
+            server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 3, 0.1, 0.7, 0., 0.3);
         }
         super.die(source);
     }

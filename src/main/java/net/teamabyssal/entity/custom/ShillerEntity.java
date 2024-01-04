@@ -24,8 +24,8 @@ import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.entity.categories.Evolving;
 import net.teamabyssal.entity.categories.Parasite;
-import net.teamabyssal.handlers.ScoreHandler;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.WorldDataRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -38,6 +38,8 @@ public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
     public static final EntityDataAccessor<Integer> POINTS = SynchedEntityData.defineId(ShillerEntity.class, EntityDataSerializers.INT);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+
 
     public ShillerEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -120,11 +122,15 @@ public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
             this.level().playSound((Player) null, this.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.0F, 1.0F);
             if (this.level() instanceof ServerLevel server) {
                 server.sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 1, this.getZ(), 5, 0.4, 1.0, 0.4, 0);
+                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(server);
+                int currentScore = worldDataRegistry.getScore();
+                worldDataRegistry.setScore(currentScore + 2);
             }
+
 
             this.discard();
             this.EvolveIntoMalruptor(this);
-            ScoreHandler.setScore(ScoreHandler.getScore() + 2);
+
         }
 
 
