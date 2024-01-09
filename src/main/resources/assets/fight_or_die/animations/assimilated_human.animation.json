@@ -113,7 +113,7 @@
 			"bones": {
 				"Arm1": {
 					"rotation": {
-						"vector": ["-97.718+math.lerprotate(2, 10, 25 * query.anim_time)*1.4", 17.49048, -35.00474]
+						"vector": ["-87.718+math.cos(-55+query.anim_time*220)*-35", 17.49048, -35.00474]
 					},
 					"position": {
 						"vector": [-0.5, 0, 0]
@@ -124,7 +124,7 @@
 				},
 				"Arm2": {
 					"rotation": {
-						"vector": ["77.8262+math.lerprotate(2, 10, 25 * query.anim_time)*1.4", -15.00706, 32.4786]
+						"vector": ["-72.1738+math.cos(-55+query.anim_time*220)*35", -15.00706, 32.4786]
 					},
 					"position": {
 						"vector": [0.5, 0, 0]
@@ -168,7 +168,7 @@
 				},
 				"UpperBody": {
 					"rotation": {
-						"vector": [10, 0, 0]
+						"vector": [10, "0+math.cos(-50+query.anim_time*280)*15", 0]
 					}
 				},
 				"Legs": {

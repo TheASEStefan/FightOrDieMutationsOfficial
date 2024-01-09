@@ -65,15 +65,12 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
         super.registerGoals();
         this.goalSelector.addGoal(1, new HeadHuntGoal(this, 0.65F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
-        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
-                return 2.0 + entity.getBbWidth() * entity.getBbWidth();
+                return 1.5 + entity.getBbWidth() * entity.getBbWidth();
             }
         });
     }
@@ -250,7 +247,7 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
                 vec31 = vec31.normalize().scale(2D).add(vec3.scale(1.5D));
             }
 
-            this.mob.setDeltaMovement(vec31.x + yd + MathHelper.DELTA / 32, this.yd + (MathHelper.PI / 12), vec31.z + yd);
+            this.mob.setDeltaMovement(vec31.x + yd * (MathHelper.DELTA / 64), this.yd + (MathHelper.PI / 12), vec31.z + yd);
         }
 
         @Override

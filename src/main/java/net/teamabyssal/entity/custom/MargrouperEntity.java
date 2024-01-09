@@ -67,7 +67,7 @@ public class MargrouperEntity extends Infector implements GeoEntity, Evolved, Hu
         this.goalSelector.addGoal(3, new CustomMeleeAttackGoal(this, 1.2, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
-                return 3.0 + entity.getBbWidth() * entity.getBbWidth();
+                return 2.0 + entity.getBbWidth() * entity.getBbWidth();
             }
         });
 
@@ -75,32 +75,30 @@ public class MargrouperEntity extends Infector implements GeoEntity, Evolved, Hu
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Zombie.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Skeleton.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Spider.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Silverfish.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Endermite.class, true));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Skeleton.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Spider.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Silverfish.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Endermite.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Slime.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.enderman_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.creeper_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.witch_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 10));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
         this.goalSelector.addGoal(1, new MargrouperHuntGoal(this, 0.85F));
     }
 

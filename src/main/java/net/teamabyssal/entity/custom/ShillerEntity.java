@@ -60,12 +60,8 @@ public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatDiveGoal(this));
-        this.goalSelector.addGoal(4, new RandomStrollGoal(this, 0.7D, 25, true));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
         this.targetSelector.addGoal(3, new AvoidEntityGoal(this, LivingEntity.class, 10.0F, 0.7F, 0.7F));
-        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
     }
 
     public void setPoints(Integer count) {

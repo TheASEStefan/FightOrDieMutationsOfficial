@@ -19,9 +19,9 @@ public class SubtractionDevice extends Item implements Device, Utility {
     }
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) pLevel);
-        int currentScore = worldDataRegistry.getScore();
-        if (!pLevel.isClientSide && pPlayer != null && pUsedHand == InteractionHand.MAIN_HAND) {
+        if (!pLevel.isClientSide && pUsedHand == InteractionHand.MAIN_HAND && pLevel instanceof ServerLevel world) {
+            WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world);
+            int currentScore = worldDataRegistry.getScore();
             worldDataRegistry.setScore(currentScore - 1000);
             pPlayer.sendSystemMessage(Component.literal("-1000"));
             pPlayer.getCooldowns().addCooldown(this, 20);

@@ -13,14 +13,12 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.teamabyssal.entity.categories.Assimilated;
-import net.teamabyssal.entity.categories.Head;
-import net.teamabyssal.entity.categories.Infector;
-import net.teamabyssal.entity.categories.Parasite;
+import net.teamabyssal.entity.categories.*;
 import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
 import net.teamabyssal.entity.custom.MalruptorEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EffectRegistry;
+import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
@@ -29,7 +27,7 @@ public class LivingSpawnedModifications {
     public static void addSpawn(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof LivingEntity entity) {
             Level world = entity.level();
-            if (!world.isClientSide && world instanceof ServerLevel serverLevel) {
+            if (!world.isClientSide && world instanceof ServerLevel serverLevel && !EntityRegistry.PARASITES.contains(entity)) {
                 WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(serverLevel);
                 int currentPhase = worldDataRegistry.getPhase();
                 if (currentPhase == 4) {
@@ -47,6 +45,7 @@ public class LivingSpawnedModifications {
             abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Parasite.class, 16.0F, 0.7F, 0.75F));
             abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Assimilated.class, 16.0F, 0.7F, 0.75F));
             abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Head.class, 16.0F, 0.7F, 0.75F));
+            abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, AdvancedAssimilated.class, 16.0F, 0.7F, 0.75F));
         }
         else if (event.getEntity() instanceof WanderingTrader) {
             WanderingTrader wanderingTraderEntity = (WanderingTrader) event.getEntity();
@@ -54,6 +53,7 @@ public class LivingSpawnedModifications {
             wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Parasite.class, 16.0F, 0.7F, 0.75F));
             wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Assimilated.class, 16.0F, 0.7F, 0.75F));
             wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Head.class, 16.0F, 0.7F, 0.75F));
+            wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, AdvancedAssimilated.class, 16.0F, 0.7F, 0.75F));
         }
         else if (event.getEntity() instanceof Zombie) {
             Zombie zombie = (Zombie) event.getEntity();
@@ -61,6 +61,7 @@ public class LivingSpawnedModifications {
             zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, Parasite.class, true));
             zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, Assimilated.class, true));
             zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, Head.class, true));
+            zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, AdvancedAssimilated.class, true));
         }
         else if (event.getEntity() instanceof IronGolem) {
             IronGolem ironGolem = (IronGolem) event.getEntity();
@@ -68,6 +69,7 @@ public class LivingSpawnedModifications {
             ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Parasite.class, true));
             ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Assimilated.class, true));
             ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Head.class, true));
+            ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, AdvancedAssimilated.class, true));
         }
         else if (event.getEntity() instanceof MalruptorEntity) {
             MalruptorEntity malruptorEntity = (MalruptorEntity) event.getEntity();

@@ -1,6 +1,7 @@
 package net.teamabyssal.entity.categories;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerLevel;
@@ -17,16 +18,11 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
-import net.teamabyssal.entity.ai.InfectorSearchAreaGoal;
-import net.teamabyssal.entity.ai.InfectorTargettingGoal;
 import net.teamabyssal.registry.*;
-import org.jetbrains.annotations.Nullable;
 
 public class Infector extends Monster {
 
 
-    @Nullable
-    BlockPos searchPos;
 
     public Infector(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -36,14 +32,6 @@ public class Infector extends Monster {
         EntityRegistry.PARASITES.add(this);
     }
 
-    @Nullable
-    public BlockPos getSearchPos() {
-        return searchPos;
-    }
-
-    public void setSearchPos(@Nullable BlockPos searchPos) {
-        this.searchPos = searchPos;
-    }
 
 
     public void travel(Vec3 pTravelVector) {
@@ -85,8 +73,6 @@ public class Infector extends Monster {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new InfectorSearchAreaGoal(this, 1.2));
-        this.goalSelector.addGoal(1,new InfectorTargettingGoal(this));
         this.goalSelector.addGoal(3,new FloatDiveGoal(this));
     }
 
@@ -110,9 +96,9 @@ public class Infector extends Monster {
 
     @Override
     public void die(DamageSource source) {
-        if (this.level() instanceof ServerLevel server) {
-            server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 3, 0.1, 0.7, 0., 0.3);
-        }
+        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 1.6, this.getZ(), 0.0D, 0.0D, 0.0D);
+        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 1.6, this.getZ() + 0.1, 0.0D, 0.0D, 0.0D);
+        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 1.6, this.getZ() - 0.1, 0.0D, 0.0D, 0.0D);
         super.die(source);
     }
 }

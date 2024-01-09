@@ -82,6 +82,12 @@
     ],
     "subtitle": "subtitles.fight_or_die.humanoid.death"
   },
+  "assimilated.animal.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_animal.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.assimilated.animal.ambient"
+  },
 
   "player_phase0": {
     "sounds": [

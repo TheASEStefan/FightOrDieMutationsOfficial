@@ -39,7 +39,7 @@ public class BiomeModification implements BiomeModifier {
                     for (String str : FightOrDieMutationsConfig.SERVER.spawns.get()) {
                         String[] string = str.split("\\|");
                         EntityType<?> entity = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(string[0]));
-                        if (entity != null){
+                        if (entity != null) {
                             builder.getMobSpawnSettings().getSpawner(entity.getCategory())
                                     .add(new MobSpawnSettings.SpawnerData(entity, Integer.parseUnsignedInt(string[1]) + biomesModifier,
                                             Integer.parseUnsignedInt(string[2]), Integer.parseUnsignedInt(string[3])));

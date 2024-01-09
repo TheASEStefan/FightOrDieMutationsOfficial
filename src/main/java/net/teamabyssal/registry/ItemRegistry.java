@@ -24,14 +24,18 @@ public class ItemRegistry {
 
     public static final RegistryObject<Item> SHILLER_SPAWN_EGG = ITEMS.register("shiller_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x110202, new Item.Properties()));
-    public static final RegistryObject<Item> MALRUPTOR_SPAWN_EGG = ITEMS.register("malruptor_spawn_egg",
+    public static final RegistryObject<Item> MALRUPTOR_SPAWN_EGG = ITEMS.register("springer_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.MALRUPTOR, 0x000000, 0x110202, new Item.Properties()));
-    public static final RegistryObject<Item> MARGROUPER_SPAWN_EGG = ITEMS.register("margrouper_spawn_egg",
+    public static final RegistryObject<Item> MARGROUPER_SPAWN_EGG = ITEMS.register("grouper_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.MARGROUPER, 0x000000, 0x110202, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_SPAWN_EGG = ITEMS.register("assimilated_human_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN, 0x28283e, 0x345350, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_human_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN_HEAD, 0x28283e, 0x345350, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_COW_SPAWN_EGG = ITEMS.register("assimilated_cow_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_COW, 0x281604, 0x3f2306, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_CREEPER_SPAWN_EGG = ITEMS.register("assimilated_creeper_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_CREEPER, 0x042804, 0x10a510, new Item.Properties()));
 
     public static final RegistryObject<Item> ADDITION_DEVICE = ITEMS.register("addition_device",
             () -> new AdditionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));

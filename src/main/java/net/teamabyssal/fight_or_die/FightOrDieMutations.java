@@ -88,6 +88,8 @@ public class FightOrDieMutations {
             EntityRenderers.register(EntityRegistry.MARGROUPER.get(), MargrouperRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN.get(), AssimilatedHumanRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_COW.get(), AssimilatedCowRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_CREEPER.get(), AssimilatedCreeperRenderer::new);
 
 
         }

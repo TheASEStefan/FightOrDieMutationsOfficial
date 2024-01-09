@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +15,6 @@ public class WorldDataRegistry extends SavedData {
 
     private int score;
     private int phase;
-    private int join;
     private boolean cnt0 = false;
     private boolean cnt1 = false;
     private boolean cnt2 = false;
@@ -78,16 +78,6 @@ public class WorldDataRegistry extends SavedData {
     }
 
 
-    public int getJoin() {
-        setDirty();
-        return join;
-    }
-
-    public void setJoin(int join) {
-        this.join = join;
-        setDirty();
-    }
-
     public int getScore() {
         setDirty();
         return score;
@@ -105,22 +95,22 @@ public class WorldDataRegistry extends SavedData {
 
     public int getPhase() {
         setDirty();
-        if (getScore() >= 0 && getScore() < 1000) {
+        if (getScore() >= 0 && getScore() < FightOrDieMutationsConfig.SERVER.phase1_points.get()) {
             phase = 0;
         }
-        else if (getScore() >= 1000 && getScore() < 5000) {
+        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase1_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase2_points.get()) {
             phase = 1;
         }
-        else if (getScore() >= 5000 && getScore() < 25000) {
+        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase2_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase3_points.get()) {
             phase = 2;
         }
-        else if (getScore() >= 25000 && getScore() < 100000) {
+        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase3_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase4_points.get()) {
             phase = 3;
         }
-        else if (getScore() >= 100000 && getScore() < 250000) {
+        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase4_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase5_points.get()) {
             phase = 4;
         }
-        else if (getScore() >= 250000) {
+        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase5_points.get()) {
             phase = 5;
         }
         return phase;
@@ -131,19 +121,19 @@ public class WorldDataRegistry extends SavedData {
             setScore(0);
         }
         else if (phase == 1) {
-            setScore(1000);
+            setScore(FightOrDieMutationsConfig.SERVER.phase1_points.get());
         }
         else if (phase == 2) {
-            setScore(5000);
+            setScore(FightOrDieMutationsConfig.SERVER.phase2_points.get());
         }
         else if (phase == 3) {
-            setScore(25000);
+            setScore(FightOrDieMutationsConfig.SERVER.phase3_points.get());
         }
         else if (phase == 4) {
-            setScore(100000);
+            setScore(FightOrDieMutationsConfig.SERVER.phase4_points.get());
         }
         else if (phase == 5) {
-            setScore(250000);
+            setScore(FightOrDieMutationsConfig.SERVER.phase5_points.get());
         }
         else {
             setScore(0);
@@ -157,37 +147,37 @@ public class WorldDataRegistry extends SavedData {
         if (getPhase() == 0 && !cnt0) {
             cnt0 = true;
             player.sendSystemMessage(Component.literal("Zero"));
-            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE0.get(), SoundSource.HOSTILE, 1.2F, 1.0F);
+            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE0.get(), SoundSource.MASTER, 1.2F, 1.0F);
 
         }
         else if (getPhase() == 1 && !cnt1) {
             cnt1 = true;
             player.sendSystemMessage(Component.literal("First"));
-            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE1.get(), SoundSource.HOSTILE, 1.6F, 1.0F);
+            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE1.get(), SoundSource.MASTER, 1.6F, 1.0F);
 
         }
         else if (getPhase() == 2 && !cnt2) {
             cnt2 = true;
             player.sendSystemMessage(Component.literal("Second"));
-            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE2.get(), SoundSource.HOSTILE, 1.6F, 1.0F);
+            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE2.get(), SoundSource.MASTER, 1.6F, 1.0F);
 
         }
         else if (getPhase() == 3 && !cnt3) {
             cnt3 = true;
             player.sendSystemMessage(Component.literal("Third"));
-            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE3.get(), SoundSource.HOSTILE, 1.2F, 1.0F);
+            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE3.get(), SoundSource.MASTER, 1.2F, 1.0F);
 
         }
         else if (getPhase() == 4 && !cnt4) {
             cnt4 = true;
             player.sendSystemMessage(Component.literal("Fourth"));
-            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE4.get(), SoundSource.HOSTILE, 1.4F, 1.0F);
+            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE4.get(), SoundSource.MASTER, 1.4F, 1.0F);
 
         }
         else if (getPhase() == 5 && !cnt5) {
             cnt5 = true;
             player.sendSystemMessage(Component.literal("Fifth"));
-            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE5.get(), SoundSource.HOSTILE, 1.4F, 1.0F);
+            player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE5.get(), SoundSource.MASTER, 1.4F, 1.0F);
 
         }
         this.setDirty();
@@ -198,7 +188,6 @@ public class WorldDataRegistry extends SavedData {
     public @NotNull CompoundTag save(CompoundTag nbt) {
         nbt.putInt("score", this.score);
         nbt.putInt("phase", this.phase);
-        nbt.putInt("join", this.join);
         nbt.putBoolean("cnt0", this.cnt0);
         nbt.putBoolean("cnt1", this.cnt1);
         nbt.putBoolean("cnt2", this.cnt2);
@@ -212,7 +201,6 @@ public class WorldDataRegistry extends SavedData {
         WorldDataRegistry worldDataRegistry = new WorldDataRegistry();
         worldDataRegistry.score = nbt.getInt("score");
         worldDataRegistry.phase = nbt.getInt("phase");
-        worldDataRegistry.join = nbt.getInt("join");
         worldDataRegistry.cnt0 = nbt.getBoolean("cnt0");
         worldDataRegistry.cnt1 = nbt.getBoolean("cnt1");
         worldDataRegistry.cnt2 = nbt.getBoolean("cnt2");

@@ -32,15 +32,15 @@ public class EntityRegistry {
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "shiller").toString()));
     public static final RegistryObject<EntityType<MalruptorEntity>> MALRUPTOR =
-            ENTITY_TYPES.register("malruptor",
+            ENTITY_TYPES.register("springer",
                     () -> EntityType.Builder.of(MalruptorEntity::new, PARASITE)
-                            .sized(1.1f, 1.1f)
-                            .build(new ResourceLocation(FightOrDieMutations.MODID, "malruptor").toString()));
+                            .sized(0.8f, 1.1f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "springer").toString()));
     public static final RegistryObject<EntityType<MargrouperEntity>> MARGROUPER =
-            ENTITY_TYPES.register("margrouper",
+            ENTITY_TYPES.register("grouper",
                     () -> EntityType.Builder.of(MargrouperEntity::new, PARASITE)
-                            .sized(1.4f, 1.4f)
-                            .build(new ResourceLocation(FightOrDieMutations.MODID, "margrouper").toString()));
+                            .sized(1.1f, 1.4f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "grouper").toString()));
     public static final RegistryObject<EntityType<AssimilatedHumanEntity>> ASSIMILATED_HUMAN =
             ENTITY_TYPES.register("assimilated_human",
                     () -> EntityType.Builder.of(AssimilatedHumanEntity::new, PARASITE)
@@ -51,6 +51,16 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(AssimilatedHumanHeadEntity::new, PARASITE)
                             .sized(0.7f, 0.8f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human_head").toString()));
+    public static final RegistryObject<EntityType<AssimilatedCowEntity>> ASSIMILATED_COW =
+            ENTITY_TYPES.register("assimilated_cow",
+                    () -> EntityType.Builder.of(AssimilatedCowEntity::new, PARASITE)
+                            .sized(1.0f, 1.5f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_cow").toString()));
+    public static final RegistryObject<EntityType<AssimilatedCreeperEntity>> ASSIMILATED_CREEPER =
+            ENTITY_TYPES.register("assimilated_creeper",
+                    () -> EntityType.Builder.of(AssimilatedCreeperEntity::new, PARASITE)
+                            .sized(0.8f, 2.0f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_creeper").toString()));
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

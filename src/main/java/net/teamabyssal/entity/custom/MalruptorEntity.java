@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
@@ -26,12 +27,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
+import net.teamabyssal.constants.MathHelper;
 import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
+import net.teamabyssal.entity.ai.MalruptorInfects;
 import net.teamabyssal.entity.categories.Evolved;
 import net.teamabyssal.entity.categories.Evolving;
 import net.teamabyssal.entity.categories.Hunter;
 import net.teamabyssal.entity.categories.Infector;
+import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
@@ -64,7 +68,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
 
     @Override
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
-        return super.causeFallDamage(pFallDistance, pMultiplier / 4 , pSource);
+        return false;
     }
 
 
@@ -86,10 +90,10 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
         this.goalSelector.addGoal(3, new CustomMeleeAttackGoal(this, 1.2, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
-                return 3.0 + entity.getBbWidth() * entity.getBbWidth();
+                return 2.0 + entity.getBbWidth() * entity.getBbWidth();
             }
         });
-        this.goalSelector.addGoal(1, new MalruptorJumpGoal(this, 0.65F));
+        this.goalSelector.addGoal(1, new MalruptorJumpGoal(this, 0.7F));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true) {
 
             @Override
@@ -105,7 +109,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
                 return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
             }
         });
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Skeleton.class, true) {
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Skeleton.class, true) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
@@ -114,34 +118,34 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.enderman_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.creeper_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.witch_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Endermite.class, true) {
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Endermite.class, true) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
             }
         });
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Silverfish.class, true) {
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Silverfish.class, true) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
             }
         });
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Spider.class, true) {
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Spider.class, true) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
@@ -153,10 +157,19 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
                 return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
             }
         });
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Slime.class, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+            }
+        });
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 10));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.addGoal(10, new MalruptorInfects(this, 1.0, Cow.class) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && (this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() < 4);
+            }
+        });
     }
 
     @Override
@@ -273,6 +286,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
         private LivingEntity target;
         private final float yd;
 
+
         public MalruptorJumpGoal(Mob mob, float v) {
             this.mob = mob;
             this.yd = v;
@@ -291,17 +305,13 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
                     if (!this.mob.onGround()) {
                         return false;
                     } else {
-                        return this.mob.getRandom().nextInt(reducedTickDelay(15)) == 0;
+                        return this.mob.getRandom().nextInt(reducedTickDelay(14)) == 0;
                     }
                 } else {
                     return false;
                 }
             }
 
-        }
-
-        public boolean canContinueToUse() {
-            return !this.mob.onGround();
         }
 
 
@@ -320,7 +330,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
                 vec31 = vec31.normalize().scale(2D).add(vec3.scale(1.5D));
             }
 
-            this.mob.setDeltaMovement(vec31.x + yd, this.yd, vec31.z + yd);
+            this.mob.setDeltaMovement(vec31.x + yd * (MathHelper.RELAT / 156), this.yd + (MathHelper.HEX / 12), vec31.z + yd);
         }
 
         @Override

@@ -5,6 +5,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.teamabyssal.entity.categories.AdvancedAssimilated;
 import net.teamabyssal.entity.categories.Assimilated;
 import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.entity.categories.Parasite;
@@ -20,6 +21,8 @@ public class SpawnPlacementEvent {
         event.register(EntityRegistry.MALRUPTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Infector::checkMonsterInfectorRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityRegistry.MARGROUPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Infector::checkMonsterInfectorRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityRegistry.ASSIMILATED_HUMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AdvancedAssimilated::checkMonsterAdvancedAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
 
 
     }

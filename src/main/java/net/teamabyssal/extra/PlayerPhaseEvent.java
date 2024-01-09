@@ -28,16 +28,6 @@ public class PlayerPhaseEvent {
         }
     }
 
-    @SubscribeEvent()
-    public static void addSpawn(EntityJoinLevelEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player && event.getEntity().level() instanceof ServerLevel world) {
-            if (!world.isClientSide) {
-                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world);
-                worldDataRegistry.setJoin(worldDataRegistry.getJoin() + 1);
-            }
-        }
-    }
-
 
 
     @SubscribeEvent
@@ -55,9 +45,9 @@ public class PlayerPhaseEvent {
                         worldDataRegistry.setScore(currentScore - 1);
                     }
                 }
-                if (Math.random() < 0.01F) {
+                if (Math.random() < 0.015F) {
                     if (currentScore > 0) {
-                        worldDataRegistry.setScore(currentScore - 1);
+                        worldDataRegistry.setScore(currentScore + 3);
                     }
                 }
             }
@@ -70,9 +60,9 @@ public class PlayerPhaseEvent {
                         worldDataRegistry.setScore(currentScore - 1);
                     }
                 }
-                if (Math.random() < 0.015F) {
-                    if (currentPhase > 1) {
-                        worldDataRegistry.setScore(currentScore + 1);
+                if (Math.random() < 0.025F) {
+                    if (currentScore > 0) {
+                        worldDataRegistry.setScore(currentScore + 5);
                     }
                 }
             }

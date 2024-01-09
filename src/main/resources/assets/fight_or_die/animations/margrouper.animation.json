@@ -49,6 +49,56 @@
 					"scale": {
 						"vector": [1.3, 1.3, 1.3]
 					}
+				},
+				"Tentacle": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*-10", 0, 0]
+					}
+				},
+				"Tentacle9": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*10", 0, 0]
+					}
+				},
+				"Tentacle10": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*-10", 0, 0]
+					}
+				},
+				"Tentacle11": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*10", 0, 0]
+					}
+				},
+				"Tentacle12": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*-10", 0, 0]
+					}
+				},
+				"Tentacle2": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*-10", 0, 0]
+					}
+				},
+				"Tentacle3": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*10", 0, 0]
+					}
+				},
+				"Tentacle4": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*10", 0, 0]
+					}
+				},
+				"Tentacle5": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*-10", 0, 0]
+					}
+				},
+				"Tentacle6": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*120)*-10", 0, 0]
+					}
 				}
 			}
 		},
@@ -135,6 +185,56 @@
 					},
 					"scale": {
 						"vector": [1.3, 1.3, 1.3]
+					}
+				},
+				"Tentacle": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle9": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle10": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle11": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle12": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle2": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle3": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle4": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle5": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle6": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
 					}
 				}
 			}
@@ -247,6 +347,56 @@
 					},
 					"scale": {
 						"vector": [1.3, 1.3, 1.3]
+					}
+				},
+				"Tentacle": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle9": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle10": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle11": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle12": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle2": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle3": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle4": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*10", 0, 0]
+					}
+				},
+				"Tentacle5": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
+					}
+				},
+				"Tentacle6": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*220)*-10", 0, 0]
 					}
 				}
 			}
