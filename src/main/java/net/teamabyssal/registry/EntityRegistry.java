@@ -36,11 +36,6 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(MalruptorEntity::new, PARASITE)
                             .sized(0.8f, 1.1f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "springer").toString()));
-    public static final RegistryObject<EntityType<MargrouperEntity>> MARGROUPER =
-            ENTITY_TYPES.register("grouper",
-                    () -> EntityType.Builder.of(MargrouperEntity::new, PARASITE)
-                            .sized(1.1f, 1.4f)
-                            .build(new ResourceLocation(FightOrDieMutations.MODID, "grouper").toString()));
     public static final RegistryObject<EntityType<AssimilatedHumanEntity>> ASSIMILATED_HUMAN =
             ENTITY_TYPES.register("assimilated_human",
                     () -> EntityType.Builder.of(AssimilatedHumanEntity::new, PARASITE)

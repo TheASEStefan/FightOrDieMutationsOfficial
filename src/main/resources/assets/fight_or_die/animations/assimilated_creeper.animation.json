@@ -78,6 +78,9 @@
 			"loop": true,
 			"bones": {
 				"creeper": {
+					"rotation": {
+						"vector": [0, "math.cos(-55+query.anim_time*9000)*20", 0]
+					},
 					"position": {
 						"vector": [0, "-0.5+math.sin(-60+query.anim_time*320)*1.2", 0]
 					}
@@ -125,7 +128,7 @@
 			"bones": {
 				"creeper": {
 					"rotation": {
-						"vector": [67.5, 0, 0]
+						"vector": ["67.5+math.cos(-55+query.anim_time*9000)*3", "math.cos(-55+query.anim_time*9000)*3", 0]
 					},
 					"position": {
 						"vector": [0, 2, 16]

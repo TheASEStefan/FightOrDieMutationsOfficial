@@ -1,16 +1,12 @@
 package net.teamabyssal.entity.custom;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -32,11 +28,9 @@ import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.ai.MalruptorInfects;
 import net.teamabyssal.entity.categories.Evolved;
-import net.teamabyssal.entity.categories.Evolving;
 import net.teamabyssal.entity.categories.Hunter;
 import net.teamabyssal.entity.categories.Infector;
 import net.teamabyssal.registry.EffectRegistry;
-import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
 import org.jetbrains.annotations.Nullable;
@@ -50,11 +44,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 
-public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Evolved, Hunter {
-
-
-
-    public static final EntityDataAccessor<Integer> KILLS = SynchedEntityData.defineId(MalruptorEntity.class, EntityDataSerializers.INT);
+public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hunter {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static boolean jumping = false;
@@ -78,7 +68,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
                 .add(Attributes.ATTACK_KNOCKBACK, 0.6D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.1D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.malruptor_health.get())
                 .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.malruptor_damage.get())
                 .add(Attributes.ARMOR, 2.0D);
@@ -172,57 +162,9 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
         });
     }
 
-    @Override
-    public void tick() {
-        if (this.isAlive() && this.getKills() == 20) {
-
-            this.level().playSound((Player) null, this.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.0F, 1.0F);
-            if (this.level() instanceof ServerLevel server) {
-                server.sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 1, this.getZ(), 5, 0.4, 1.0, 0.4, 0);
-                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(server);
-                int currentScore = worldDataRegistry.getScore();
-                worldDataRegistry.setScore(currentScore + 5);
-            }
-
-            this.discard();
-            this.EvolveIntoMargrouper(this);
-        }
-        super.tick();
-    }
-    private void EvolveIntoMargrouper(Entity entity) {
-        MargrouperEntity margrouperEntity = new MargrouperEntity(EntityRegistry.MARGROUPER.get(), entity.level());
-        margrouperEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
-        entity.level().addFreshEntity(margrouperEntity);
-    }
 
     public boolean isHunting() {
         return !this.onGround() && jumping;
-    }
-
-    public void setKills(Integer count) {
-        entityData.set(KILLS, count);
-    }
-
-    public int getKills() {
-        return entityData.get(KILLS);
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putInt("kills", entityData.get(KILLS));
-    }
-
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        entityData.set(KILLS, tag.getInt("kills"));
-    }
-
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(KILLS, 0);
     }
 
     @Override
@@ -275,7 +217,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolving, Ev
             int currentScore = worldDataRegistry.getScore();
             int currentPhase = worldDataRegistry.getPhase();
             if (Math.random() <= 0.85F && currentPhase > 2) {
-                worldDataRegistry.setScore(currentScore - 1);
+                worldDataRegistry.setScore(currentScore - 2);
             }
         }
         super.die(source);

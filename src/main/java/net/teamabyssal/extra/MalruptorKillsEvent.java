@@ -28,15 +28,7 @@ public class MalruptorKillsEvent {
                     worldDataRegistry.setScore(currentScore + 10);
                 }
             }
-
-            if (event.getSource().getEntity() instanceof MalruptorEntity) {
-            MalruptorEntity malruptorEntity = (MalruptorEntity) event.getSource().getEntity();
-            Level world = malruptorEntity.level();
-            if (!world.isClientSide && malruptorEntity.isAlive()) {
-                malruptorEntity.setKills(malruptorEntity.getKills() + 1);
-               }
-            }
-            else if (event.getSource().getEntity() instanceof AssimilatedHumanHeadEntity) {
+            if (event.getSource().getEntity() instanceof AssimilatedHumanHeadEntity) {
                 AssimilatedHumanHeadEntity assimilatedHumanHeadEntity = (AssimilatedHumanHeadEntity) event.getSource().getEntity();
                 Level world = assimilatedHumanHeadEntity.level();
                 if (!world.isClientSide && assimilatedHumanHeadEntity.isAlive()) {

@@ -15,7 +15,6 @@ public class AttributeEvent {
 
         event.put(EntityRegistry.SHILLER.get(), ShillerEntity.createAttributes().build());
         event.put(EntityRegistry.MALRUPTOR.get(), MalruptorEntity.createAttributes().build());
-        event.put(EntityRegistry.MARGROUPER.get(), MargrouperEntity.createAttributes().build());
         event.put(EntityRegistry.ASSIMILATED_HUMAN.get(), AssimilatedHumanEntity.createAttributes().build());
         event.put(EntityRegistry.ASSIMILATED_COW.get(), AssimilatedCowEntity.createAttributes().build());
         event.put(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadEntity.createAttributes().build());

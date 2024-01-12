@@ -26,8 +26,6 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x110202, new Item.Properties()));
     public static final RegistryObject<Item> MALRUPTOR_SPAWN_EGG = ITEMS.register("springer_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.MALRUPTOR, 0x000000, 0x110202, new Item.Properties()));
-    public static final RegistryObject<Item> MARGROUPER_SPAWN_EGG = ITEMS.register("grouper_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityRegistry.MARGROUPER, 0x000000, 0x110202, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_SPAWN_EGG = ITEMS.register("assimilated_human_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN, 0x28283e, 0x345350, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_human_head_spawn_egg",

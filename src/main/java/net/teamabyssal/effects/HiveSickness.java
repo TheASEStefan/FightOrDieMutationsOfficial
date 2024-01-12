@@ -18,7 +18,7 @@ public class HiveSickness extends MobEffect {
     }
 
     public void applyEffectTick(LivingEntity entity, int intense) {
-        if (!( EntityRegistry.PARASITES.contains(entity) || FightOrDieMutationsConfig.SERVER.hive_sickness.get().contains(entity.getEncodeId()))) {
+        if (!(EntityRegistry.PARASITES.contains(entity) || FightOrDieMutationsConfig.SERVER.hive_sickness.get().contains(entity.getEncodeId()))) {
             if (this == EffectRegistry.HIVE_SICKNESS.get()) {
                 if (!entity.getCommandSenderWorld().isClientSide && entity instanceof Player player && player.getFoodData().getFoodLevel() > 0 && intense < 1){
                     player.causeFoodExhaustion(1.0F);

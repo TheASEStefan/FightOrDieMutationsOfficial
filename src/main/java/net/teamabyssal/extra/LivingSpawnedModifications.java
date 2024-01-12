@@ -71,15 +71,6 @@ public class LivingSpawnedModifications {
             ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Head.class, true));
             ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, AdvancedAssimilated.class, true));
         }
-        else if (event.getEntity() instanceof MalruptorEntity) {
-            MalruptorEntity malruptorEntity = (MalruptorEntity) event.getEntity();
-            Level world = malruptorEntity.level();
-            if (!world.isClientSide) {
-                if (Math.random() <= 0.85F) {
-                    malruptorEntity.setKills(malruptorEntity.getKills() + malruptorEntity.getRandom().nextInt(15));
-                }
-            }
-        }
         else if (event.getEntity() instanceof AssimilatedHumanHeadEntity) {
             AssimilatedHumanHeadEntity assimilatedHumanHeadEntity = (AssimilatedHumanHeadEntity) event.getEntity();
             Level world = assimilatedHumanHeadEntity.level();

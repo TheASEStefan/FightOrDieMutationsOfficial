@@ -65,7 +65,6 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
         super.registerGoals();
         this.goalSelector.addGoal(1, new HeadHuntGoal(this, 0.65F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
             @Override
@@ -81,7 +80,7 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
                 .add(Attributes.ATTACK_KNOCKBACK, 0.05D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.28D)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
                 .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_human_head_health.get())
                 .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_human_head_damage.get())
                 .add(Attributes.ARMOR, 1D);

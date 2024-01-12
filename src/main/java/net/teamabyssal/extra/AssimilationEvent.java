@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -13,6 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.custom.AssimilatedCowEntity;
+import net.teamabyssal.entity.custom.AssimilatedCreeperEntity;
 import net.teamabyssal.entity.custom.AssimilatedHumanEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EffectRegistry;
@@ -33,7 +35,7 @@ public class AssimilationEvent {
             int currentPhase = worldDataRegistry.getPhase();
             int currentScore = worldDataRegistry.getScore();
 
-            if (entity instanceof Zombie zombie && zombie.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_human_assimilation.get()) {
+            if (entity instanceof Zombie zombie && zombie.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_human_assimilation.get() && Math.random() <= 0.95F) {
                 AssimilatedHumanEntity assimilatedHumanEntity = EntityRegistry.ASSIMILATED_HUMAN.get().create(world);
                 assert assimilatedHumanEntity != null;
                 assimilatedHumanEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -46,6 +48,22 @@ public class AssimilationEvent {
                     }
                     else if (currentPhase >= 3) {
                         worldDataRegistry.setScore(currentScore + 10);
+                    }
+                }
+            }
+            else if (entity instanceof Creeper creeper && creeper.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_creeper_assimilation.get() && Math.random() <= 0.90F) {
+                AssimilatedCreeperEntity assimilatedCreeperEntity = EntityRegistry.ASSIMILATED_CREEPER.get().create(world);
+                assert assimilatedCreeperEntity != null;
+                assimilatedCreeperEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                world.addFreshEntity(assimilatedCreeperEntity);
+                assimilatedCreeperEntity.playSound(SoundEvents.ZOMBIE_INFECT);
+                if (creeper.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.EXPLOSION, creeper.getX(), creeper.getY() + 1, creeper.getZ(), 5, 0.4, 1.0, 0.4, 0);
+                    if (currentPhase < 3) {
+                        worldDataRegistry.setScore(currentScore + 10);
+                    }
+                    else if (currentPhase >= 3) {
+                        worldDataRegistry.setScore(currentScore + 20);
                     }
                 }
             }

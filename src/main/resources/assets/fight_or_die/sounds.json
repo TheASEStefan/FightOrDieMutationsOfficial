@@ -27,27 +27,6 @@
     "subtitle": "subtitles.fight_or_die.entity.malruptor.infect"
   },
 
-  "entity.margrouper.ambient": {
-    "sounds": [
-      "fight_or_die:mob/margrouper.idle"
-    ],
-    "subtitle": "subtitles.fight_or_die.entity.margrouper.ambient"
-  },
-
-  "entity.margrouper.hurt": {
-    "sounds": [
-      "fight_or_die:mob/margrouper.hurt"
-    ],
-    "subtitle": "subtitles.fight_or_die.entity.margrouper.hurt"
-  },
-
-  "entity.margrouper.death": {
-    "sounds": [
-      "fight_or_die:mob/margrouper.death"
-    ],
-    "subtitle": "subtitles.fight_or_die.entity.margrouper.death"
-  },
-
   "entity.assimilated_human.ambient": {
     "sounds": [
       "fight_or_die:mob/assimilated_human.idle"
@@ -87,6 +66,19 @@
       "fight_or_die:mob/assimilated_animal.idle"
     ],
     "subtitle": "subtitles.fight_or_die.assimilated.animal.ambient"
+  },
+  "entity.assimilated_creeper.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_creeper.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_creeper.ambient"
+  },
+
+  "entity.assimilated_creeper.death": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_creeper.death"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_creeper.death"
   },
 
   "player_phase0": {

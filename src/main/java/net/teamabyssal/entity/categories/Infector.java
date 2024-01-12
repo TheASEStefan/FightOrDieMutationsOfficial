@@ -11,6 +11,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -33,20 +35,6 @@ public class Infector extends Monster {
     }
 
 
-
-    public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() && this.isInFluidType()) {
-            this.moveRelative(0.1F, pTravelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.6D));
-            if (this.getTarget() == null) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-            }
-        } else {
-            super.travel(pTravelVector);
-        }
-
-    }
 
     public int getMaxAirSupply() {
         return 1200;
@@ -74,6 +62,7 @@ public class Infector extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(3,new FloatDiveGoal(this));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
     }
 
 

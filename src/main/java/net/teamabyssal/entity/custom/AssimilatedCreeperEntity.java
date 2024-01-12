@@ -1,7 +1,9 @@
 package net.teamabyssal.entity.custom;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -12,16 +14,17 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.AABB;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.MathHelper;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
@@ -37,13 +40,13 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
+import java.util.List;
 
 public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity, Leaper {
     private final int minDamage = 2;
     private final int maxDamage = 4;
-    private static boolean leaping = false;
     private final float extraRadius = ((MathHelper.HEX + Mth.clamp(3, MathHelper.HEX, MathHelper.PI) + (MathHelper.DELTA / 3)) / 10);
-    private final float explosionRadius = (MathHelper.HEX * 2);
+    private final float explosionRadius = (float) (MathHelper.HEX * 2.4);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedCreeperEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -66,7 +69,6 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
                 return 2.0 + entity.getBbWidth() * entity.getBbWidth();
             }
         });
-        this.goalSelector.addGoal(2, new CreeperLeapGoal(this, 0.45F));
     }
 
     @Nullable
@@ -105,16 +107,18 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
         }
     }
 
-    public boolean isLeaping() {
-        return !this.onGround() && leaping && this.isAlive() && this.hurtTime < 1;
-    }
 
 
     @Override
     public void tick() {
         if (this.getTarget() != null && this.isAlive()) {
             Entity attackTarget = this.getTarget();
-            if (attackTarget instanceof Player || attackTarget instanceof IronGolem) {
+            if (attackTarget instanceof Player) {
+                if (this.distanceTo(attackTarget) < 1.35) {
+                    this.explodeThis();
+                }
+            }
+            else if (attackTarget instanceof IronGolem) {
                 if (this.distanceTo(attackTarget) < 3) {
                     this.explodeThis();
                 }
@@ -128,7 +132,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     private void explodeThis() {
         if (!this.level().isClientSide) {
             this.dead = true;
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), (float) this.explosionRadius * this.extraRadius, Level.ExplosionInteraction.MOB);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), (float) this.explosionRadius * this.extraRadius, Level.ExplosionInteraction.NONE);
+            this.level().playSound((Player) null, this.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
             this.discard();
             this.spawnLingeringCloud();
         }
@@ -142,7 +147,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
         cloud.setDuration(cloud.getDuration() / 3);
         cloud.setRadiusPerTick(-cloud.getRadius() / (float)cloud.getDuration());
         cloud.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 6000, 1));
-        cloud.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 600, 1));
+        cloud.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 1));
 
         this.level().addFreshEntity(cloud);
     }
@@ -152,20 +157,33 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(
                 new AnimationController<>(this, "controllerOP", 7, event -> {
-                    if (event.isMoving() && !this.isAggressive() && !this.isLeaping()) {
+                    if (event.isMoving() && !this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_walk"));
                     }
-                    else if (event.isMoving() && this.isAggressive() && !this.isLeaping()) {
+                    else if (event.isMoving() && this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_target"));
-                    }
-                    else if (this.isLeaping()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_leap"));
                     }
                     return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_idle"));
                 }));
 
     }
 
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        Entity attackTarget = this.getTarget();
+        if (attackTarget != null && pSource.getEntity() != null && pSource.getEntity() instanceof LivingEntity livingEntity) {
+            if (livingEntity != attackTarget) {
+                if (this.distanceTo(attackTarget) < 4) {
+                    this.explodeThis();
+                }
+                else {
+                    this.setTarget(livingEntity);
+                    this.getLookControl().setLookAt(livingEntity);
+                }
+            }
+        }
+        return super.hurt(pSource, pAmount);
+    }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -182,12 +200,11 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
         super.die(source);
     }
 
-    /*
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundRegistry.ASSIMILATED_ANIMAL_AMBIENT.get();
+        return SoundRegistry.ENTITY_ASSIMILATED_CREEPER_AMBIENT.get();
     }
 
     @Override
@@ -198,12 +215,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundRegistry.ASSIMILATED_ANIMAL_AMBIENT.get();
+        return SoundRegistry.ENTITY_ASSIMILATED_CREEPER_DEATH.get();
     }
-
-
-   */
-
 
     protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
         super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
@@ -211,63 +224,4 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
 
     }
 
-
-    public static class CreeperLeapGoal extends Goal {
-        private final AssimilatedCreeperEntity mob;
-        private LivingEntity target;
-        private final float yd;
-
-
-        public CreeperLeapGoal(AssimilatedCreeperEntity mob, float v) {
-            this.mob = mob;
-            this.yd = v;
-            this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
-        }
-
-        public boolean canUse() {
-            this.target = this.mob.getTarget();
-            if (this.target == null) {
-                return false;
-            }
-            else if (this.mob.isInWater()) {
-                return false;
-            }
-            else {
-                double d0 = this.mob.distanceTo(this.target);
-                if (d0 > 6.0D && d0 < 14.0D) {
-                    if (!this.mob.onGround()) {
-                        return false;
-                    } else {
-                        return this.mob.getRandom().nextInt(reducedTickDelay(14)) == 0;
-                    }
-                } else {
-                    return false;
-                }
-            }
-
-        }
-
-        @Override
-        public void tick() {
-            if (this.mob.getTarget() != null) {
-                this.mob.getLookControl().setLookAt(this.target);
-                leaping = true;
-            }
-        }
-
-        public void start() {
-            Vec3 vec3 = this.mob.getDeltaMovement();
-            Vec3 vec31 = new Vec3((this.target.getX() - this.mob.getX()) / Mth.floor(MathHelper.HEX), 0.0D, this.target.getZ() - this.mob.getZ());
-            if (vec31.lengthSqr() > 1.0E-7D) {
-                vec31 = vec31.normalize().scale(2D).add(vec3.scale(1.5D));
-            }
-
-            this.mob.setDeltaMovement(vec31.x + yd, this.yd + (MathHelper.PI / 36), vec31.z + yd);
-        }
-
-        @Override
-        public void stop() {
-            super.stop();
-        }
-    }
 }

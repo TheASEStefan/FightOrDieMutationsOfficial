@@ -70,7 +70,7 @@ public class AssimilatedCowEntity extends Assimilated implements GeoEntity {
                 .add(Attributes.ATTACK_KNOCKBACK, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_cow_health.get())
                 .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_cow_damage.get())
                 .add(Attributes.ARMOR, 2D);

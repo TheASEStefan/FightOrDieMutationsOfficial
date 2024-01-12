@@ -2,14 +2,20 @@ package net.teamabyssal.entity.categories;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.*;
@@ -27,6 +33,8 @@ import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
 
 public class AdvancedAssimilated extends Monster {
+    public static final EntityDataAccessor<Integer> AGGRESSION_TICKS = SynchedEntityData.defineId(AdvancedAssimilated.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> PERSISTENT = SynchedEntityData.defineId(AdvancedAssimilated.class, EntityDataSerializers.BOOLEAN);
     public AdvancedAssimilated(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 20.0F);
@@ -35,6 +43,10 @@ public class AdvancedAssimilated extends Monster {
         EntityRegistry.PARASITES.add(this);
     }
 
+    @Override
+    public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
+        return !this.entityData.get(PERSISTENT);
+    }
 
     public int getMaxAirSupply() {
         return 1600;
@@ -56,9 +68,51 @@ public class AdvancedAssimilated extends Monster {
         return super.doHurtTarget(entity);
     }
 
+    public void setPersistent(boolean persistent) {
+        entityData.set(PERSISTENT, persistent);
+    }
+    public void setAggressionTicks(int ticks) {
+        entityData.set(AGGRESSION_TICKS, ticks);
+    }
+    public int getAggressionTicks() {
+        return this.entityData.get(AGGRESSION_TICKS);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("aggression_ticks",entityData.get(AGGRESSION_TICKS));
+        tag.putBoolean("persistent",entityData.get(PERSISTENT));
+    }
+
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        entityData.set(AGGRESSION_TICKS, tag.getInt("aggression_ticks"));
+        entityData.set(PERSISTENT, tag.getBoolean("persistent"));
+    }
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(AGGRESSION_TICKS, 0);
+        this.entityData.define(PERSISTENT,false);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.getTarget() != null && this.isAlive()) {
+            this.setAggressionTicks(this.getAggressionTicks() + 1);
+            if (this.getAggressionTicks() == 1600) {
+                this.setPersistent(true);
+            }
+        }
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(3, new FloatDiveGoal(this));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));

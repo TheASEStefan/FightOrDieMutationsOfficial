@@ -85,7 +85,6 @@ public class FightOrDieMutations {
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(EntityRegistry.SHILLER.get(), ShillerRenderer::new);
             EntityRenderers.register(EntityRegistry.MALRUPTOR.get(), MalruptorRenderer::new);
-            EntityRenderers.register(EntityRegistry.MARGROUPER.get(), MargrouperRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN.get(), AssimilatedHumanRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_COW.get(), AssimilatedCowRenderer::new);

@@ -2,7 +2,6 @@
 
   "item.fight_or_die.shiller_spawn_egg": "Shiller Spawn Egg",
   "item.fight_or_die.springer_spawn_egg": "Springer Spawn Egg",
-  "item.fight_or_die.grouper_spawn_egg": "Grouper Spawn Egg",
   "item.fight_or_die.assimilated_human_spawn_egg": "Assimilated Human Spawn Egg",
   "item.fight_or_die.assimilated_human_head_spawn_egg": "Assimilated Human Head Spawn Egg",
   "item.fight_or_die.assimilated_cow_spawn_egg": "Assimilated Cow Spawn Egg",
@@ -18,7 +17,6 @@
 
   "entity.fight_or_die.shiller": "Shiller",
   "entity.fight_or_die.springer": "Springer",
-  "entity.fight_or_die.grouper": "Grouper",
   "entity.fight_or_die.assimilated_human": "Assimilated Human",
   "entity.fight_or_die.assimilated_human_head": "Assimilated Human Head",
   "entity.fight_or_die.assimilated_cow": "Assimilated Cow",
@@ -38,9 +36,8 @@
   "subtitles.fight_or_die.entity.malruptor.death": "Springer dies",
   "subtitles.fight_or_die.entity.malruptor.infect": "Springer infects",
 
-  "subtitles.fight_or_die.entity.margrouper.ambient": "Grouper screeches",
-  "subtitles.fight_or_die.entity.margrouper.hurt": "Grouper hurts",
-  "subtitles.fight_or_die.entity.margrouper.death": "Grouper dies",
+  "subtitles.fight_or_die.entity.assimilated_creeper.ambient": "Assimilated Creeper growls and fizzles!",
+  "subtitles.fight_or_die.entity.assimilated_creeper.death": "Assimilated Creeper dies",
 
   "subtitles.fight_or_die.entity.assimilated_human.ambient": "Assimilated Human growls",
   "subtitles.fight_or_die.entity.assimilated.animal.ambient": "Assimilated Animal growls",
