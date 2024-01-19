@@ -38,6 +38,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
@@ -53,13 +54,6 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedHumanEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-    }
-    @Override
-    protected void customServerAiStep() {
-        if (!this.isNoAi() && GoalUtils.hasGroundPathNavigation(this)) {
-            ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
-        }
-        super.customServerAiStep();
     }
 
     @Override
@@ -102,8 +96,8 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
 
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(
+    public void registerControllers(AnimatableManager.ControllerRegistrar controlleersin) {
+        controlleersin.add(
                 new AnimationController<>(this, "controllerOP", 7, event -> {
                     if (event.isMoving() && !this.isAggressive()) {
                         event.getController().setAnimationSpeed(1.2D);

@@ -41,16 +41,31 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(AssimilatedHumanEntity::new, PARASITE)
                             .sized(0.8f, 1.9f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human").toString()));
+    public static final RegistryObject<EntityType<AssimilatedVillagerEntity>> ASSIMILATED_VILLAGER =
+            ENTITY_TYPES.register("assimilated_villager",
+                    () -> EntityType.Builder.of(AssimilatedVillagerEntity::new, PARASITE)
+                            .sized(0.8f, 1.9f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_villager").toString()));
     public static final RegistryObject<EntityType<AssimilatedHumanHeadEntity>> ASSIMILATED_HUMAN_HEAD =
             ENTITY_TYPES.register("assimilated_human_head",
                     () -> EntityType.Builder.of(AssimilatedHumanHeadEntity::new, PARASITE)
                             .sized(0.7f, 0.8f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human_head").toString()));
+    public static final RegistryObject<EntityType<AssimilatedVillagerHeadEntity>> ASSIMILATED_VILLAGER_HEAD =
+            ENTITY_TYPES.register("assimilated_villager_head",
+                    () -> EntityType.Builder.of(AssimilatedVillagerHeadEntity::new, PARASITE)
+                            .sized(0.7f, 0.8f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_villager_head").toString()));
     public static final RegistryObject<EntityType<AssimilatedCowEntity>> ASSIMILATED_COW =
             ENTITY_TYPES.register("assimilated_cow",
                     () -> EntityType.Builder.of(AssimilatedCowEntity::new, PARASITE)
                             .sized(1.0f, 1.5f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_cow").toString()));
+    public static final RegistryObject<EntityType<AssimilatedSheepEntity>> ASSIMILATED_SHEEP =
+            ENTITY_TYPES.register("assimilated_sheep",
+                    () -> EntityType.Builder.of(AssimilatedSheepEntity::new, PARASITE)
+                            .sized(0.9f, 1.4f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_sheep").toString()));
     public static final RegistryObject<EntityType<AssimilatedCreeperEntity>> ASSIMILATED_CREEPER =
             ENTITY_TYPES.register("assimilated_creeper",
                     () -> EntityType.Builder.of(AssimilatedCreeperEntity::new, PARASITE)

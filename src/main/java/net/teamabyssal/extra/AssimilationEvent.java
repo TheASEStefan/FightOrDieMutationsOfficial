@@ -3,23 +3,23 @@ package net.teamabyssal.extra;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
-import net.teamabyssal.entity.custom.AssimilatedCowEntity;
-import net.teamabyssal.entity.custom.AssimilatedCreeperEntity;
-import net.teamabyssal.entity.custom.AssimilatedHumanEntity;
+import net.teamabyssal.entity.custom.*;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
-import net.teamabyssal.registry.EffectRegistry;
-import net.teamabyssal.registry.EntityRegistry;
-import net.teamabyssal.registry.WorldDataRegistry;
+import net.teamabyssal.registry.*;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
 public class AssimilationEvent {
@@ -40,9 +40,10 @@ public class AssimilationEvent {
                 assert assimilatedHumanEntity != null;
                 assimilatedHumanEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                 world.addFreshEntity(assimilatedHumanEntity);
-                assimilatedHumanEntity.playSound(SoundEvents.ZOMBIE_INFECT);
+                zombie.level().playSound((Player) null, zombie.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
                 if (zombie.level() instanceof ServerLevel server) {
-                    server.sendParticles(ParticleTypes.EXPLOSION, zombie.getX(), zombie.getY() + 1, zombie.getZ(), 5, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleTypes.EXPLOSION, zombie.getX(), zombie.getY() + 1, zombie.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), zombie.getX(), zombie.getY() + 1, zombie.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
                     if (currentPhase < 3) {
                         worldDataRegistry.setScore(currentScore + 5);
                     }
@@ -56,14 +57,32 @@ public class AssimilationEvent {
                 assert assimilatedCreeperEntity != null;
                 assimilatedCreeperEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                 world.addFreshEntity(assimilatedCreeperEntity);
-                assimilatedCreeperEntity.playSound(SoundEvents.ZOMBIE_INFECT);
+                creeper.level().playSound((Player) null, creeper.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
                 if (creeper.level() instanceof ServerLevel server) {
-                    server.sendParticles(ParticleTypes.EXPLOSION, creeper.getX(), creeper.getY() + 1, creeper.getZ(), 5, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleTypes.EXPLOSION, creeper.getX(), creeper.getY() + 1, creeper.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), creeper.getX(), creeper.getY() + 1, creeper.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
                     if (currentPhase < 3) {
                         worldDataRegistry.setScore(currentScore + 10);
                     }
                     else if (currentPhase >= 3) {
                         worldDataRegistry.setScore(currentScore + 20);
+                    }
+                }
+            }
+            else if (entity instanceof Villager villager && villager.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_villager_assimilation.get() && Math.random() <= 0.85F) {
+                AssimilatedVillagerEntity assimilatedVillagerEntity = EntityRegistry.ASSIMILATED_VILLAGER.get().create(world);
+                assert assimilatedVillagerEntity != null;
+                assimilatedVillagerEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                world.addFreshEntity(assimilatedVillagerEntity);
+                villager.level().playSound((Player) null, villager.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
+                if (villager.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.EXPLOSION, villager.getX(), villager.getY() + 1, villager.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), villager.getX(), villager.getY() + 1, villager.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
+                    if (currentPhase < 3) {
+                        worldDataRegistry.setScore(currentScore + 5);
+                    }
+                    else if (currentPhase >= 3) {
+                        worldDataRegistry.setScore(currentScore + 10);
                     }
                 }
             }
@@ -86,13 +105,31 @@ public class AssimilationEvent {
                 assimilatedCowEntity.moveTo(x, y, z);
                 world.addFreshEntity(assimilatedCowEntity);
                 cow.discard();
-                assimilatedCowEntity.playSound(SoundEvents.ZOMBIE_INFECT);
+                cow.level().playSound((Player) null, cow.blockPosition(), SoundRegistry.ENTITY_TURN.get(), SoundSource.HOSTILE, 1.6F, 1.0F);
                 if (cow.getLastHurtByMob() != null) {
                     assimilatedCowEntity.setTarget(cow.getLastHurtByMob());
                     assimilatedCowEntity.getLookControl().setLookAt(cow.getLastHurtByMob());
                 }
                 if (cow.level() instanceof ServerLevel server) {
-                    server.sendParticles(ParticleTypes.EXPLOSION, cow.getX(), cow.getY() + 1, cow.getZ(), 5, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleTypes.EXPLOSION, cow.getX(), cow.getY() + 1, cow.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), cow.getX(), cow.getY() + 1, cow.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
+                    worldDataRegistry.setScore(currentScore + 2);
+                }
+            }
+            else if (entity instanceof Sheep sheep && sheep.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_sheep_assimilation.get()) {
+                AssimilatedSheepEntity assimilatedSheepEntity = EntityRegistry.ASSIMILATED_SHEEP.get().create(world);
+                assert assimilatedSheepEntity != null;
+                assimilatedSheepEntity.moveTo(x, y, z);
+                world.addFreshEntity(assimilatedSheepEntity);
+                sheep.discard();
+                sheep.level().playSound((Player) null, sheep.blockPosition(), SoundRegistry.ENTITY_TURN.get(), SoundSource.HOSTILE, 1.6F, 1.0F);
+                if (sheep.getLastHurtByMob() != null) {
+                    assimilatedSheepEntity.setTarget(sheep.getLastHurtByMob());
+                    assimilatedSheepEntity.getLookControl().setLookAt(sheep.getLastHurtByMob());
+                }
+                if (sheep.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.EXPLOSION, sheep.getX(), sheep.getY() + 1, sheep.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), sheep.getX(), sheep.getY() + 1, sheep.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
                     worldDataRegistry.setScore(currentScore + 2);
                 }
             }

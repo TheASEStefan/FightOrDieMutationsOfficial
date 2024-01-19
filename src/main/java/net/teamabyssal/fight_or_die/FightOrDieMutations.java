@@ -5,7 +5,6 @@ import com.mojang.serialization.Codec;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -86,8 +85,11 @@ public class FightOrDieMutations {
             EntityRenderers.register(EntityRegistry.SHILLER.get(), ShillerRenderer::new);
             EntityRenderers.register(EntityRegistry.MALRUPTOR.get(), MalruptorRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN.get(), AssimilatedHumanRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_VILLAGER.get(), AssimilatedVillagerRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_VILLAGER_HEAD.get(), AssimilatedVillagerHeadRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_COW.get(), AssimilatedCowRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_SHEEP.get(), AssimilatedSheepRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_CREEPER.get(), AssimilatedCreeperRenderer::new);
 
 

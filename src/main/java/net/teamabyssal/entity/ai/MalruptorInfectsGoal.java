@@ -1,24 +1,16 @@
 package net.teamabyssal.entity.ai;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.teamabyssal.entity.custom.AssimilatedCowEntity;
-import net.teamabyssal.entity.custom.AssimilatedHumanEntity;
 import net.teamabyssal.registry.EffectRegistry;
-import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 
 import javax.annotation.Nullable;
@@ -26,7 +18,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class MalruptorInfects extends Goal {
+public class MalruptorInfectsGoal extends Goal {
 
     private static TargetingConditions PARTNER_TARGETING;
     protected final Level level;
@@ -37,14 +29,14 @@ public class MalruptorInfects extends Goal {
     private final double speedModifier;
 
 
-    public  MalruptorInfects(PathfinderMob mob, double speedModifier){
+    public MalruptorInfectsGoal(PathfinderMob mob, double speedModifier){
         this(mob , speedModifier, mob.getClass());
     }
-    public MalruptorInfects(PathfinderMob mob, double speedModifier, Class<? extends PathfinderMob> partnerClass){
+    public MalruptorInfectsGoal(PathfinderMob mob, double speedModifier, Class<? extends PathfinderMob> partnerClass){
         this(mob,speedModifier,partnerClass , null);
     }
 
-    public  MalruptorInfects(PathfinderMob mob, double speedModifier, Class<? extends PathfinderMob> partnerClass, @Nullable Predicate<LivingEntity> en){
+    public MalruptorInfectsGoal(PathfinderMob mob, double speedModifier, Class<? extends PathfinderMob> partnerClass, @Nullable Predicate<LivingEntity> en){
         this.level = mob.level();
         this.mob = mob;
         this.speedModifier = speedModifier;

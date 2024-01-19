@@ -13,10 +13,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,10 +38,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class AssimilatedCowEntity extends Assimilated implements GeoEntity {
+public class AssimilatedSheepEntity extends Assimilated implements GeoEntity {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public AssimilatedCowEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public AssimilatedSheepEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -63,32 +62,30 @@ public class AssimilatedCowEntity extends Assimilated implements GeoEntity {
     @Nullable
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.ATTACK_KNOCKBACK, 0.2D)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.1D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_cow_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_cow_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_sheep_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_sheep_damage.get())
                 .add(Attributes.ARMOR, 2D);
 
     }
 
-
-
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerOm) {
-        controllerOm.add(
-                new AnimationController<>(this, "controllerOP", 7, event -> {
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerR) {
+        controllerR.add(
+                new AnimationController<>(this, "controllerR", 7, event -> {
                     if (event.isMoving() && !this.isAggressive()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_cow_walk"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_sheep_walk"));
                     }
                     else if (event.isMoving() && this.isAggressive()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_cow_target"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_sheep_target"));
                     }
                     else if (this.isDeadOrDying()) {
-                        return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_cow_death"));
+                        return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_sheep_death"));
                     }
-                    return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_cow_idle"));
+                    return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_sheep_idle"));
                 }));
 
     }
@@ -178,7 +175,6 @@ public class AssimilatedCowEntity extends Assimilated implements GeoEntity {
     protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
         super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
         Entity entity = pSource.getEntity();
-
 
     }
 }

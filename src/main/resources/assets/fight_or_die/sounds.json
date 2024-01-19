@@ -34,6 +34,13 @@
     "subtitle": "subtitles.fight_or_die.entity.assimilated_human.ambient"
   },
 
+  "entity.assimilated_villager.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_villager.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_villager.ambient"
+  },
+
   "entity.assimilated.hurt": {
     "sounds": [
       "fight_or_die:mob/assimilated.hurt"
@@ -46,6 +53,13 @@
       "fight_or_die:mob/explosion"
     ],
     "subtitle": "subtitles.fight_or_die.entity.explosion"
+  },
+
+  "entity.turn": {
+    "sounds": [
+      "fight_or_die:mob/turn"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.turn"
   },
 
   "entity.head.ambient": {

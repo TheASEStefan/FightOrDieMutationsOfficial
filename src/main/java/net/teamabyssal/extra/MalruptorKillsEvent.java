@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
+import net.teamabyssal.entity.custom.AssimilatedVillagerHeadEntity;
 import net.teamabyssal.entity.custom.MalruptorEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EntityRegistry;
@@ -33,6 +34,13 @@ public class MalruptorKillsEvent {
                 Level world = assimilatedHumanHeadEntity.level();
                 if (!world.isClientSide && assimilatedHumanHeadEntity.isAlive()) {
                     assimilatedHumanHeadEntity.setKills(assimilatedHumanHeadEntity.getKills() + 1);
+                }
+            }
+            else if (event.getSource().getEntity() instanceof AssimilatedVillagerHeadEntity) {
+                AssimilatedVillagerHeadEntity assimilatedVillagerHeadEntity = (AssimilatedVillagerHeadEntity) event.getSource().getEntity();
+                Level world = assimilatedVillagerHeadEntity.level();
+                if (!world.isClientSide && assimilatedVillagerHeadEntity.isAlive()) {
+                    assimilatedVillagerHeadEntity.setKills(assimilatedVillagerHeadEntity.getKills() + 1);
                 }
             }
         }

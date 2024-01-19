@@ -15,6 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.entity.categories.*;
 import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
+import net.teamabyssal.entity.custom.AssimilatedVillagerHeadEntity;
 import net.teamabyssal.entity.custom.MalruptorEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EffectRegistry;
@@ -76,7 +77,16 @@ public class LivingSpawnedModifications {
             Level world = assimilatedHumanHeadEntity.level();
             if (!world.isClientSide) {
                 if (Math.random() <= 0.85F) {
-                    assimilatedHumanHeadEntity.setKills(assimilatedHumanHeadEntity.getKills() + assimilatedHumanHeadEntity.getRandom().nextInt(2));
+                    assimilatedHumanHeadEntity.setKills(assimilatedHumanHeadEntity.getKills() + assimilatedHumanHeadEntity.getRandom().nextInt(3));
+                }
+            }
+        }
+        else if (event.getEntity() instanceof AssimilatedVillagerHeadEntity) {
+            AssimilatedVillagerHeadEntity assimilatedVillagerHeadEntity = (AssimilatedVillagerHeadEntity) event.getEntity();
+            Level world = assimilatedVillagerHeadEntity.level();
+            if (!world.isClientSide) {
+                if (Math.random() <= 0.85F) {
+                    assimilatedVillagerHeadEntity.setKills(assimilatedVillagerHeadEntity.getKills() + assimilatedVillagerHeadEntity.getRandom().nextInt(3));
                 }
             }
         }

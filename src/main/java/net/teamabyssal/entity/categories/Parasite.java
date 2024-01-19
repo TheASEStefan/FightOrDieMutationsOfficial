@@ -71,6 +71,16 @@ public class Parasite extends Monster {
     protected void registerGoals() {
         this.goalSelector.addGoal(10, new FloatDiveGoal(this));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && this.mob.getTarget() == null;
+            }
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && this.mob.getTarget() == null;
+            }
+        });
     }
 
     public static boolean checkMonsterParasiteRules(EntityType<? extends Parasite> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {

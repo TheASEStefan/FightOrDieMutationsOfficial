@@ -19,8 +19,11 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.SHILLER_SPAWN_EGG.get());
         entries.accept(ItemRegistry.MALRUPTOR_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_COW_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.ASSIMILATED_SHEEP_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_HUMAN_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.ASSIMILATED_VILLAGER_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_HUMAN_HEAD_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_CREEPER_SPAWN_EGG.get());
 
         entries.accept(ItemRegistry.ADDITION_DEVICE.get());

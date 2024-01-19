@@ -16,7 +16,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.monster.Monster;
@@ -44,12 +45,13 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 
-public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolving, Hunter {
-    public static final EntityDataAccessor<Integer> KILLS = SynchedEntityData.defineId(AssimilatedHumanHeadEntity.class, EntityDataSerializers.INT);
+public class AssimilatedVillagerHeadEntity extends Head implements GeoEntity, Evolving, Hunter {
+
+    public static final EntityDataAccessor<Integer> KILLS = SynchedEntityData.defineId(AssimilatedVillagerHeadEntity.class, EntityDataSerializers.INT);
     private static boolean hunting = false;
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public AssimilatedHumanHeadEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public AssimilatedVillagerHeadEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new WallMovementControl(this);
         this.navigation = new WallClimberNavigation(this, pLevel);
@@ -81,9 +83,9 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.15D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_human_head_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_human_head_damage.get())
-                .add(Attributes.ARMOR, 1D);
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_villager_head_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_villager_head_damage.get())
+                .add(Attributes.ARMOR, 2D);
 
     }
     @Override
@@ -98,17 +100,15 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
                 worldDataRegistry.setScore(currentScore + 2);
             }
             this.discard();
-            this.EvolveIntoSimHuman(this);
+            this.EvolveIntoSimVillager(this);
         }
         super.tick();
     }
-    private void EvolveIntoSimHuman(Entity entity) {
-        AssimilatedHumanEntity assimilatedHumanEntity = new AssimilatedHumanEntity(EntityRegistry.ASSIMILATED_HUMAN.get(), entity.level());
-        assimilatedHumanEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
-        entity.level().addFreshEntity(assimilatedHumanEntity);
+    private void EvolveIntoSimVillager(Entity entity) {
+        AssimilatedVillagerEntity assimilatedVillagerEntity = new AssimilatedVillagerEntity(EntityRegistry.ASSIMILATED_VILLAGER.get(), entity.level());
+        assimilatedVillagerEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
+        entity.level().addFreshEntity(assimilatedVillagerEntity);
     }
-
-
 
     public void setKills(Integer count) {
         entityData.set(KILLS, count);
@@ -145,20 +145,20 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
         controllerO.add(
                 new AnimationController<>(this, "controllerO", 7, event -> {
                     if (event.isMoving() && !this.isAggressive()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_walk"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_villager_head_walk"));
                     }
                     else if (event.isMoving() && this.isAggressive() && this.onGround()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_target"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_villager_head_target"));
                     }
                     else if (!event.isMoving() && !this.isAggressive()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_idle"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_villager_head_idle"));
                     }
                     return PlayState.CONTINUE;
                 }));
         controllerO.add(
                 new AnimationController<>(this, "controllerN", 7, event -> {
                     if (this.isHunting()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_head_air"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_villager_head_air"));
                     }
                     return PlayState.STOP;
                 }));

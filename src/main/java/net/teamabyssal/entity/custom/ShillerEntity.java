@@ -32,6 +32,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
@@ -92,15 +93,18 @@ public class ShillerEntity extends Parasite implements GeoEntity, Evolving {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerD) {
+        controllerD.add(
                 new AnimationController<>(this, "controllerRegistrar", 7, event -> {
                     event.getController().setAnimationSpeed(1.0D);
-                    if (event.isMoving()) {
+                    if (!event.isMoving()) {
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("shiller_idle"));
+                    }
+                    else if (event.isMoving()) {
                         event.getController().setAnimationSpeed(1.8D);
                         return event.setAndContinue(RawAnimation.begin().thenLoop("shiller_walk"));
                     }
-                    return event.setAndContinue(RawAnimation.begin().thenLoop("shiller_idle"));
+                    return PlayState.CONTINUE;
                 }));
 
     }

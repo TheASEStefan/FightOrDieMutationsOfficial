@@ -35,7 +35,7 @@ public class FightOrDieMutationsConfig {
     }
     public static class Server {
 
-
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> blacklist;
         public final ForgeConfigSpec.ConfigValue<Integer> phase1_points;
         public final ForgeConfigSpec.ConfigValue<Integer> phase2_points;
         public final ForgeConfigSpec.ConfigValue<Integer> phase3_points;
@@ -52,16 +52,23 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> malruptor_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_head_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_head_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_head_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_head_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_sheep_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_sheep_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_damage;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_human_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_villager_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_adventurer_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_cow_assimilation;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_sheep_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_creeper_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> creeper_attack;
         public final ForgeConfigSpec.ConfigValue<Boolean> enderman_attack;
@@ -87,13 +94,25 @@ public class FightOrDieMutationsConfig {
             this.assimilated_human_health = builder.comment("Default 20").defineInRange("Sets Assimilated Human's Max health", 20, 10, Double.MAX_VALUE);
             this.assimilated_human_damage = builder.comment("Default 8").defineInRange("Sets Assimilated Human's Damage", 8, 4, Double.MAX_VALUE);
             builder.pop();
+            builder.push("Assimilated Villager");
+            this.assimilated_villager_health = builder.comment("Default 22").defineInRange("Sets Assimilated Villager's Max health", 22, 12, Double.MAX_VALUE);
+            this.assimilated_villager_damage = builder.comment("Default 9").defineInRange("Sets Assimilated Villager's Damage", 9, 4, Double.MAX_VALUE);
+            builder.pop();
             builder.push("Assimilated Human Head");
             this.assimilated_human_head_health = builder.comment("Default 7").defineInRange("Sets Assimilated Human Head's Max health", 7, 4, Double.MAX_VALUE);
             this.assimilated_human_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Human Head's Damage", 3, 1, Double.MAX_VALUE);
             builder.pop();
+            builder.push("Assimilated Villager Head");
+            this.assimilated_villager_head_health = builder.comment("Default 8").defineInRange("Sets Assimilated Villager Head's Max health", 8, 4, Double.MAX_VALUE);
+            this.assimilated_villager_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Villager Head's Damage", 3, 1, Double.MAX_VALUE);
+            builder.pop();
             builder.push("Assimilated Cow");
             this.assimilated_cow_health = builder.comment("Default 16").defineInRange("Sets Assimilated Cow's Max health", 16, 7, Double.MAX_VALUE);
             this.assimilated_cow_damage = builder.comment("Default 8").defineInRange("Sets Assimilated Cow's Damage", 8, 3, Double.MAX_VALUE);
+            builder.pop();
+            builder.push("Assimilated Sheep");
+            this.assimilated_sheep_health = builder.comment("Default 14").defineInRange("Sets Assimilated Sheep's Max health", 14, 4, Double.MAX_VALUE);
+            this.assimilated_sheep_damage = builder.comment("Default 7").defineInRange("Sets Assimilated Sheep's Damage", 7, 3, Double.MAX_VALUE);
             builder.pop();
             builder.push("Assimilated Creeper");
             this.assimilated_creeper_health = builder.comment("Default 12").defineInRange("Sets Assimilated Creeper's Max health", 12, 5, Double.MAX_VALUE);
@@ -105,8 +124,17 @@ public class FightOrDieMutationsConfig {
             this.dimension_parameters = builder.comment("Default minecraft:is_overworld").defineList("Dictates in what biome the parasites spawn",
                     Lists.newArrayList("minecraft:is_overworld") , o -> o instanceof String);
             this.spawns = builder.defineList("mob|weight|minimum|maximum",
-                    Lists.newArrayList("fight_or_die:shiller|35|1|3", "fight_or_die:springer|25|1|2", "fight_or_die:assimilated_human|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_creeper|15|1|1") , o -> o instanceof String);
+                    Lists.newArrayList("fight_or_die:shiller|45|1|3", "fight_or_die:springer|30|1|2", "fight_or_die:assimilated_human|28|1|2", "fight_or_die:assimilated_villager|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_sheep|25|1|2", "fight_or_die:assimilated_creeper|15|1|1") , o -> o instanceof String);
             builder.pop();
+
+            builder.push("Targeting Tasks");
+
+            this.blacklist = builder.defineList("Mobs Not Targeted",
+                    Lists.newArrayList(
+                            "minecraft:squid","minecraft:bat","minecraft:armor_stand") , o -> o instanceof String);
+
+            builder.pop();
+
 
             builder.push("Effects");
             this.hive_sickness = builder.defineList("Mobs that are immune to the hive sickness infection",
@@ -121,12 +149,13 @@ public class FightOrDieMutationsConfig {
             builder.push("Assimilations");
             this.assimilated_human_assimilation = builder.comment("Default true").define("Should zombies convert into their assimilated counterpart?",true);
             this.assimilated_cow_assimilation = builder.comment("Default true").define("Should cows convert into their assimilated counterpart?",true);
+            this.assimilated_sheep_assimilation = builder.comment("Default true").define("Should sheeps convert into their assimilated counterpart?",true);
             this.assimilated_villager_assimilation = builder.comment("Default true").define("Should villagers convert into their assimilated counterpart?",true);
             this.assimilated_adventurer_assimilation = builder.comment("Default true").define("Should players convert into their assimilated counterpart?",true);
             this.assimilated_creeper_assimilation = builder.comment("Default true").define("Should creepers convert into their assimilated counterpart?",true);
             builder.pop();
-            builder.push("Targeting Goals");
-            this.creeper_attack= builder.comment("Default true").define("Should mobs target creepers?",true);
+            builder.push("Springer Targeting Goals");
+            this.creeper_attack = builder.comment("Default true").define("Should mobs target creepers?",true);
             this.enderman_attack = builder.comment("Default true").define("Should mobs target endermans?",true);
             this.witch_attack = builder.comment("Default true").define("Should mobs target witches?",true);
             builder.pop();

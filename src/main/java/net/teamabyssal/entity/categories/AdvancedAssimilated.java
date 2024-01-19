@@ -17,7 +17,12 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ambient.Bat;
+import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
@@ -113,39 +118,12 @@ public class AdvancedAssimilated extends Monster {
     protected void registerGoals() {
         this.goalSelector.addGoal(3, new FloatDiveGoal(this));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, this::targetPredicate));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Zombie.class, true));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Skeleton.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Spider.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Silverfish.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Endermite.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Slime.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Pillager.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Vindicator.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Evoker.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
-            @Override
-            public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.enderman_attack.get();
-            }
-        });
-        /*
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true) {
-            @Override
-            public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.creeper_attack.get();
-            }
-        });
-
-         */
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
-            @Override
-            public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.witch_attack.get();
-            }
-        });
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+    }
+    private boolean targetPredicate(LivingEntity liv) {
+        return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
     }
 
     public static boolean checkMonsterAdvancedAssimilatedRules(EntityType<? extends AdvancedAssimilated> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {

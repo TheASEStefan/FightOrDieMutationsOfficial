@@ -3,8 +3,11 @@
   "item.fight_or_die.shiller_spawn_egg": "Shiller Spawn Egg",
   "item.fight_or_die.springer_spawn_egg": "Springer Spawn Egg",
   "item.fight_or_die.assimilated_human_spawn_egg": "Assimilated Human Spawn Egg",
+  "item.fight_or_die.assimilated_villager_spawn_egg": "Assimilated Villager Spawn Egg",
   "item.fight_or_die.assimilated_human_head_spawn_egg": "Assimilated Human Head Spawn Egg",
+  "item.fight_or_die.assimilated_villager_head_spawn_egg": "Assimilated Villager Head Spawn Egg",
   "item.fight_or_die.assimilated_cow_spawn_egg": "Assimilated Cow Spawn Egg",
+  "item.fight_or_die.assimilated_sheep_spawn_egg": "Assimilated Sheep Spawn Egg",
   "item.fight_or_die.assimilated_creeper_spawn_egg": "Assimilated Creeper Spawn Egg",
 
   "item.fight_or_die.addition_device": "Addition Device",
@@ -18,8 +21,11 @@
   "entity.fight_or_die.shiller": "Shiller",
   "entity.fight_or_die.springer": "Springer",
   "entity.fight_or_die.assimilated_human": "Assimilated Human",
+  "entity.fight_or_die.assimilated_villager": "Assimilated Villager",
   "entity.fight_or_die.assimilated_human_head": "Assimilated Human Head",
+  "entity.fight_or_die.assimilated_villager_head": "Assimilated Villager Head",
   "entity.fight_or_die.assimilated_cow": "Assimilated Cow",
+  "entity.fight_or_die.assimilated_sheep": "Assimilated Sheep",
   "entity.fight_or_die.assimilated_creeper": "Assimilated Creeper",
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",
@@ -40,9 +46,11 @@
   "subtitles.fight_or_die.entity.assimilated_creeper.death": "Assimilated Creeper dies",
 
   "subtitles.fight_or_die.entity.assimilated_human.ambient": "Assimilated Human growls",
+  "subtitles.fight_or_die.entity.assimilated_villager.ambient": "Assimilated Villager growls",
   "subtitles.fight_or_die.entity.assimilated.animal.ambient": "Assimilated Animal growls",
   "subtitles.fight_or_die.entity.assimilated.hurt" : "Assimilated hurts",
   "subtitles.fight_or_die.entity.explosion" : "Mutation explodes",
+  "subtitles.fight_or_die.entity.turn" : "Mutation turns",
   "subtitles.fight_or_die.entity.head.ambient" : "Walking Head shrieks",
   "subtitles.fight_or_die.humanoid.death" : "Human mutation dies",
 

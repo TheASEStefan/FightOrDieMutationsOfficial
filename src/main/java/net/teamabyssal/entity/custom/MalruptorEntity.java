@@ -1,9 +1,5 @@
 package net.teamabyssal.entity.custom;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,6 +13,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +23,7 @@ import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.MathHelper;
 import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
-import net.teamabyssal.entity.ai.MalruptorInfects;
+import net.teamabyssal.entity.ai.MalruptorInfectsGoal;
 import net.teamabyssal.entity.categories.Evolved;
 import net.teamabyssal.entity.categories.Hunter;
 import net.teamabyssal.entity.categories.Infector;
@@ -154,7 +151,13 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
             }
         });
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(10, new MalruptorInfects(this, 1.0, Cow.class) {
+        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.25, Cow.class) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && (this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() < 4);
+            }
+        });
+        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.25, Sheep.class) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && (this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() < 4);
@@ -180,7 +183,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
                     else if (!event.isMoving() && !this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("malruptor_idle"));
                     }
-                    return PlayState.STOP;
+                    return PlayState.CONTINUE;
                 }));
         controllerV.add(
                 new AnimationController<>(this, "controllerK", 7, event -> {

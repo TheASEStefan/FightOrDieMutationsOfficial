@@ -25,10 +25,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.MathHelper;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.AdvancedAssimilated;
+import net.teamabyssal.entity.categories.Assimilated;
 import net.teamabyssal.entity.categories.Leaper;
 import net.teamabyssal.registry.*;
 import org.jetbrains.annotations.Nullable;
@@ -37,10 +39,12 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 import java.util.List;
+
 
 public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity, Leaper {
     private final int minDamage = 2;
@@ -107,19 +111,20 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
         }
     }
 
+    public boolean canExplode() {
+        return this.getTarget() != null && (this.getTarget() instanceof Player || this.getTarget() instanceof IronGolem);
+    }
 
 
     @Override
     public void tick() {
         if (this.getTarget() != null && this.isAlive()) {
             Entity attackTarget = this.getTarget();
-            if (attackTarget instanceof Player) {
-                if (this.distanceTo(attackTarget) < 1.35) {
+            if (this.canExplode()) {
+                if (this.distanceTo(attackTarget) < 1.35 && attackTarget instanceof Player) {
                     this.explodeThis();
                 }
-            }
-            else if (attackTarget instanceof IronGolem) {
-                if (this.distanceTo(attackTarget) < 3) {
+                else if (this.distanceTo(attackTarget) < 3 && attackTarget instanceof IronGolem) {
                     this.explodeThis();
                 }
             }
@@ -130,7 +135,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
 
 
     private void explodeThis() {
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide && this.getTarget() != null && this.getTarget().isAlive()) {
             this.dead = true;
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), (float) this.explosionRadius * this.extraRadius, Level.ExplosionInteraction.NONE);
             this.level().playSound((Player) null, this.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
@@ -157,13 +162,16 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(
                 new AnimationController<>(this, "controllerOP", 7, event -> {
-                    if (event.isMoving() && !this.isAggressive()) {
+                    if (!event.isMoving()) {
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_idle"));
+                    }
+                    else if (event.isMoving() && !this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_walk"));
                     }
                     else if (event.isMoving() && this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_target"));
                     }
-                    return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_idle"));
+                    return PlayState.CONTINUE;
                 }));
 
     }
@@ -172,11 +180,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     public boolean hurt(DamageSource pSource, float pAmount) {
         Entity attackTarget = this.getTarget();
         if (attackTarget != null && pSource.getEntity() != null && pSource.getEntity() instanceof LivingEntity livingEntity) {
-            if (livingEntity != attackTarget) {
-                if (this.distanceTo(attackTarget) < 4) {
-                    this.explodeThis();
-                }
-                else {
+            if (livingEntity != attackTarget && this.isAlive()) {
+                if (this.distanceTo(attackTarget) > 4) {
                     this.setTarget(livingEntity);
                     this.getLookControl().setLookAt(livingEntity);
                 }
