@@ -62,6 +62,8 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_sheep_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_sheep_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_pig_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_pig_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_damage;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_human_assimilation;
@@ -69,10 +71,10 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_adventurer_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_cow_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_sheep_assimilation;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_pig_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_creeper_assimilation;
-        public final ForgeConfigSpec.ConfigValue<Boolean> creeper_attack;
-        public final ForgeConfigSpec.ConfigValue<Boolean> enderman_attack;
-        public final ForgeConfigSpec.ConfigValue<Boolean> witch_attack;
+        public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_enderman;
+        public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_witch;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("Phases");
@@ -114,6 +116,10 @@ public class FightOrDieMutationsConfig {
             this.assimilated_sheep_health = builder.comment("Default 14").defineInRange("Sets Assimilated Sheep's Max health", 14, 4, Double.MAX_VALUE);
             this.assimilated_sheep_damage = builder.comment("Default 7").defineInRange("Sets Assimilated Sheep's Damage", 7, 3, Double.MAX_VALUE);
             builder.pop();
+            builder.push("Assimilated Pig");
+            this.assimilated_pig_health = builder.comment("Default 12").defineInRange("Sets Assimilated Pig's Max health", 12, 3, Double.MAX_VALUE);
+            this.assimilated_pig_damage = builder.comment("Default 7").defineInRange("Sets Assimilated Pig's Damage", 7, 2, Double.MAX_VALUE);
+            builder.pop();
             builder.push("Assimilated Creeper");
             this.assimilated_creeper_health = builder.comment("Default 12").defineInRange("Sets Assimilated Creeper's Max health", 12, 5, Double.MAX_VALUE);
             this.assimilated_creeper_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Creeper's Damage", 3, 1, Double.MAX_VALUE);
@@ -124,14 +130,14 @@ public class FightOrDieMutationsConfig {
             this.dimension_parameters = builder.comment("Default minecraft:is_overworld").defineList("Dictates in what biome the parasites spawn",
                     Lists.newArrayList("minecraft:is_overworld") , o -> o instanceof String);
             this.spawns = builder.defineList("mob|weight|minimum|maximum",
-                    Lists.newArrayList("fight_or_die:shiller|45|1|3", "fight_or_die:springer|30|1|2", "fight_or_die:assimilated_human|28|1|2", "fight_or_die:assimilated_villager|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_sheep|25|1|2", "fight_or_die:assimilated_creeper|15|1|1") , o -> o instanceof String);
+                    Lists.newArrayList("fight_or_die:shiller|45|1|3", "fight_or_die:springer|30|1|2", "fight_or_die:assimilated_human|28|1|2", "fight_or_die:assimilated_villager|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_sheep|25|1|2", "fight_or_die:assimilated_pig|25|1|2", "fight_or_die:assimilated_creeper|15|1|1") , o -> o instanceof String);
             builder.pop();
 
             builder.push("Targeting Tasks");
 
             this.blacklist = builder.defineList("Mobs Not Targeted",
                     Lists.newArrayList(
-                            "minecraft:squid","minecraft:bat","minecraft:armor_stand") , o -> o instanceof String);
+                            "minecraft:squid","minecraft:bat","minecraft:armor_stand", "minecraft:creeper", "minecraft:ghast") , o -> o instanceof String);
 
             builder.pop();
 
@@ -150,14 +156,14 @@ public class FightOrDieMutationsConfig {
             this.assimilated_human_assimilation = builder.comment("Default true").define("Should zombies convert into their assimilated counterpart?",true);
             this.assimilated_cow_assimilation = builder.comment("Default true").define("Should cows convert into their assimilated counterpart?",true);
             this.assimilated_sheep_assimilation = builder.comment("Default true").define("Should sheeps convert into their assimilated counterpart?",true);
+            this.assimilated_pig_assimilation = builder.comment("Default true").define("Should pigs convert into their assimilated counterpart?",true);
             this.assimilated_villager_assimilation = builder.comment("Default true").define("Should villagers convert into their assimilated counterpart?",true);
             this.assimilated_adventurer_assimilation = builder.comment("Default true").define("Should players convert into their assimilated counterpart?",true);
             this.assimilated_creeper_assimilation = builder.comment("Default true").define("Should creepers convert into their assimilated counterpart?",true);
             builder.pop();
             builder.push("Springer Targeting Goals");
-            this.creeper_attack = builder.comment("Default true").define("Should mobs target creepers?",true);
-            this.enderman_attack = builder.comment("Default true").define("Should mobs target endermans?",true);
-            this.witch_attack = builder.comment("Default true").define("Should mobs target witches?",true);
+            this.springer_attacks_enderman = builder.comment("Default true").define("Should springers target endermans?",true);
+            this.springer_attacks_witch = builder.comment("Default true").define("Should springers target witches?",true);
             builder.pop();
 
 

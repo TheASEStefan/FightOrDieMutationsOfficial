@@ -98,7 +98,7 @@ public class MalruptorInfectsGoal extends Goal {
 
     @Nullable
     private PathfinderMob getFreePartner() {
-        List<? extends PathfinderMob> list = this.level.getNearbyEntities(this.partnerClass, PARTNER_TARGETING, this.mob, this.mob.getBoundingBox().inflate(this.mob.getAttributeBaseValue(Attributes.FOLLOW_RANGE)));
+        List<? extends PathfinderMob> list = this.level.getNearbyEntities(this.partnerClass, PARTNER_TARGETING, this.mob, this.mob.getBoundingBox().inflate(this.mob.getAttributeBaseValue(Attributes.FOLLOW_RANGE) + 32));
         double d0 = Double.MAX_VALUE;
         PathfinderMob inf = null;
 

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
@@ -105,19 +106,13 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.enderman_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
-            }
-        });
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Creeper.class, true) {
-            @Override
-            public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.creeper_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.springer_attacks_enderman.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.witch_attack.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.springer_attacks_witch.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
             }
         });
         this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Endermite.class, true) {
@@ -151,13 +146,19 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
             }
         });
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.25, Cow.class) {
+        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.3, Cow.class) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && (this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() < 4);
             }
         });
-        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.25, Sheep.class) {
+        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.3, Sheep.class) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && (this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() < 4);
+            }
+        });
+        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.3, Pig.class) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && (this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() < 4);

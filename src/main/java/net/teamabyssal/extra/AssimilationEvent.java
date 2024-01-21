@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
@@ -130,6 +131,23 @@ public class AssimilationEvent {
                 if (sheep.level() instanceof ServerLevel server) {
                     server.sendParticles(ParticleTypes.EXPLOSION, sheep.getX(), sheep.getY() + 1, sheep.getZ(), 3, 0.4, 1.0, 0.4, 0);
                     server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), sheep.getX(), sheep.getY() + 1, sheep.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
+                    worldDataRegistry.setScore(currentScore + 2);
+                }
+            }
+            else if (entity instanceof Pig pig && pig.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_pig_assimilation.get()) {
+                AssimilatedPigEntity assimilatedPigEntity = EntityRegistry.ASSIMILATED_PIG.get().create(world);
+                assert assimilatedPigEntity != null;
+                assimilatedPigEntity.moveTo(x, y, z);
+                world.addFreshEntity(assimilatedPigEntity);
+                pig.discard();
+                pig.level().playSound((Player) null, pig.blockPosition(), SoundRegistry.ENTITY_TURN.get(), SoundSource.HOSTILE, 1.6F, 1.0F);
+                if (pig.getLastHurtByMob() != null) {
+                    assimilatedPigEntity.setTarget(pig.getLastHurtByMob());
+                    assimilatedPigEntity.getLookControl().setLookAt(pig.getLastHurtByMob());
+                }
+                if (pig.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.EXPLOSION, pig.getX(), pig.getY() + 1, pig.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), pig.getX(), pig.getY() + 1, pig.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
                     worldDataRegistry.setScore(currentScore + 2);
                 }
             }

@@ -37,6 +37,8 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_COW, 0x281604, 0x3f2306, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_SHEEP_SPAWN_EGG = ITEMS.register("assimilated_sheep_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_SHEEP, 0xfacbcb, 0x560808, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_PIG_SPAWN_EGG = ITEMS.register("assimilated_pig_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_PIG, 0x280416, 0x9b1057, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_CREEPER_SPAWN_EGG = ITEMS.register("assimilated_creeper_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_CREEPER, 0x042804, 0x10a510, new Item.Properties()));
 
@@ -47,6 +49,12 @@ public class ItemRegistry {
     public static final RegistryObject<Item> PARASCORE = ITEMS.register("parascore",
             () -> new Parascore(new Item.Properties()));
     public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("infector_thorax",
+            () -> new BaseItem(new Item.Properties()));
+    public static final RegistryObject<Item> RIPPING_FLESH = ITEMS.register("ripping_flesh",
+            () -> new BaseItem(new Item.Properties()));
+    public static final RegistryObject<Item> ROTTEN_BRAIN = ITEMS.register("rotten_brain",
+            () -> new BaseItem(new Item.Properties()));
+    public static final RegistryObject<Item> SICKENED_HEART = ITEMS.register("sickened_heart",
             () -> new BaseItem(new Item.Properties()));
 
 

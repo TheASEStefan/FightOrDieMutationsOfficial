@@ -1,6 +1,5 @@
 package net.teamabyssal.entity.custom;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,24 +13,18 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.MathHelper;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.AdvancedAssimilated;
-import net.teamabyssal.entity.categories.Assimilated;
-import net.teamabyssal.entity.categories.Leaper;
 import net.teamabyssal.registry.*;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -42,15 +35,13 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.EnumSet;
-import java.util.List;
 
 
-public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity, Leaper {
+public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity {
     private final int minDamage = 2;
     private final int maxDamage = 4;
     private final float extraRadius = ((MathHelper.HEX + Mth.clamp(3, MathHelper.HEX, MathHelper.PI) + (MathHelper.DELTA / 3)) / 10);
-    private final float explosionRadius = (float) (MathHelper.HEX * 2.4);
+    private final float explosionRadius = (float) (MathHelper.HEX * 2.3);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedCreeperEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

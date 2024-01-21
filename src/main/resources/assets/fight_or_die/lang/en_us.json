@@ -8,12 +8,16 @@
   "item.fight_or_die.assimilated_villager_head_spawn_egg": "Assimilated Villager Head Spawn Egg",
   "item.fight_or_die.assimilated_cow_spawn_egg": "Assimilated Cow Spawn Egg",
   "item.fight_or_die.assimilated_sheep_spawn_egg": "Assimilated Sheep Spawn Egg",
+  "item.fight_or_die.assimilated_pig_spawn_egg": "Assimilated Pig Spawn Egg",
   "item.fight_or_die.assimilated_creeper_spawn_egg": "Assimilated Creeper Spawn Egg",
 
   "item.fight_or_die.addition_device": "Addition Device",
   "item.fight_or_die.subtraction_device": "Subtraction Device",
   "item.fight_or_die.parascore": "Parascore",
   "item.fight_or_die.infector_thorax": "Infector Thorax",
+  "item.fight_or_die.ripping_flesh": "Ripping Flesh",
+  "item.fight_or_die.sickened_heart": "Sickened Heart",
+  "item.fight_or_die.rotten_brain": "Rotten Brain",
 
   "block.fight_or_die.hive_block": "Hive Block",
   "block.fight_or_die.hive_tunnel_block": "Hive Tunnel",
@@ -26,6 +30,7 @@
   "entity.fight_or_die.assimilated_villager_head": "Assimilated Villager Head",
   "entity.fight_or_die.assimilated_cow": "Assimilated Cow",
   "entity.fight_or_die.assimilated_sheep": "Assimilated Sheep",
+  "entity.fight_or_die.assimilated_pig": "Assimilated Pig",
   "entity.fight_or_die.assimilated_creeper": "Assimilated Creeper",
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",

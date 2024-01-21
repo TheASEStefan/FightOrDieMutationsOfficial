@@ -3,15 +3,21 @@
   "category": "misc",
   "key":   {
     "#": {
-      "item": "fight_or_die:infector_thorax"
+      "item": "fight_or_die:rotten_brain"
+    },
+    "$": {
+      "item": "fight_or_die:ripping_flesh"
+    },
+    "@": {
+      "item": "fight_or_die:sickened_heart"
     },
     "/": {
       "item": "minecraft:clock"
     }
   },
   "pattern": [
-    " # ",
-    "#/#",
+    " @ ",
+    "$/$",
     " # "
   ],
   "result": {

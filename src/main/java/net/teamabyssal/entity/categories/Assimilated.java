@@ -28,6 +28,7 @@ import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.*;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.ItemRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
 
 
@@ -91,15 +92,21 @@ public class Assimilated extends Monster {
     protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
         super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
         Entity entity = pSource.getEntity();
+        if (Math.random() <= 0.3F) {
+            this.spawnAtLocation(ItemRegistry.RIPPING_FLESH.get());
+        }
+        if (Math.random() <= 0.05) {
+            this.spawnAtLocation(ItemRegistry.SICKENED_HEART.get());
+        }
+        else if (Math.random() <= 0.05) {
+            this.spawnAtLocation(ItemRegistry.ROTTEN_BRAIN.get());
+        }
 
     }
 
 
     @Override
     public void die(DamageSource source) {
-        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 1.6, this.getZ(), 0.0D, 0.0D, 0.0D);
-        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 1.6, this.getZ() + 0.1, 0.0D, 0.0D, 0.0D);
-        this.level().addParticle(DustParticleOptions.REDSTONE, this.getX(), this.getY() + 1.6, this.getZ() - 0.1, 0.0D, 0.0D, 0.0D);
         if (this.level() instanceof ServerLevel world) {
             WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world);
             int currentScore = worldDataRegistry.getScore();

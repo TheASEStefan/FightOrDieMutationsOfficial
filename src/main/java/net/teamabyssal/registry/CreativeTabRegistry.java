@@ -16,14 +16,20 @@ public class CreativeTabRegistry {
 
 
     public static final RegistryObject<CreativeModeTab> ITEM = TABS.register("items", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + FightOrDieMutations.MODID + ".item")).icon(() -> new ItemStack(ItemRegistry.SHILLER_SPAWN_EGG.get())).displayItems((enabledFeatures, entries) -> {
+
         entries.accept(ItemRegistry.SHILLER_SPAWN_EGG.get());
         entries.accept(ItemRegistry.MALRUPTOR_SPAWN_EGG.get());
+
         entries.accept(ItemRegistry.ASSIMILATED_COW_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_SHEEP_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.ASSIMILATED_PIG_SPAWN_EGG.get());
+
         entries.accept(ItemRegistry.ASSIMILATED_HUMAN_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_VILLAGER_SPAWN_EGG.get());
+
         entries.accept(ItemRegistry.ASSIMILATED_HUMAN_HEAD_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG.get());
+
         entries.accept(ItemRegistry.ASSIMILATED_CREEPER_SPAWN_EGG.get());
 
         entries.accept(ItemRegistry.ADDITION_DEVICE.get());
@@ -31,6 +37,9 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.PARASCORE.get());
 
         entries.accept(ItemRegistry.INFECTOR_THORAX.get());
+        entries.accept(ItemRegistry.RIPPING_FLESH.get());
+        entries.accept(ItemRegistry.SICKENED_HEART.get());
+        entries.accept(ItemRegistry.ROTTEN_BRAIN.get());
 
         entries.accept(BlockRegistry.HIVE_BLOCK.get());
         entries.accept(BlockRegistry.HIVE_TUNNEL_BLOCK.get());
