@@ -3,6 +3,8 @@ package net.teamabyssal.entity.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.teamabyssal.constants.IEntity;
+import net.teamabyssal.constants.IMath;
 import net.teamabyssal.entity.custom.AssimilatedCowEntity;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

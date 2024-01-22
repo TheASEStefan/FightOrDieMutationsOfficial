@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
-import net.teamabyssal.constants.MathHelper;
+import net.teamabyssal.constants.IMathHelper;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.AdvancedAssimilated;
 import net.teamabyssal.registry.*;
@@ -40,8 +40,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity {
     private final int minDamage = 2;
     private final int maxDamage = 4;
-    private final float extraRadius = ((MathHelper.HEX + Mth.clamp(3, MathHelper.HEX, MathHelper.PI) + (MathHelper.DELTA / 3)) / 10);
-    private final float explosionRadius = (float) (MathHelper.HEX * 2.3);
+    private final float extraRadius = ((IMathHelper.HEX + Mth.clamp(3, IMathHelper.HEX, IMathHelper.PI) + (IMathHelper.DELTA / 3)) / 10);
+    private final float explosionRadius = (float) (IMathHelper.HEX * 2.3);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedCreeperEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

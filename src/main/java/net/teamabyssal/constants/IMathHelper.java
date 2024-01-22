@@ -8,7 +8,7 @@ import net.minecraft.util.Mth;
 @Calculator = ChatGPT
  */
 
-public class MathHelper {
+public class IMathHelper {
 
     public static final float PI = 3.14F;
     public static final float DELTA = (PI * 3 * Mth.floor(PI)) / 4;

@@ -4,6 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.util.Mth;
 
 
+
 /*
 @Author = ASEStefan, Minecraft
 @Name = Math and Animation Formulas
@@ -12,26 +13,27 @@ because I will animate models with these formulas, just like I do with Molang in
 @Idea = Me, Molang
  */
 
-public class MathAnimationUtils {
-    public static final float PI = MathHelper.PI;
-    public static final float DELTA = MathHelper.DELTA;
-    public static final float OMEGA = MathHelper.OMEGA;
-    public static final float HEX = MathHelper.HEX;
+public class IMath extends IMathHelper {
+    public static final float PI = IMathHelper.PI;
+    public static final float DELTA = IMathHelper.DELTA;
+    public static final float OMEGA = IMathHelper.OMEGA;
+    public static final float HEX = IMathHelper.HEX;
     private static final float[] SIN = Util.make(new float[65536], (floats) -> {
         for(int i = 0; i < floats.length; ++i) {
-            floats[i] = (float) Math.sin((double)i * Math.PI * 2.0D / 65536.0D);
+            floats[i] = (float) Math.sin((double) i * Math.PI * 2.0D / 65536.0D);
         }
 
     });
-    Mth mth;
-    Math math;
 
-    // limbSwingAmount = query.anim_time (probably)
-
+    public static float sqrt(float pValue) {
+        return (float) Math.sqrt((double) pValue);
+    }
+    public static float pow(double a, double b) {
+        return (float) StrictMath.pow(a, b);
+    }
     public static float sin(float pValue) {
         return SIN [ (int) (pValue * 10430.378F) & '\uffff'];
     }
-
     public static float cos(float pValue) {
         return SIN [ (int) (pValue * 10430.378F + 16384.0F) & '\uffff'];
     }

@@ -21,7 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
-import net.teamabyssal.constants.MathHelper;
+import net.teamabyssal.constants.IMathHelper;
 import net.teamabyssal.controls.WallMovementControl;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.ai.MalruptorInfectsGoal;
@@ -276,7 +276,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
                 vec31 = vec31.normalize().scale(2D).add(vec3.scale(1.5D));
             }
 
-            this.mob.setDeltaMovement(vec31.x + yd * (MathHelper.RELAT / 156), this.yd + (MathHelper.HEX / 12), vec31.z + yd);
+            this.mob.setDeltaMovement(vec31.x + yd * (IMathHelper.RELAT / 156), this.yd + (IMathHelper.HEX / 12), vec31.z + yd);
         }
 
         @Override
