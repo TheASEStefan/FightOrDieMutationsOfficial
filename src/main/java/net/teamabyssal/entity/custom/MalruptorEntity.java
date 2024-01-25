@@ -164,6 +164,12 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
                 return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && (this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() < 4);
             }
         });
+        this.goalSelector.addGoal(10, new MalruptorInfectsGoal(this, 1.3, Creeper.class) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && this.mob.getTarget() == null && this.partner != null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get());
+            }
+        });
     }
 
 

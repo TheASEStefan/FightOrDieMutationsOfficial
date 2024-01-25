@@ -1,5 +1,6 @@
 package net.teamabyssal.entity.custom;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,7 +16,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ambient.Bat;
+import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,8 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.IMathHelper;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
-import net.teamabyssal.entity.categories.AdvancedAssimilated;
-import net.teamabyssal.entity.categories.Assimilated;
+import net.teamabyssal.entity.categories.*;
 import net.teamabyssal.extra.ScreenShakeEntity;
 import net.teamabyssal.registry.*;
 import org.jetbrains.annotations.Nullable;
@@ -39,10 +44,6 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static net.teamabyssal.entity.ai.FollowOthersGoal.PARTNER_TARGETING;
 
 
 public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity {
@@ -115,21 +116,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
         return this.getTarget() != null && (this.getTarget() instanceof Player || this.getTarget() instanceof IronGolem);
     }
 
-    public boolean isValidParameter() {
-        if (FightOrDieMutationsConfig.SERVER.creeper_near_mutation_explosion.get()) {
-            Level world = this.level();
-            double x = this.getX();
-            double y = this.getY();
-            double z = this.getZ();
-
-            // List<Class<? extends Monster>> mobs = Arrays.asList(AdvancedAssimilated.class, Assimilated.class);
-
-            boolean flag1 = world.getEntitiesOfClass(Assimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
-            boolean flag2 = world.getEntitiesOfClass(AdvancedAssimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
-
-            return flag1 || flag2;
-        }
-        return true;
+    private boolean explosionPredicate(LivingEntity liv) {
+        return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated);
     }
 
 
@@ -138,7 +126,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     public void tick() {
         if (this.getTarget() != null && this.isAlive()) {
             Entity attackTarget = this.getTarget();
-            if (this.canExplode() && this.isValidParameter()) {
+            if (this.canExplode()) {
                 if (this.distanceTo(attackTarget) < 1.35 && attackTarget instanceof Player) {
                     this.explodeThis();
                 }
@@ -160,6 +148,21 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
             this.discard();
             this.spawnLingeringCloud();
             ScreenShakeEntity.ScreenShake(level(), position(), 12, 0.25f, 15, 10);
+            Level world = this.level();
+            double x = this.getX();
+            double y = this.getY();
+            double z = this.getZ();
+
+            boolean flag1 = !world.getEntitiesOfClass(Assimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
+            boolean flag2 = !world.getEntitiesOfClass(AdvancedAssimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
+            boolean flag3 = !world.getEntitiesOfClass(Head.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
+
+            if (flag1 || flag2 || flag3) {
+                if (world instanceof ServerLevel world1) {
+                    WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world1);
+                    worldDataRegistry.setScore(worldDataRegistry.getScore() + 20);
+                }
+            }
         }
     }
 
@@ -218,7 +221,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     public void die(DamageSource source) {
         if (this.getTarget() != null) {
             Entity attackTarget = this.getTarget();
-            if (!(attackTarget instanceof Player || attackTarget instanceof IronGolem) && Math.random() <= 0.75F && this.isValidParameter()) {
+            if (!(attackTarget instanceof Player || attackTarget instanceof IronGolem) && Math.random() <= 0.75F) {
                 this.explodeThis();
             }
         }
