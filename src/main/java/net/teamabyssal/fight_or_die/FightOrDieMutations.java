@@ -8,6 +8,7 @@ import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -21,6 +22,7 @@ import net.teamabyssal.biome.BiomeModification;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.client.*;
 import net.teamabyssal.event.SpawnPlacementEvent;
+import net.teamabyssal.extra.CameraShake;
 import net.teamabyssal.registry.*;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
@@ -30,6 +32,7 @@ import software.bernie.geckolib.GeckoLib;
 public class FightOrDieMutations {
     public static final String MODID = "fight_or_die";
     private static final Logger LOGGER = LogUtils.getLogger();
+
 
     public FightOrDieMutations() {
 
@@ -82,6 +85,9 @@ public class FightOrDieMutations {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+            MinecraftForge.EVENT_BUS.register(new CameraShake());
+            EntityRenderers.register(EntityRegistry.SCREEN_SHAKE.get(), RendererNull::new);
             EntityRenderers.register(EntityRegistry.SHILLER.get(), ShillerRenderer::new);
             EntityRenderers.register(EntityRegistry.MALRUPTOR.get(), MalruptorRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN.get(), AssimilatedHumanRenderer::new);

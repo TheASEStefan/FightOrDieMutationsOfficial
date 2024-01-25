@@ -74,7 +74,7 @@ public class IMath extends IMathHelper {
         return (pDelta - pStart) / (pEnd - pStart);
     }
     public static float lerpedTan(float pDelta, float pStart, float pEnd) {
-        return (sin(pEnd) / cos(pEnd)) - (sin(pEnd) / cos(pStart)) + ((sin(pDelta) / cos(pDelta)) / 4);
+        return (sin(pEnd) / cos(pEnd)) - (sin(pStart) / cos(pStart)) + ((sin(pDelta) / cos(pDelta)) / 4);
     }
     public static float lerpedCot(float pDelta, float pStart, float pEnd) {
         return (cos(pEnd) / sin(pEnd)) - (cos(pStart) / sin(pStart)) + ((cos(pDelta) / sin(pDelta)) / 4);

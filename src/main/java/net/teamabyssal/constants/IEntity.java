@@ -2,7 +2,6 @@ package net.teamabyssal.constants;
 
 import net.minecraft.client.model.*;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 
 public class IEntity {
@@ -17,11 +16,11 @@ public class IEntity {
 
     }
 
-    public static boolean isWalking(Monster monster, float limbSwingAmount) {
-        return !(limbSwingAmount > -0.15F && limbSwingAmount < 0.15F) && !monster.isAggressive();
+    public static boolean isChangingPos(Monster monster, float limbSwingAmount) {
+        return !(limbSwingAmount > -0.15F && limbSwingAmount < 0.15F);
     }
     public static boolean isAggressive(Monster monster, float limbSwingAmount) {
-        return !(limbSwingAmount > -0.15F && limbSwingAmount < 0.15F) && monster.isAggressive();
+        return monster.isAggressive();
     }
     public static boolean isHurt(LivingEntity entity) {
         return entity.hurtTime > 0;

@@ -66,6 +66,7 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_pig_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_damage;
+        public final ForgeConfigSpec.ConfigValue<Boolean> creeper_near_mutation_explosion;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_human_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_villager_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_adventurer_assimilation;
@@ -123,6 +124,7 @@ public class FightOrDieMutationsConfig {
             builder.push("Assimilated Creeper");
             this.assimilated_creeper_health = builder.comment("Default 12").defineInRange("Sets Assimilated Creeper's Max health", 12, 5, Double.MAX_VALUE);
             this.assimilated_creeper_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Creeper's Damage", 3, 1, Double.MAX_VALUE);
+            this.creeper_near_mutation_explosion = builder.comment("Default true").define("Should assimilated creepers not explode if close to a sim creature or higher?",true);
             builder.pop();
 
             builder.push("Spawns");

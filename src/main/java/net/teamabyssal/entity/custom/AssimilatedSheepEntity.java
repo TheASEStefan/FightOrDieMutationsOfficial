@@ -23,6 +23,7 @@ import net.minecraft.world.phys.AABB;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Assimilated;
+import net.teamabyssal.extra.ScreenShakeEntity;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.ParticleRegistry;
@@ -112,6 +113,7 @@ public class AssimilatedSheepEntity extends Assimilated implements GeoEntity {
                         livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0), livingEntity);
                         livingEntity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 1200, 0), livingEntity);
                         livingEntity.level().playSound((Player) null, livingEntity.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+                        ScreenShakeEntity.ScreenShake(level(), position(), 8, 0.1f, 3, 10);
                         if (this.level() instanceof ServerLevel server) {
                             server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
                         }
@@ -131,6 +133,7 @@ public class AssimilatedSheepEntity extends Assimilated implements GeoEntity {
                         this.ShillerExplosion(this);
                         this.ShillerExplosion(this);
                         this.ShillerExplosion(this);
+                        ScreenShakeEntity.ScreenShake(level(), position(), 8, 0.1f, 3, 10);
                         if (this.level() instanceof ServerLevel server) {
                             server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
                         }

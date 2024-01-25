@@ -26,6 +26,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.network.NetworkHooks;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.*;
+import net.teamabyssal.extra.ScreenShakeEntity;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.ItemRegistry;

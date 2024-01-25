@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.custom.*;
+import net.teamabyssal.extra.ScreenShakeEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 
 import java.util.ArrayList;
@@ -25,6 +26,12 @@ public class EntityRegistry {
     public static final MobCategory PARASITE = MobCategory.create("parasite","parasite", FightOrDieMutationsConfig.SERVER.mob_cap.get(),false,false,128);
 
     public  static  final List<Entity> PARASITES = new ArrayList<>();
+
+    public static final RegistryObject<EntityType<ScreenShakeEntity>> SCREEN_SHAKE = ENTITY_TYPES.register("screen_shake", () -> EntityType.Builder.<ScreenShakeEntity>of(ScreenShakeEntity::new, MobCategory.MISC)
+            .noSummon()
+            .sized(1.0f, 1.0f)
+            .setUpdateInterval(Integer.MAX_VALUE)
+            .build(FightOrDieMutations.MODID + ":screen_shake"));
 
     public static final RegistryObject<EntityType<ShillerEntity>> SHILLER =
             ENTITY_TYPES.register("shiller",
