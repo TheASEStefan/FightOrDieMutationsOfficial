@@ -38,11 +38,11 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class AssimilatedPigEntity extends Assimilated implements GeoEntity {
+public class AssimilatedFoxEntity extends Assimilated implements GeoEntity {
 
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public AssimilatedPigEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public AssimilatedFoxEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -67,26 +67,28 @@ public class AssimilatedPigEntity extends Assimilated implements GeoEntity {
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.1D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_pig_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_pig_damage.get())
-                .add(Attributes.ARMOR, 2D);
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_fox_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_fox_damage.get())
+                .add(Attributes.ARMOR, 1D);
 
     }
+
+
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerOm) {
         controllerOm.add(
                 new AnimationController<>(this, "controllerOP", 7, event -> {
                     if (event.isMoving() && !this.isAggressive()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_pig_walk"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_fox_walk"));
                     }
                     else if (event.isMoving() && this.isAggressive()) {
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_pig_target"));
+                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_fox_target"));
                     }
                     else if (this.isDeadOrDying()) {
-                        return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_pig_death"));
+                        return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_fox_death"));
                     }
-                    return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_pig_idle"));
+                    return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_fox_idle"));
                 }));
 
     }
@@ -100,7 +102,7 @@ public class AssimilatedPigEntity extends Assimilated implements GeoEntity {
     @Override
     public void die(DamageSource source) {
         /* if (Math.random() <= 0.25F) {
-            //this.DropPigHead(this);
+            //this.DropFoxHead(this);
         }
          */
 
@@ -178,5 +180,7 @@ public class AssimilatedPigEntity extends Assimilated implements GeoEntity {
     protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
         super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
         Entity entity = pSource.getEntity();
+
+
     }
 }

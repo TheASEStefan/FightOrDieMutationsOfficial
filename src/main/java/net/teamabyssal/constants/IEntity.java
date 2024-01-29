@@ -16,10 +16,10 @@ public class IEntity {
 
     }
 
-    public static boolean isChangingPos(Monster monster, float limbSwingAmount) {
+    public static boolean isChangingPos(LivingEntity entity, float limbSwingAmount) {
         return !(limbSwingAmount > -0.15F && limbSwingAmount < 0.15F);
     }
-    public static boolean isAggressive(Monster monster, float limbSwingAmount) {
+    public static boolean isAggressive(Monster monster) {
         return monster.isAggressive();
     }
     public static boolean isHurt(LivingEntity entity) {

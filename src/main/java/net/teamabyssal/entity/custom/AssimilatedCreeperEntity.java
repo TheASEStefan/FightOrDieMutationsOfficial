@@ -44,12 +44,14 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.List;
 
 
 public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity {
     private final int minDamage = 2;
     private final int maxDamage = 4;
     private final byte box = 10;
+    private final byte half_box = box / 2;
     private final float extraRadius = ((IMathHelper.HEX + Mth.clamp(3, IMathHelper.HEX, IMathHelper.PI) + (IMathHelper.DELTA / 3)) / 10);
     private final float explosionRadius = (float) (IMathHelper.HEX * 2.3);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -148,6 +150,17 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
             this.discard();
             this.spawnLingeringCloud();
             ScreenShakeEntity.ScreenShake(level(), position(), 12, 0.25f, 15, 10);
+
+            AABB boundingBox = this.getBoundingBox().inflate(half_box + 1);
+            List<Entity> entities = this.level().getEntities(this, boundingBox);
+            for (Entity entity : entities) {
+                if (entity instanceof LivingEntity livingEntity && !(EntityRegistry.PARASITES.contains(entity))) {
+                    if (!livingEntity.hasEffect(EffectRegistry.HIVE_SICKNESS.get())) {
+                        livingEntity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 6000, 2), livingEntity);
+                    }
+                }
+            }
+
             Level world = this.level();
             double x = this.getX();
             double y = this.getY();
@@ -155,9 +168,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
 
             boolean flag1 = !world.getEntitiesOfClass(Assimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
             boolean flag2 = !world.getEntitiesOfClass(AdvancedAssimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
-            boolean flag3 = !world.getEntitiesOfClass(Head.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
 
-            if (flag1 || flag2 || flag3) {
+            if (flag1 || flag2) {
                 if (world instanceof ServerLevel world1) {
                     WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world1);
                     worldDataRegistry.setScore(worldDataRegistry.getScore() + 20);

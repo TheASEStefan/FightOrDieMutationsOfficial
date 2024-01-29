@@ -23,6 +23,7 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.ASSIMILATED_COW_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_SHEEP_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_PIG_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.ASSIMILATED_FOX_SPAWN_EGG.get());
 
         entries.accept(ItemRegistry.ASSIMILATED_HUMAN_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_VILLAGER_SPAWN_EGG.get());

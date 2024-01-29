@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Creeper;
@@ -148,6 +149,23 @@ public class AssimilationEvent {
                 if (pig.level() instanceof ServerLevel server) {
                     server.sendParticles(ParticleTypes.EXPLOSION, pig.getX(), pig.getY() + 1, pig.getZ(), 3, 0.4, 1.0, 0.4, 0);
                     server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), pig.getX(), pig.getY() + 1, pig.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
+                    worldDataRegistry.setScore(currentScore + 2);
+                }
+            }
+            else if (entity instanceof Fox fox && fox.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_fox_assimilation.get()) {
+                AssimilatedFoxEntity assimilatedFoxEntity = EntityRegistry.ASSIMILATED_FOX.get().create(world);
+                assert assimilatedFoxEntity != null;
+                assimilatedFoxEntity.moveTo(x, y, z);
+                world.addFreshEntity(assimilatedFoxEntity);
+                fox.discard();
+                fox.level().playSound((Player) null, fox.blockPosition(), SoundRegistry.ENTITY_TURN.get(), SoundSource.HOSTILE, 1.6F, 1.0F);
+                if (fox.getLastHurtByMob() != null) {
+                    assimilatedFoxEntity.setTarget(fox.getLastHurtByMob());
+                    assimilatedFoxEntity.getLookControl().setLookAt(fox.getLastHurtByMob());
+                }
+                if (fox.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.EXPLOSION, fox.getX(), fox.getY() + 1, fox.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    server.sendParticles(ParticleRegistry.BLOOD_PUFF.get(), fox.getX(), fox.getY() + 1, fox.getZ(), 55, 0.3, 0.8, 0.4, 0.2);
                     worldDataRegistry.setScore(currentScore + 2);
                 }
             }

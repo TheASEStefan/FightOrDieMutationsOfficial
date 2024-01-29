@@ -85,7 +85,7 @@ public class AssimilatedVillagerHeadEntity extends Head implements GeoEntity, Ev
                 .add(Attributes.MOVEMENT_SPEED, 0.15D)
                 .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_villager_head_health.get())
                 .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_villager_head_damage.get())
-                .add(Attributes.ARMOR, 2D);
+                .add(Attributes.ARMOR, 1D);
 
     }
     @Override
@@ -109,6 +109,8 @@ public class AssimilatedVillagerHeadEntity extends Head implements GeoEntity, Ev
         assimilatedVillagerEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
         entity.level().addFreshEntity(assimilatedVillagerEntity);
     }
+
+
 
     public void setKills(Integer count) {
         entityData.set(KILLS, count);

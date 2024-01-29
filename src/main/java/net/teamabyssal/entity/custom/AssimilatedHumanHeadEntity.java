@@ -198,6 +198,7 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
         private LivingEntity target;
         private final float yd;
 
+
         public HeadHuntGoal(Mob mob, float v) {
             this.mob = mob;
             this.yd = v;
@@ -235,7 +236,6 @@ public class AssimilatedHumanHeadEntity extends Head implements GeoEntity, Evolv
             if (this.mob.getTarget() != null) {
                 this.mob.getLookControl().setLookAt(this.target);
                 hunting = true;
-
             }
         }
 

@@ -9,6 +9,7 @@
   "item.fight_or_die.assimilated_cow_spawn_egg": "Assimilated Cow Spawn Egg",
   "item.fight_or_die.assimilated_sheep_spawn_egg": "Assimilated Sheep Spawn Egg",
   "item.fight_or_die.assimilated_pig_spawn_egg": "Assimilated Pig Spawn Egg",
+  "item.fight_or_die.assimilated_fox_spawn_egg": "Assimilated Fox Spawn Egg",
   "item.fight_or_die.assimilated_creeper_spawn_egg": "Assimilated Creeper Spawn Egg",
 
   "item.fight_or_die.addition_device": "Addition Device",
@@ -31,6 +32,7 @@
   "entity.fight_or_die.assimilated_cow": "Assimilated Cow",
   "entity.fight_or_die.assimilated_sheep": "Assimilated Sheep",
   "entity.fight_or_die.assimilated_pig": "Assimilated Pig",
+  "entity.fight_or_die.assimilated_fox": "Assimilated Fox",
   "entity.fight_or_die.assimilated_creeper": "Assimilated Creeper",
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",

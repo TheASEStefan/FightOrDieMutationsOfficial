@@ -27,6 +27,8 @@ import net.teamabyssal.registry.*;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
+import javax.xml.stream.events.EntityDeclaration;
+
 
 @Mod(FightOrDieMutations.MODID)
 public class FightOrDieMutations {
@@ -97,7 +99,9 @@ public class FightOrDieMutations {
             EntityRenderers.register(EntityRegistry.ASSIMILATED_COW.get(), AssimilatedCowRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_SHEEP.get(), AssimilatedSheepRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_PIG.get(), AssimilatedPigRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_FOX.get(), AssimilatedFoxRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_CREEPER.get(), AssimilatedCreeperRenderer::new);
+
 
 
         }

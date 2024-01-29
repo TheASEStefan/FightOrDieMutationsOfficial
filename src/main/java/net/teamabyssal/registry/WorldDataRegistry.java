@@ -95,22 +95,22 @@ public class WorldDataRegistry extends SavedData {
 
     public int getPhase() {
         setDirty();
-        if (getScore() >= 0 && getScore() < FightOrDieMutationsConfig.SERVER.phase1_points.get()) {
+        if (getScore() >= 0 && getScore() < FightOrDieMutationsConfig.DATAGEN.phase1_points.get()) {
             phase = 0;
         }
-        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase1_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase2_points.get()) {
+        else if (getScore() >= FightOrDieMutationsConfig.DATAGEN.phase1_points.get() && getScore() < FightOrDieMutationsConfig.DATAGEN.phase2_points.get()) {
             phase = 1;
         }
-        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase2_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase3_points.get()) {
+        else if (getScore() >= FightOrDieMutationsConfig.DATAGEN.phase2_points.get() && getScore() < FightOrDieMutationsConfig.DATAGEN.phase3_points.get()) {
             phase = 2;
         }
-        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase3_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase4_points.get()) {
+        else if (getScore() >= FightOrDieMutationsConfig.DATAGEN.phase3_points.get() && getScore() < FightOrDieMutationsConfig.DATAGEN.phase4_points.get()) {
             phase = 3;
         }
-        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase4_points.get() && getScore() < FightOrDieMutationsConfig.SERVER.phase5_points.get()) {
+        else if (getScore() >= FightOrDieMutationsConfig.DATAGEN.phase4_points.get() && getScore() < FightOrDieMutationsConfig.DATAGEN.phase5_points.get()) {
             phase = 4;
         }
-        else if (getScore() >= FightOrDieMutationsConfig.SERVER.phase5_points.get()) {
+        else if (getScore() >= FightOrDieMutationsConfig.DATAGEN.phase5_points.get()) {
             phase = 5;
         }
         return phase;
@@ -121,19 +121,19 @@ public class WorldDataRegistry extends SavedData {
             setScore(0);
         }
         else if (phase == 1) {
-            setScore(FightOrDieMutationsConfig.SERVER.phase1_points.get());
+            setScore(FightOrDieMutationsConfig.DATAGEN.phase1_points.get());
         }
         else if (phase == 2) {
-            setScore(FightOrDieMutationsConfig.SERVER.phase2_points.get());
+            setScore(FightOrDieMutationsConfig.DATAGEN.phase2_points.get());
         }
         else if (phase == 3) {
-            setScore(FightOrDieMutationsConfig.SERVER.phase3_points.get());
+            setScore(FightOrDieMutationsConfig.DATAGEN.phase3_points.get());
         }
         else if (phase == 4) {
-            setScore(FightOrDieMutationsConfig.SERVER.phase4_points.get());
+            setScore(FightOrDieMutationsConfig.DATAGEN.phase4_points.get());
         }
         else if (phase == 5) {
-            setScore(FightOrDieMutationsConfig.SERVER.phase5_points.get());
+            setScore(FightOrDieMutationsConfig.DATAGEN.phase5_points.get());
         }
         else {
             setScore(0);

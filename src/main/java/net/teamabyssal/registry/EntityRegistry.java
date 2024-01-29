@@ -51,7 +51,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<AssimilatedVillagerEntity>> ASSIMILATED_VILLAGER =
             ENTITY_TYPES.register("assimilated_villager",
                     () -> EntityType.Builder.of(AssimilatedVillagerEntity::new, PARASITE)
-                            .sized(0.8f, 1.9f)
+                            .sized(0.8f, 2.0f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_villager").toString()));
     public static final RegistryObject<EntityType<AssimilatedHumanHeadEntity>> ASSIMILATED_HUMAN_HEAD =
             ENTITY_TYPES.register("assimilated_human_head",
@@ -78,6 +78,11 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(AssimilatedPigEntity::new, PARASITE)
                             .sized(0.8f, 1.1f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_pig").toString()));
+    public static final RegistryObject<EntityType<AssimilatedFoxEntity>> ASSIMILATED_FOX =
+            ENTITY_TYPES.register("assimilated_fox",
+                    () -> EntityType.Builder.of(AssimilatedFoxEntity::new, PARASITE)
+                            .sized(0.6f, 0.9f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_fox").toString()));
     public static final RegistryObject<EntityType<AssimilatedCreeperEntity>> ASSIMILATED_CREEPER =
             ENTITY_TYPES.register("assimilated_creeper",
                     () -> EntityType.Builder.of(AssimilatedCreeperEntity::new, PARASITE)

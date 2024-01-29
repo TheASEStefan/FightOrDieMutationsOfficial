@@ -148,7 +148,7 @@ public class AdvancedAssimilated extends Monster {
             int currentScore = worldDataRegistry.getScore();
             int currentPhase = worldDataRegistry.getPhase();
             if (currentPhase > 2) {
-                worldDataRegistry.setScore(currentScore - 15);
+                worldDataRegistry.setScore(currentScore - 25);
             }
         }
         super.die(source);

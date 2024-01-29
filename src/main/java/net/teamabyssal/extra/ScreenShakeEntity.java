@@ -17,6 +17,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 import net.teamabyssal.registry.EntityRegistry;
 
+/*
+@Source = From the shadows github
+ */
+
 public class ScreenShakeEntity extends Entity {
     private static final EntityDataAccessor<Float> RADIUS = SynchedEntityData.defineId(ScreenShakeEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> MAGNITUDE = SynchedEntityData.defineId(ScreenShakeEntity.class, EntityDataSerializers.FLOAT);

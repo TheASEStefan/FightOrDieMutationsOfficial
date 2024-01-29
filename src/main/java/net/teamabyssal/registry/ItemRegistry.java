@@ -32,13 +32,15 @@ public class ItemRegistry {
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_human_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN_HEAD, 0x28283e, 0x345350, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG = ITEMS.register("assimilated_villager_head_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER_HEAD, 0x281604, 0x6e3d0a, new Item.Properties()));
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER_HEAD, 0x281603, 0x6e5d0a, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_COW_SPAWN_EGG = ITEMS.register("assimilated_cow_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_COW, 0x281604, 0x3f2306, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_SHEEP_SPAWN_EGG = ITEMS.register("assimilated_sheep_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_SHEEP, 0xfacbcb, 0x560808, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_PIG_SPAWN_EGG = ITEMS.register("assimilated_pig_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_PIG, 0x280416, 0x9b1057, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_FOX_SPAWN_EGG = ITEMS.register("assimilated_fox_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_FOX, 0x3f2306, 0x9d570e, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_CREEPER_SPAWN_EGG = ITEMS.register("assimilated_creeper_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_CREEPER, 0x042804, 0x10a510, new Item.Properties()));
 
