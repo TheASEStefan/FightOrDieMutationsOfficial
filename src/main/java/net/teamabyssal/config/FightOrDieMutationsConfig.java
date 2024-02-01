@@ -73,6 +73,7 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_creeper_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_enderman;
         public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_witch;
+        public final ForgeConfigSpec.ConfigValue<Boolean> random_disturbing_sounds;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("Shiller");
@@ -160,6 +161,9 @@ public class FightOrDieMutationsConfig {
             builder.push("Springer Targeting Goals");
             this.springer_attacks_enderman = builder.comment("Default true").define("Should springers target endermans?",true);
             this.springer_attacks_witch = builder.comment("Default true").define("Should springers target witches?",true);
+            builder.pop();
+            builder.push("Ambience");
+            this.random_disturbing_sounds = builder.comment("Default true").define("Should players hear disturbing sounds from time to time? (Note: this affects only one random player from the server)",true);
             builder.pop();
 
 

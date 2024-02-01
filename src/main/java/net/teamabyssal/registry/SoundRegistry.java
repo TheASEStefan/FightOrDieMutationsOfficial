@@ -27,6 +27,9 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> ENTITY_MALRUPTOR_DEATH = soundRegistry("entity.malruptor.death");
     public static final RegistryObject<SoundEvent> ENTITY_MALRUPTOR_INFECT = soundRegistry("entity.malruptor.infect");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_HUMAN_AMBIENT  = soundRegistry("entity.assimilated_human.ambient");
+    public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_COW_AMBIENT  = soundRegistry("entity.assimilated_cow.ambient");
+    public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_SHEEP_AMBIENT  = soundRegistry("entity.assimilated_sheep.ambient");
+    public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_PIG_AMBIENT  = soundRegistry("entity.assimilated_pig.ambient");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_VILLAGER_AMBIENT  = soundRegistry("entity.assimilated_villager.ambient");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_CREEPER_AMBIENT  = soundRegistry("entity.assimilated_creeper.ambient");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_CREEPER_DEATH  = soundRegistry("entity.assimilated_creeper.death");
@@ -42,5 +45,8 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> PHASE3 = soundRegistry("player_phase3");
     public static final RegistryObject<SoundEvent> PHASE4 = soundRegistry("player_phase4");
     public static final RegistryObject<SoundEvent> PHASE5 = soundRegistry("player_phase5");
+    public static final RegistryObject<SoundEvent> JUMPSCARE_1 = soundRegistry("jumpscare_1");
+    public static final RegistryObject<SoundEvent> JUMPSCARE_2 = soundRegistry("jumpscare_2");
+    public static final RegistryObject<SoundEvent> JUMPSCARE_3 = soundRegistry("jumpscare_3");
 
 }

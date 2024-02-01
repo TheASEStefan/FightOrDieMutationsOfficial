@@ -10,10 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -123,6 +120,18 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
         return cache;
     }
 
+    private void spawnLingeringCloud() {
+        AreaEffectCloud cloud = new AreaEffectCloud(this.level(), this.getX(), this.getY(), this.getZ());
+        cloud.setRadius(1.5F);
+        cloud.setRadiusOnUse(-0.5F);
+        cloud.setWaitTime(6);
+        cloud.setDuration((cloud.getDuration() / 3) * 2);
+        cloud.setRadiusPerTick(-cloud.getRadius() / (float) cloud.getDuration());
+        cloud.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 2400, 1));
+
+        this.level().addFreshEntity(cloud);
+    }
+
 
     @Override
     public void die(DamageSource source) {
@@ -139,6 +148,7 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
                             livingEntity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 1200, 0), livingEntity);
                             livingEntity.level().playSound((Player) null, livingEntity.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
                             ScreenShakeEntity.ScreenShake(level(), position(), 8, 0.1f, 3, 10);
+                            this.spawnLingeringCloud();
                             if (this.level() instanceof ServerLevel server) {
                                 server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
                             }
@@ -159,6 +169,7 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
                         this.ShillerExplosion(this);
                         this.ShillerExplosion(this);
                         ScreenShakeEntity.ScreenShake(level(), position(), 8, 0.1f, 3, 10);
+                        this.spawnLingeringCloud();
                         if (this.level() instanceof ServerLevel server) {
                             server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
                         }

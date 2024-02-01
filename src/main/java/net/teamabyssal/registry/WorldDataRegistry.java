@@ -21,6 +21,10 @@ public class WorldDataRegistry extends SavedData {
     private boolean cnt3 = false;
     private boolean cnt4 = false;
     private boolean cnt5 = false;
+    private boolean metal_sound_event = false;
+    private boolean violin_event = false;
+    private boolean wood_croak_event = false;
+
 
     public boolean isCnt0() {
         setDirty();
@@ -76,6 +80,36 @@ public class WorldDataRegistry extends SavedData {
         this.cnt5 = cnt5;
         setDirty();
     }
+
+    public boolean hadMetalEvent() {
+        setDirty();
+        return metal_sound_event;
+    }
+
+    public boolean hadViolinEvent() {
+        setDirty();
+        return violin_event;
+    }
+
+    public boolean hadWoodCroakEvent() {
+        setDirty();
+        return wood_croak_event;
+    }
+    public void setHadMetalEvent(boolean had) {
+        metal_sound_event = had;
+        setDirty();
+    }
+    public void setHadViolinEvent(boolean had) {
+        violin_event = had;
+        setDirty();
+    }
+    public void setHadWoodCroakEvent(boolean had) {
+        wood_croak_event = had;
+        setDirty();
+    }
+
+
+
 
 
     public int getScore() {
@@ -194,6 +228,9 @@ public class WorldDataRegistry extends SavedData {
         nbt.putBoolean("cnt3", this.cnt3);
         nbt.putBoolean("cnt4", this.cnt4);
         nbt.putBoolean("cnt5", this.cnt5);
+        nbt.putBoolean("metal_sound_event", this.metal_sound_event);
+        nbt.putBoolean("violin_event", this.violin_event);
+        nbt.putBoolean("wood_croak_event", this.wood_croak_event);
         return nbt;
     }
 
@@ -207,6 +244,9 @@ public class WorldDataRegistry extends SavedData {
         worldDataRegistry.cnt3 = nbt.getBoolean("cnt3");
         worldDataRegistry.cnt4 = nbt.getBoolean("cnt4");
         worldDataRegistry.cnt5 = nbt.getBoolean("cnt5");
+        worldDataRegistry.metal_sound_event = nbt.getBoolean("metal_sound_event");
+        worldDataRegistry.violin_event = nbt.getBoolean("violin_event");
+        worldDataRegistry.wood_croak_event = nbt.getBoolean("wood_croak_event");
         return worldDataRegistry;
     }
 

@@ -33,6 +33,24 @@
     ],
     "subtitle": "subtitles.fight_or_die.entity.assimilated_human.ambient"
   },
+  "entity.assimilated_cow.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_cow.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_cow.ambient"
+  },
+  "entity.assimilated_sheep.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_sheep.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_sheep.ambient"
+  },
+  "entity.assimilated_pig.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_pig.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_pig.ambient"
+  },
 
   "entity.assimilated_villager.ambient": {
     "sounds": [
@@ -135,6 +153,27 @@
       "fight_or_die:mob/phase5"
     ],
     "subtitle": "subtitles.fight_or_die.player_phase5"
+  },
+
+  "jumpscare_1": {
+    "sounds": [
+      "fight_or_die:mob/jumpscare1"
+    ],
+    "subtitle": "subtitles.fight_or_die.jumpscare_1"
+  },
+
+  "jumpscare_2": {
+    "sounds": [
+      "fight_or_die:mob/jumpscare2"
+    ],
+    "subtitle": "subtitles.fight_or_die.jumpscare_2"
+  },
+
+  "jumpscare_3": {
+    "sounds": [
+      "fight_or_die:mob/jumpscare3"
+    ],
+    "subtitle": "subtitles.fight_or_die.jumpscare_3"
   }
 
 

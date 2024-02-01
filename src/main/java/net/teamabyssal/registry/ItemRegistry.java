@@ -50,7 +50,7 @@ public class ItemRegistry {
             () -> new SubtractionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PARASCORE = ITEMS.register("parascore",
             () -> new Parascore(new Item.Properties()));
-    public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("infector_thorax",
+    public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("springer_thorax",
             () -> new BaseItem(new Item.Properties()));
     public static final RegistryObject<Item> RIPPING_FLESH = ITEMS.register("ripping_flesh",
             () -> new BaseItem(new Item.Properties()));

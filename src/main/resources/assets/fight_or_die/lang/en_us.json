@@ -15,7 +15,7 @@
   "item.fight_or_die.addition_device": "Addition Device",
   "item.fight_or_die.subtraction_device": "Subtraction Device",
   "item.fight_or_die.parascore": "Parascore",
-  "item.fight_or_die.infector_thorax": "Infector Thorax",
+  "item.fight_or_die.infector_thorax": "Springer Thorax",
   "item.fight_or_die.ripping_flesh": "Ripping Flesh",
   "item.fight_or_die.sickened_heart": "Sickened Heart",
   "item.fight_or_die.rotten_brain": "Rotten Brain",
@@ -44,6 +44,10 @@
   "subtitles.fight_or_die.player_phase4": "I'm starting to get scared, I'm being counted down...",
   "subtitles.fight_or_die.player_phase5": "...",
 
+  "subtitles.fight_or_die.jumpscare_1": "What was that?",
+  "subtitles.fight_or_die.jumpscare_2": "I'm getting scared!",
+  "subtitles.fight_or_die.jumpscare_3": "Huh?",
+
   "subtitles.fight_or_die.entity.malruptor.ambient": "Springer shrieks",
   "subtitles.fight_or_die.entity.malruptor.hurt": "Springer hurts",
   "subtitles.fight_or_die.entity.malruptor.death": "Springer dies",
@@ -53,8 +57,12 @@
   "subtitles.fight_or_die.entity.assimilated_creeper.death": "Assimilated Creeper dies",
 
   "subtitles.fight_or_die.entity.assimilated_human.ambient": "Assimilated Human growls",
+  "subtitles.fight_or_die.entity.assimilated_cow.ambient": "Assimilated Cow growls",
+  "subtitles.fight_or_die.entity.assimilated_sheep.ambient": "Assimilated Sheep growls",
+  "subtitles.fight_or_die.entity.assimilated_pig.ambient": "Assimilated Pig growls",
   "subtitles.fight_or_die.entity.assimilated_villager.ambient": "Assimilated Villager growls",
   "subtitles.fight_or_die.entity.assimilated.animal.ambient": "Assimilated Animal growls",
+
   "subtitles.fight_or_die.entity.assimilated.hurt" : "Assimilated hurts",
   "subtitles.fight_or_die.entity.explosion" : "Mutation explodes",
   "subtitles.fight_or_die.entity.turn" : "Mutation turns",
