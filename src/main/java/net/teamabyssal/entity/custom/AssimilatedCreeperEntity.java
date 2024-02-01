@@ -53,7 +53,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     private final byte box = 10;
     private final byte half_box = box / 2;
     private final float extraRadius = ((IMathHelper.HEX + Mth.clamp(3, IMathHelper.HEX, IMathHelper.PI) + (IMathHelper.DELTA / 3)) / 10);
-    private final float explosionRadius = (float) (IMathHelper.HEX * 2.3);
+    private final float explosionRadius = (float) (IMathHelper.HEX * 2.2);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedCreeperEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
