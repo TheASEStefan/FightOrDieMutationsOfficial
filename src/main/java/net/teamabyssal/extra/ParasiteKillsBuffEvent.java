@@ -8,7 +8,9 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.teamabyssal.entity.categories.*;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
+import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
 
@@ -21,12 +23,9 @@ public class ParasiteKillsBuffEvent {
             Level world = entity.level();
             WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) world);
             int currentPhase = worldDataRegistry.getPhase();
-                if (!world.isClientSide && EntityRegistry.PARASITES.contains(entity)) {
-                    if (currentPhase >= 2) {
-                        entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 600, 0), entity);
-                    }
-                    if (currentPhase >= 4) {
-                        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 0), entity);
+                if (!world.isClientSide && (entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primitive || entity instanceof Adapted)) {
+                    if (currentPhase >= 3 && Math.random() <= 0.7) {
+                        entity.addEffect(new MobEffectInstance(EffectRegistry.RAGE.get(), 400, 0), entity);
                     }
                 }
         }

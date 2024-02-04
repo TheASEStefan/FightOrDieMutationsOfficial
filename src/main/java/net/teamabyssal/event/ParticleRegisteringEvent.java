@@ -6,8 +6,9 @@ import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
-import net.teamabyssal.particles.BloodPuff;
-import net.teamabyssal.particles.PoisonPuff;
+import net.teamabyssal.particles.BloodPuffParticle;
+import net.teamabyssal.particles.KillCountParticle;
+import net.teamabyssal.particles.PoisonPuffParticle;
 import net.teamabyssal.registry.ParticleRegistry;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -16,9 +17,12 @@ public class ParticleRegisteringEvent {
     public static void registerParticle(RegisterParticleProvidersEvent event) {
 
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.BLOOD_PUFF.get(),
-                BloodPuff.Provider::new);
+                BloodPuffParticle.Provider::new);
 
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.POISON_PUFF.get(),
-                PoisonPuff.Provider::new);
+                PoisonPuffParticle.Provider::new);
+
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.KILL_COUNT.get(),
+                KillCountParticle.Provider::new);
     }
 }

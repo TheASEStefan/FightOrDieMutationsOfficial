@@ -42,9 +42,13 @@ authors="ASEStefan, luci_hddr, TeamAbyssal" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Fight or Die Mutations ( FDM ) is a mod that adds mutations and parasites into the game, as well as a new infectious virus that attacks cows,villagers and even you! Starting off slowly,
-but as days go by, you'll see more crazy features and mobs, including new special classes that each have a quirk! After 100 Days, mobs will start disappearing till they can't spawn anymore!
-That means you won, so congratulations, you have survived the parasite outbreak! With this said, the purpose of the mod is just to survive the 100 days and more, so good luck!
+Welcome to Fight or Die: Mutations (FDM). This mod will bring chaos into your world and it'll slowly erupt. When joining a new world, you'll be greeted with a message that points out something while a sound plays: "Zero"? What's that you ask while enjoying a casual minecraft game like usual. After some time another one of those creepy messages appears: "First"? You start to panic and slowly the world you loved turns into pure madness. Welcome to FDM! This mod brings mutations and parasites into the game that can evolve, adapt, merge and they can get stronger as... time goes on? Some of these monsters have unique abilities to counter whatever you have. So get it together and start fighting because there's only a chance... a slim chance... that you will get to live another day instead of being gone forever, tormented by these vile creatures. What is their weakness you wonder? Fire. Fire's very efficient against them because they are smart, fast in water and can dive to you and some can teleport or explode, so use FIRE because it deals more damage to them depending on their class.
+
+Note: Fight or Die: Mutations is an official rework of our old mod mutationcraft. This mod has more capacity and flexibility than the other being made in Java and not MCreator. It also supports: Config Files, support for the assimilated adventurer, better spawning and evolution system, structures and working phase system.
+
+You can find more information about the mod on the official wiki: https://trello.com/b/bhT28pSH/fight-or-die-mutations
+
+I would be very grateful if you would support me on Ko-fi: https://ko-fi.com/asestefan , you don't have to but it would mean the world to me, thanks for listening!
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.fight_or_die]] #optional

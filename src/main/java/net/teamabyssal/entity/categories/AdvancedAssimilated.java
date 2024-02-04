@@ -35,6 +35,7 @@ import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.entity.ai.FloatDiveGoal;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+import net.teamabyssal.registry.ParticleRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
 
 public class AdvancedAssimilated extends Monster {
@@ -108,7 +109,7 @@ public class AdvancedAssimilated extends Monster {
         super.tick();
         if (this.getTarget() != null && this.isAlive()) {
             this.setAggressionTicks(this.getAggressionTicks() + 1);
-            if (this.getAggressionTicks() == 1600) {
+            if (this.getAggressionTicks() == (1600 + this.getRandom().nextInt(800))) {
                 this.setPersistent(true);
             }
         }

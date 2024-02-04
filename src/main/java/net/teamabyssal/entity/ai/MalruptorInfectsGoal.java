@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.teamabyssal.registry.EffectRegistry;
+import net.teamabyssal.registry.ParticleRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 
 import javax.annotation.Nullable;
@@ -90,6 +91,7 @@ public class MalruptorInfectsGoal extends Goal {
         cloud.setWaitTime(10);
         cloud.setDuration(cloud.getDuration() / 2);
         cloud.setRadiusPerTick(-cloud.getRadius() / (float)cloud.getDuration());
+        cloud.setParticle(ParticleRegistry.KILL_COUNT.get());
         cloud.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 12000));
 
         this.level.addFreshEntity(cloud);

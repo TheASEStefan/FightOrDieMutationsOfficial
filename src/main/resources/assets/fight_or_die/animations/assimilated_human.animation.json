@@ -62,7 +62,7 @@
 			"bones": {
 				"Arm1": {
 					"rotation": {
-						"vector": ["4.8031+math.cos(-50+query.anim_time*200)*18", 5.50398, -22.34087]
+						"vector": ["4.8031+math.cos(-50+query.anim_time*200)*20", 5.50398, -22.34087]
 					},
 					"scale": {
 						"vector": [1.2, 1.1, 1.2]
@@ -70,7 +70,7 @@
 				},
 				"Arm2": {
 					"rotation": {
-						"vector": ["math.cos(-50+query.anim_time*200)*-12.8658", 2.98041, 17.9919]
+						"vector": ["math.cos(-50+query.anim_time*200)*-20", 2.98041, 17.9919]
 					},
 					"scale": {
 						"vector": [1.2, 1.1, 1.2]
@@ -83,17 +83,17 @@
 				},
 				"LowerJaw": {
 					"rotation": {
-						"vector": ["-5+math.cos(-50+query.anim_time*180)*18", 0, 0]
+						"vector": ["-5+math.cos(-50+query.anim_time*180)*20", 0, 0]
 					}
 				},
 				"Leg1": {
 					"rotation": {
-						"vector": ["math.cos(-50+query.anim_time*200)*-18", 0, 0]
+						"vector": ["math.cos(-50+query.anim_time*200)*-20", 0, 0]
 					}
 				},
 				"Leg2": {
 					"rotation": {
-						"vector": ["math.cos(-50+query.anim_time*200)*18", 0, 0]
+						"vector": ["math.cos(-50+query.anim_time*200)*20", 0, 0]
 					}
 				},
 				"Hand1": {
@@ -166,12 +166,12 @@
 				},
 				"Leg1": {
 					"rotation": {
-						"vector": ["-5+math.cos(-50+query.anim_time*280)*-40", 0, 0]
+						"vector": ["-5+math.cos(-50+query.anim_time*280)*-45", 0, 0]
 					}
 				},
 				"Leg2": {
 					"rotation": {
-						"vector": ["-5+math.cos(-50+query.anim_time*280)*40", 0, 0]
+						"vector": ["-5+math.cos(-50+query.anim_time*280)*45", 0, 0]
 					}
 				},
 				"UpperBody": {
@@ -192,7 +192,15 @@
 				},
 				"Head": {
 					"rotation": {
-						"vector": [-25, 0, 0]
+						"vector": [-25, 0, "math.sin(-55+query.anim_time*260)*8"]
+					}
+				},
+				"Arms": {
+					"rotation": {
+						"vector": [20, "math.sin(-55+query.anim_time*260)*8", 0]
+					},
+					"position": {
+						"vector": [0, 0, 2]
 					}
 				}
 			}
@@ -242,6 +250,47 @@
 				"LowerJaw": {
 					"rotation": {
 						"vector": [0, "math.cos(-50+query.anim_time*3700)*5", 0]
+					}
+				}
+			}
+		},
+		"assimilated_human_test": {
+			"loop": true,
+			"bones": {
+				"Head": {
+					"rotation": {
+						"vector": ["2.5+math.cos(-50+query.anim_time*160)*7", 0, 0]
+					}
+				},
+				"LowerJaw": {
+					"rotation": {
+						"vector": ["math.cos(-50+query.anim_time*160)*15", 0, 0]
+					}
+				},
+				"Arm1": {
+					"rotation": {
+						"vector": [0, 0, "-22.5+math.cos(-50+query.anim_time*150)*-6"]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Arm2": {
+					"rotation": {
+						"vector": ["math.p", 0, 22.5]
+					},
+					"scale": {
+						"vector": [1.2, 1.1, 1.2]
+					}
+				},
+				"Hand1": {
+					"rotation": {
+						"vector": [25, 0, 0]
+					}
+				},
+				"Hand2": {
+					"rotation": {
+						"vector": [25, 0, 0]
 					}
 				}
 			}

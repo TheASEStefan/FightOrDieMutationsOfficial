@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.util.GoalUtils;
@@ -61,8 +63,9 @@ public class AssimilatedVillagerEntity extends Assimilated implements GeoEntity 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
@@ -104,11 +107,11 @@ public class AssimilatedVillagerEntity extends Assimilated implements GeoEntity 
                         event.getController().setAnimationSpeed(1.2D);
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_villager_walk"));
                     }
-                    else if (event.isMoving() && this.isAggressive()) {
+                    if (event.isMoving() && this.isAggressive()) {
                         event.getController().setAnimationSpeed(2.0D);
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_villager_target"));
                     }
-                    else if (this.isDeadOrDying()) {
+                    if (this.isDeadOrDying()) {
                         return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_villager_death"));
                     }
                     return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_villager_idle"));
@@ -125,7 +128,7 @@ public class AssimilatedVillagerEntity extends Assimilated implements GeoEntity 
         cloud.setRadius(1.5F);
         cloud.setRadiusOnUse(-0.5F);
         cloud.setWaitTime(6);
-        cloud.setDuration((cloud.getDuration() / 3) * 2);
+        cloud.setDuration(Mth.floor((((double) cloud.getDuration() / 3) * 1.2)));
         cloud.setRadiusPerTick(-cloud.getRadius() / (float) cloud.getDuration());
         cloud.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 2400, 1));
 

@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
+import net.teamabyssal.constants.IMath;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.categories.Assimilated;
 import net.teamabyssal.extra.ScreenShakeEntity;
@@ -51,8 +54,9 @@ public class AssimilatedSheepEntity extends Assimilated implements GeoEntity {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
@@ -81,10 +85,10 @@ public class AssimilatedSheepEntity extends Assimilated implements GeoEntity {
                     if (event.isMoving() && !this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_sheep_walk"));
                     }
-                    else if (event.isMoving() && this.isAggressive()) {
+                    if (event.isMoving() && this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_sheep_target"));
                     }
-                    else if (this.isDeadOrDying()) {
+                    if (this.isDeadOrDying()) {
                         return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_sheep_death"));
                     }
                     return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_sheep_idle"));
@@ -102,7 +106,7 @@ public class AssimilatedSheepEntity extends Assimilated implements GeoEntity {
         cloud.setRadius(1.5F);
         cloud.setRadiusOnUse(-0.5F);
         cloud.setWaitTime(6);
-        cloud.setDuration((cloud.getDuration() / 3) * 2);
+        cloud.setDuration(Mth.floor((((double) cloud.getDuration() / 3) * 1.2)));
         cloud.setRadiusPerTick(-cloud.getRadius() / (float) cloud.getDuration());
         cloud.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 2400, 1));
 

@@ -20,6 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.IMathHelper;
 import net.teamabyssal.controls.WallMovementControl;
+import net.teamabyssal.effects.Rage;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
 import net.teamabyssal.entity.ai.MalruptorInfectsGoal;
 import net.teamabyssal.entity.categories.Evolved;
@@ -83,7 +84,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
 
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
 
             }
         });
@@ -91,55 +92,55 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Skeleton.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderMan.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.springer_attacks_enderman.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.springer_attacks_enderman.get() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.springer_attacks_witch.get() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2;
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.springer_attacks_witch.get() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 2 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Endermite.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Silverfish.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Spider.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Zombie.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Slime.class, true) {
             @Override
             public boolean canUse() {
-                return super.canUse() && this.mob.level() instanceof ServerLevel world && WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1;
+                return super.canUse() && this.mob.level() instanceof ServerLevel world && (WorldDataRegistry.getWorldDataRegistry(world).getPhase() > 1 || this.mob.hasEffect(EffectRegistry.RAGE.get()));
             }
         });
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));

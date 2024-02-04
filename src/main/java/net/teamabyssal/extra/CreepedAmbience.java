@@ -23,29 +23,23 @@ public class CreepedAmbience {
             int playerSize = world.players().size();
             assert player1 != null;
             long day2 = (int) (24000L * 2);
+            long day3 = (int) (24000L * 3);
             long day5 = (int) (24000L * 5);
-            long day7 = (int) (24000L * 7);
             if (playerSize > 0 && FightOrDieMutationsConfig.SERVER.random_disturbing_sounds.get()) {
-                if (world.dayTime() > (day2) && Math.random() <= 0.15 && !worldDataRegistry.hadMetalEvent() && worldDataRegistry.getPhase() > 0) {
-                    for (int i = 1; i <= playerSize; i++) {
-                        player1.sendSystemMessage(Component.literal("SOON!"));
-                    }
+                if (world.dayTime() > (day2) && Math.random() <= 0.02 && !worldDataRegistry.hadMetalEvent() && worldDataRegistry.getPhase() > 0) {
+                    player1.sendSystemMessage(Component.literal("What was that?"));
                     player1.level().playSound((Player) null, player1.blockPosition(), SoundRegistry.JUMPSCARE_1.get(), SoundSource.MASTER, 1.4F, 1.0F);
                     worldDataRegistry.setScore(worldDataRegistry.getScore() + 10);
                     worldDataRegistry.setHadMetalEvent(true);
                 }
-                else if (world.dayTime() > (day5) && Math.random() <= 0.15 && !worldDataRegistry.hadViolinEvent() && worldDataRegistry.getPhase() > 0) {
-                    for (int i = 1; i <= playerSize; i++) {
-                        player1.sendSystemMessage(Component.literal("CORRUPTED!"));
-                    }
+                else if (world.dayTime() > (day5) && Math.random() <= 0.02 && !worldDataRegistry.hadViolinEvent() && worldDataRegistry.getPhase() > 0) {
+                    player1.sendSystemMessage(Component.literal("Hello?"));
                     player1.level().playSound((Player) null, player1.blockPosition(), SoundRegistry.JUMPSCARE_2.get(), SoundSource.MASTER, 1.4F, 1.0F);
                     worldDataRegistry.setScore(worldDataRegistry.getScore() + 20);
                     worldDataRegistry.setHadViolinEvent(true);
                 }
-                else if (world.dayTime() > (day7) && Math.random() <= 0.15 && !worldDataRegistry.hadWoodCroakEvent() && worldDataRegistry.getPhase() > 0) {
-                    for (int i = 1; i <= playerSize; i++) {
-                        player1.sendSystemMessage(Component.literal("DEAD!"));
-                    }
+                else if (world.dayTime() > (day3) && Math.random() <= 0.02 && !worldDataRegistry.hadWoodCroakEvent() && worldDataRegistry.getPhase() > 0) {
+                    player1.sendSystemMessage(Component.literal("Not safe..."));
                     player1.level().playSound((Player) null, player1.blockPosition(), SoundRegistry.JUMPSCARE_3.get(), SoundSource.MASTER, 1.4F, 1.0F);
                     worldDataRegistry.setScore(worldDataRegistry.getScore() + 50);
                     worldDataRegistry.setHadWoodCroakEvent(true);

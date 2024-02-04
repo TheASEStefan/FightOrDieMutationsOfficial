@@ -14,9 +14,11 @@ public class ParticleRegistry {
 
     public static final RegistryObject<SimpleParticleType> POISON_PUFF =
             PARTICLE_TYPES.register("poison_puff", () -> new SimpleParticleType(true));
-
     public static final RegistryObject<SimpleParticleType> BLOOD_PUFF =
             PARTICLE_TYPES.register("blood_puff", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> KILL_COUNT =
+            PARTICLE_TYPES.register("kill_count", () -> new SimpleParticleType(true));
+
     public static void register(IEventBus eventBus) {
         PARTICLE_TYPES.register(eventBus);
     }

@@ -118,7 +118,7 @@
 				},
 				"Head": {
 					"rotation": {
-						"vector": [-17.5, 0, 0]
+						"vector": [-17.5, 0, "math.sin(-55+query.anim_time*260)*8"]
 					}
 				},
 				"Arm1Down": {

@@ -81,7 +81,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<AssimilatedFoxEntity>> ASSIMILATED_FOX =
             ENTITY_TYPES.register("assimilated_fox",
                     () -> EntityType.Builder.of(AssimilatedFoxEntity::new, PARASITE)
-                            .sized(0.6f, 0.9f)
+                            .sized(1.0f, 0.9f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_fox").toString()));
     public static final RegistryObject<EntityType<AssimilatedCreeperEntity>> ASSIMILATED_CREEPER =
             ENTITY_TYPES.register("assimilated_creeper",

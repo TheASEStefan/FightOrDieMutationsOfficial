@@ -6,10 +6,10 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BloodPuff extends TextureSheetParticle {
+public class BloodPuffParticle extends TextureSheetParticle {
 
-    protected BloodPuff(ClientLevel level, double xCoord, double yCoord, double zCoord,
-                         SpriteSet spriteSet, double xd, double yd, double zd) {
+    protected BloodPuffParticle(ClientLevel level, double xCoord, double yCoord, double zCoord,
+                                SpriteSet spriteSet, double xd, double yd, double zd) {
         super(level, xCoord, yCoord, zCoord, xd, yd, zd);
         this.gravity = 0.9f;
         this.hasPhysics = true;
@@ -53,7 +53,7 @@ public class BloodPuff extends TextureSheetParticle {
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level,
                                        double x, double y, double z,
                                        double dx, double dy, double dz) {
-            return new BloodPuff(level, x, y, z, this.sprites, dx, dy + 0.1, dz);
+            return new BloodPuffParticle(level, x, y, z, this.sprites, dx, dy + 0.1, dz);
         }
     }
 }

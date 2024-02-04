@@ -45,11 +45,19 @@
     ],
     "subtitle": "subtitles.fight_or_die.entity.assimilated_sheep.ambient"
   },
+
   "entity.assimilated_pig.ambient": {
     "sounds": [
       "fight_or_die:mob/assimilated_pig.idle"
     ],
     "subtitle": "subtitles.fight_or_die.entity.assimilated_pig.ambient"
+  },
+
+  "entity.assimilated_fox.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_fox.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_fox.ambient"
   },
 
   "entity.assimilated_villager.ambient": {

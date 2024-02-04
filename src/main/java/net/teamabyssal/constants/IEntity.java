@@ -3,6 +3,7 @@ package net.teamabyssal.constants;
 import net.minecraft.client.model.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
+import net.teamabyssal.entity.categories.*;
 
 public class IEntity {
 

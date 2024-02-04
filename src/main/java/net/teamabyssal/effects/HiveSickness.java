@@ -5,11 +5,16 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
+import net.teamabyssal.constants.IEntity;
 import net.teamabyssal.entity.categories.*;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HiveSickness extends MobEffect {
 
@@ -17,8 +22,15 @@ public class HiveSickness extends MobEffect {
         super(MobEffectCategory.HARMFUL, -16777216);
     }
 
+    @Override
+    public List<ItemStack> getCurativeItems() {
+        ArrayList<ItemStack> ret = new ArrayList<>();
+        ret.add(ItemStack.EMPTY);
+        return ret;
+    }
+
     public void applyEffectTick(LivingEntity entity, int intense) {
-        if (!(EntityRegistry.PARASITES.contains(entity) || FightOrDieMutationsConfig.SERVER.hive_sickness.get().contains(entity.getEncodeId()))) {
+        if (!(entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primitive || entity instanceof Adapted || FightOrDieMutationsConfig.SERVER.hive_sickness.get().contains(entity.getEncodeId()))) {
             if (this == EffectRegistry.HIVE_SICKNESS.get()) {
                 if (!entity.getCommandSenderWorld().isClientSide && entity instanceof Player player && player.getFoodData().getFoodLevel() > 0 && intense < 1){
                     player.causeFoodExhaustion(1.0F);

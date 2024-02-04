@@ -15,6 +15,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.AbstractFish;
@@ -68,8 +69,9 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
@@ -199,10 +201,10 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
                     if (!event.isMoving()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_idle"));
                     }
-                    else if (event.isMoving() && !this.isAggressive()) {
+                    if (event.isMoving() && !this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_walk"));
                     }
-                    else if (event.isMoving() && this.isAggressive()) {
+                    if (event.isMoving() && this.isAggressive()) {
                         return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_creeper_target"));
                     }
                     return PlayState.CONTINUE;

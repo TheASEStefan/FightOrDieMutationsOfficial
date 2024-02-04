@@ -36,6 +36,7 @@
   "entity.fight_or_die.assimilated_creeper": "Assimilated Creeper",
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",
+  "effect.fight_or_die.rage": "Rage",
 
   "subtitles.fight_or_die.player_phase0": "Weird sounds are coming from afar...",
   "subtitles.fight_or_die.player_phase1": "Was I here before?...",
@@ -60,6 +61,7 @@
   "subtitles.fight_or_die.entity.assimilated_cow.ambient": "Assimilated Cow growls",
   "subtitles.fight_or_die.entity.assimilated_sheep.ambient": "Assimilated Sheep growls",
   "subtitles.fight_or_die.entity.assimilated_pig.ambient": "Assimilated Pig growls",
+  "subtitles.fight_or_die.entity.assimilated_fox.ambient": "Assimilated Fox screams and howls",
   "subtitles.fight_or_die.entity.assimilated_villager.ambient": "Assimilated Villager growls",
   "subtitles.fight_or_die.entity.assimilated.animal.ambient": "Assimilated Animal growls",
 

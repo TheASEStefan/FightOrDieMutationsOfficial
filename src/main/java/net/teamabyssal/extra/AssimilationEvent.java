@@ -25,6 +25,8 @@ import net.teamabyssal.registry.*;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
 public class AssimilationEvent {
+
+    /*
     @SubscribeEvent
     public static void AssimilationEventFDM(LivingDeathEvent event) {
         if (event != null && event.getEntity() != null && !event.getEntity().level().isClientSide) {
@@ -171,5 +173,7 @@ public class AssimilationEvent {
             }
         }
     }
+
+     */
 }
 

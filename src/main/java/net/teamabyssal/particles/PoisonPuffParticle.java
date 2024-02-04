@@ -6,9 +6,9 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class PoisonPuff extends TextureSheetParticle {
-    protected PoisonPuff(ClientLevel level, double xCoord, double yCoord, double zCoord,
-                         SpriteSet spriteSet, double xd, double yd, double zd) {
+public class PoisonPuffParticle extends TextureSheetParticle {
+    protected PoisonPuffParticle(ClientLevel level, double xCoord, double yCoord, double zCoord,
+                                 SpriteSet spriteSet, double xd, double yd, double zd) {
         super(level, xCoord, yCoord, zCoord, xd, yd, zd);
         this.gravity = 1f;
         this.hasPhysics = true;
@@ -51,7 +51,7 @@ public class PoisonPuff extends TextureSheetParticle {
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level,
                                        double x, double y, double z,
                                        double dx, double dy, double dz) {
-            return new PoisonPuff(level, x, y, z, this.sprites, dx, dy + 0.1, dz);
+            return new PoisonPuffParticle(level, x, y, z, this.sprites, dx, dy + 0.1, dz);
         }
     }
 }
