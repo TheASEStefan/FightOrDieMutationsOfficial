@@ -2,6 +2,7 @@
 
   "item.fight_or_die.shiller_spawn_egg": "Shiller Spawn Egg",
   "item.fight_or_die.springer_spawn_egg": "Springer Spawn Egg",
+
   "item.fight_or_die.assimilated_human_spawn_egg": "Assimilated Human Spawn Egg",
   "item.fight_or_die.assimilated_villager_spawn_egg": "Assimilated Villager Spawn Egg",
   "item.fight_or_die.assimilated_human_head_spawn_egg": "Assimilated Human Head Spawn Egg",
@@ -10,12 +11,18 @@
   "item.fight_or_die.assimilated_sheep_spawn_egg": "Assimilated Sheep Spawn Egg",
   "item.fight_or_die.assimilated_pig_spawn_egg": "Assimilated Pig Spawn Egg",
   "item.fight_or_die.assimilated_fox_spawn_egg": "Assimilated Fox Spawn Egg",
+
   "item.fight_or_die.assimilated_creeper_spawn_egg": "Assimilated Creeper Spawn Egg",
+
+  "item.fight_or_die.primitive_tormenter_spawn_egg": "Primitive Tormenter Spawn Egg",
+  "item.fight_or_die.adapted_tormenter_spawn_egg": "Adapted Tormenter Spawn Egg",
+  "item.fight_or_die.incomplete_form_spawn_egg": "Incomplete Form Spawn Egg",
+  "item.fight_or_die.failed_form_spawn_egg": "Failed Form Spawn Egg",
 
   "item.fight_or_die.addition_device": "Addition Device",
   "item.fight_or_die.subtraction_device": "Subtraction Device",
   "item.fight_or_die.parascore": "Parascore",
-  "item.fight_or_die.infector_thorax": "Springer Thorax",
+  "item.fight_or_die.springer_fragment": "Springer Fragment",
   "item.fight_or_die.ripping_flesh": "Ripping Flesh",
   "item.fight_or_die.sickened_heart": "Sickened Heart",
   "item.fight_or_die.rotten_brain": "Rotten Brain",

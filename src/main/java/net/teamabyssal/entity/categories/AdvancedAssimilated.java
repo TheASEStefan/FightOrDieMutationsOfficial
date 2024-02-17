@@ -122,7 +122,16 @@ public class AdvancedAssimilated extends Monster {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, this::targetPredicate));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Animal.class, true, this::animalPredicate));
     }
+    private boolean animalPredicate(LivingEntity liv) {
+        Level level = liv.level();
+        if (level instanceof ServerLevel serverLevel) {
+            return WorldDataRegistry.getWorldDataRegistry(serverLevel).getPhase() > 3;
+        }
+        return false;
+    }
+
     private boolean targetPredicate(LivingEntity liv) {
         return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
     }

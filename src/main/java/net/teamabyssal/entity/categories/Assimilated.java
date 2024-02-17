@@ -1,18 +1,13 @@
 package net.teamabyssal.entity.categories;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ambient.Bat;
@@ -34,7 +29,6 @@ import net.teamabyssal.registry.*;
 
 public class Assimilated extends Monster {
 
-    public static final EntityDataAccessor<Integer> RAGE_TICKS = SynchedEntityData.defineId(Assimilated.class, EntityDataSerializers.INT);
 
     public Assimilated(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -66,41 +60,6 @@ public class Assimilated extends Monster {
 
         return super.doHurtTarget(entity);
     }
-    public void setRageTicks(int ticks) {
-        entityData.set(RAGE_TICKS, ticks);
-    }
-    public int getRageTicks() {
-        return this.entityData.get(RAGE_TICKS);
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putInt("rage_ticks",entityData.get(RAGE_TICKS));
-    }
-
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        entityData.set(RAGE_TICKS, tag.getInt("rage_ticks"));
-    }
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(RAGE_TICKS, 0);
-    }
-
-    @Override
-    public void tick() {
-        if (this.getTarget() != null) {
-            this.setRageTicks(this.getRageTicks() + 1);
-        }
-        if (this.getRageTicks() > 600 && Math.random() <= 0.1 && !this.hasEffect(EffectRegistry.RAGE.get())) {
-            this.addEffect(new MobEffectInstance(EffectRegistry.RAGE.get(), 300, 0), this);
-            this.setRageTicks(0);
-        }
-        super.tick();
-    }
 
     @Override
     protected void registerGoals() {
@@ -108,6 +67,15 @@ public class Assimilated extends Monster {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, this::targetPredicate));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Animal.class, true, this::animalPredicate));
+    }
+
+    private boolean animalPredicate(LivingEntity liv) {
+        Level level = liv.level();
+        if (level instanceof ServerLevel serverLevel) {
+            return WorldDataRegistry.getWorldDataRegistry(serverLevel).getPhase() > 3;
+        }
+        return false;
     }
 
     private boolean targetPredicate(LivingEntity liv) {

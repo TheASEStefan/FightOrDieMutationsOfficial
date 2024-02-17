@@ -22,6 +22,7 @@ import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -60,6 +61,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
         super(pEntityType, pLevel);
     }
 
+    Horse horse;
+
     @Override
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
         boolean flag = super.causeFallDamage(pFallDistance, pMultiplier / ((float) (minDamage + maxDamage) / 2), pSource);
@@ -87,6 +90,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
                 .add(Attributes.FOLLOW_RANGE, 64D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35)
+                .add(Attributes.JUMP_STRENGTH, 0.25)
                 .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_creeper_health.get())
                 .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_creeper_damage.get())
                 .add(Attributes.ARMOR, 6D);

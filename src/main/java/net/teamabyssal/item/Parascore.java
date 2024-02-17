@@ -19,7 +19,7 @@ import net.teamabyssal.registry.WorldDataRegistry;
 public class Parascore extends BaseItem implements Device, Utility {
 
     public Parascore(Properties pProperties) {
-        super(new Properties().stacksTo(1).durability(10).rarity(Rarity.RARE));
+        super(new Properties().stacksTo(1).durability(10));
     }
 
 

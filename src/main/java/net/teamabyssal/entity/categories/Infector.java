@@ -13,6 +13,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -73,6 +75,15 @@ public class Infector extends Monster {
                 return super.canContinueToUse() && this.mob.getTarget() == null;
             }
         });
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Animal.class, true, this::animalPredicate));
+    }
+
+    private boolean animalPredicate(LivingEntity liv) {
+        Level level = liv.level();
+        if (level instanceof ServerLevel serverLevel) {
+            return WorldDataRegistry.getWorldDataRegistry(serverLevel).getPhase() > 3;
+        }
+        return false;
     }
 
 
