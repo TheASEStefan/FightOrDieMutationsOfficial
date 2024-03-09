@@ -1,13 +1,18 @@
 package net.teamabyssal.entity.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Difficulty;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,14 +24,17 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.util.GoalUtils;
-import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.teamabyssal.config.FightOrDieMutationsConfig;
 import net.teamabyssal.constants.IMath;
 import net.teamabyssal.entity.ai.CustomMeleeAttackGoal;
+import net.teamabyssal.entity.ai.RareLeapGoal;
 import net.teamabyssal.entity.categories.Assimilated;
 import net.teamabyssal.extra.ScreenShakeEntity;
 import net.teamabyssal.registry.EffectRegistry;
@@ -34,28 +42,27 @@ import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.ParticleRegistry;
 import net.teamabyssal.registry.SoundRegistry;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.EnumSet;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Random;
 
-public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
+public class AssimilatedAdventurerEntity extends Assimilated {
 
-    static final Predicate<Difficulty> DOOR_BREAKING_PREDICATE = (p_34082_) -> {
-        return p_34082_ == Difficulty.NORMAL || p_34082_ == Difficulty.HARD;
-    };
+    public static final EntityDataAccessor<Boolean> LEAPING = SynchedEntityData.defineId(AssimilatedAdventurerEntity.class, EntityDataSerializers.BOOLEAN);
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public AssimilatedHumanEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+
+    public AssimilatedAdventurerEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
+
+    @Override
+    protected void customServerAiStep() {
+        if (!this.isNoAi() && GoalUtils.hasGroundPathNavigation(this)) {
+            ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
+        }
+        super.customServerAiStep();
+    }
+
 
     @Override
     protected void registerGoals() {
@@ -63,6 +70,13 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(2, new RareLeapGoal(this, 0.4F) {
+            @Override
+            public void tick() {
+                setLeaping(true);
+                super.tick();
+            }
+        });
 
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
             @Override
@@ -70,7 +84,7 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
                 return 2.0 + entity.getBbWidth() * entity.getBbWidth();
             }
         });
-        this.goalSelector.addGoal(4, new HumanBreakDoorGoal(this) {
+        this.goalSelector.addGoal(5, new OpenDoorGoal(this, true) {
             @Override
             public void start() {
                 this.mob.swing(InteractionHand.MAIN_HAND);
@@ -78,50 +92,65 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
             }
         });
 
-        
+
+
+    }
+    public void setLeaping(boolean leaping) {
+        entityData.set(LEAPING, leaping);
+    }
+
+    public boolean isLeaping() {
+        return this.entityData.get(LEAPING);
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(LEAPING,false);
     }
 
 
     @Nullable
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.ATTACK_KNOCKBACK, 0.2D)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
-                .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_human_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_human_damage.get())
-                .add(Attributes.ARMOR, 4D);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.1D)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_adventurer_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_adventurer_damage.get())
+                .add(Attributes.ARMOR_TOUGHNESS, 2D)
+                .add(Attributes.ARMOR, 2D);
 
     }
 
-
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controlleersin) {
-        controlleersin.add(
-                new AnimationController<>(this, "controllerOP", 7, event -> {
-                    if (event.isMoving() && !this.isAggressive()) {
-                        event.getController().setAnimationSpeed(1.2D);
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_walk"));
-                    }
-                    if (event.isMoving() && this.isAggressive()) {
-                        event.getController().setAnimationSpeed(1.3D);
-                        return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_target"));
-                    }
-                    if (this.isDeadOrDying()) {
-                        return event.setAndContinue(RawAnimation.begin().thenPlay("assimilated_human_death"));
-                    }
-                    return event.setAndContinue(RawAnimation.begin().thenLoop("assimilated_human_idle"));
-                }));
-
+    @Nullable
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33282_, DifficultyInstance p_33283_, MobSpawnType p_33284_, @Nullable SpawnGroupData p_33285_, @Nullable CompoundTag p_33286_) {
+        ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
+        return super.finalizeSpawn(p_33282_, p_33283_, p_33284_, p_33285_, p_33286_);
     }
 
-
+    protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
+        List<? extends String> name = FightOrDieMutationsConfig.DATAGEN.name.get();
+        Random rand = new Random();
+        if (this.getCustomName() == null) {
+            for (int i = 0; i < 1; ++i) {
+                int randomIndex = rand.nextInt(name.size());
+                Component component = Component.nullToEmpty(name.get(randomIndex));
+                this.setCustomName(component);
+            }
+        }
+    }
 
     @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        float f = (float) this.getAttributeValue(Attributes.ARMOR);
+        float v = (float) this.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+
+        if (this.getLastDamageSource() != null) {
+            f += EnchantmentHelper.getDamageProtection(this.getArmorSlots(), this.getLastDamageSource());
+            v += Mth.ceil(((EnchantmentHelper.getDamageProtection(this.getArmorSlots(), this.getLastDamageSource())) * IMath.PI) / 10);
+        }
+        return super.hurt(pSource, pAmount);
     }
 
     private void spawnLingeringCloud() {
@@ -141,24 +170,24 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
     @Override
     public void die(DamageSource source) {
         if (Math.random() <= 0.25F) {
-            this.DropHumanHead(this);
+            this.DropAdventurerHead(this);
         }
-        else if (Math.random() <= 0.35F) {
-                AABB boundingBox = this.getBoundingBox().inflate(4);
-                List<Entity> entities = this.level().getEntities(this, boundingBox);
-                for (Entity entity : entities) {
-                    if (entity instanceof LivingEntity livingEntity && !(EntityRegistry.PARASITES.contains(entity))) {
-                        if (!livingEntity.hasEffect(MobEffects.POISON)) {
-                            livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0), livingEntity);
-                            livingEntity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 1200, 0), livingEntity);
-                            livingEntity.level().playSound((Player) null, livingEntity.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
-                            ScreenShakeEntity.ScreenShake(level(), position(), 8, 0.1f, 3, 10);
-                            this.spawnLingeringCloud();
-                            if (this.level() instanceof ServerLevel server) {
-                                server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
-                            }
+        if (Math.random() <= 0.35F) {
+            AABB boundingBox = this.getBoundingBox().inflate(4);
+            List<Entity> entities = this.level().getEntities(this, boundingBox);
+            for (Entity entity : entities) {
+                if (entity instanceof LivingEntity livingEntity && !(EntityRegistry.PARASITES.contains(entity))) {
+                    if (!livingEntity.hasEffect(MobEffects.POISON)) {
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0), livingEntity);
+                        livingEntity.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 1200, 0), livingEntity);
+                        livingEntity.level().playSound((Player) null, livingEntity.blockPosition(), SoundRegistry.ENTITY_EXPLOSION.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+                        ScreenShakeEntity.ScreenShake(level(), position(), 8, 0.1f, 3, 10);
+                        this.spawnLingeringCloud();
+                        if (this.level() instanceof ServerLevel server) {
+                            server.sendParticles(ParticleRegistry.POISON_PUFF.get(), this.getX(), this.getY() + 1, this.getZ(), 65, 0.2, 0.8, 0.4, 0.15);
                         }
                     }
+                }
             }
         }
         else if (Math.random() <= 0.15F) {
@@ -185,10 +214,10 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
         super.die(source);
     }
 
-    private void DropHumanHead(Entity entity) {
-        AssimilatedHumanHeadEntity assimilatedHumanHeadEntity = new AssimilatedHumanHeadEntity(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), entity.level());
-        assimilatedHumanHeadEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
-        entity.level().addFreshEntity(assimilatedHumanHeadEntity);
+    private void DropAdventurerHead(Entity entity) {
+        AssimilatedAdventurerHeadEntity assimilatedAdventurerHeadEntity = new AssimilatedAdventurerHeadEntity(EntityRegistry.ASSIMILATED_ADVENTURER_HEAD.get(), entity.level());
+        assimilatedAdventurerHeadEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
+        entity.level().addFreshEntity(assimilatedAdventurerHeadEntity);
     }
     private void ShillerExplosion(Entity entity) {
         ShillerEntity shillerEntity = new ShillerEntity(EntityRegistry.SHILLER.get(), entity.level());
@@ -199,7 +228,7 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundRegistry.ENTITY_ASSIMILATED_HUMAN_AMBIENT.get();
+        return SoundRegistry.ENTITY_ASSIMILATED_ADVENTURER_AMBIENT.get();
     }
 
     @Override
@@ -224,29 +253,7 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
     protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
         super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
         Entity entity = pSource.getEntity();
-        
+
     }
 
-    static class HumanBreakDoorGoal extends BreakDoorGoal {
-        public HumanBreakDoorGoal(Mob p_34112_) {
-            super(p_34112_, 6, AssimilatedHumanEntity.DOOR_BREAKING_PREDICATE);
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
-        }
-        
-        public boolean canContinueToUse() {
-            AssimilatedHumanEntity human = (AssimilatedHumanEntity) this.mob;
-            return human.getTarget() != null && super.canContinueToUse();
-        }
-        
-        public boolean canUse() {
-            AssimilatedHumanEntity human = (AssimilatedHumanEntity) this.mob;
-            return human.getTarget() != null && human.random.nextInt(reducedTickDelay(10)) == 0 && super.canUse();
-        }
-        
-        public void start() {
-            super.start();
-            this.mob.setNoActionTime(0);
-        }
-    }
-    
 }

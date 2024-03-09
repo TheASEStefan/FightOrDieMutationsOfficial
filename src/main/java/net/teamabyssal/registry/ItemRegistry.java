@@ -15,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.item.AdditionDevice;
+import net.teamabyssal.item.AssimilationStaff;
 import net.teamabyssal.item.Parascore;
 import net.teamabyssal.item.SubtractionDevice;
 import net.teamabyssal.item.categories.BaseItem;
@@ -32,12 +33,16 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.MALRUPTOR, 0x000000, 0x110202, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_SPAWN_EGG = ITEMS.register("assimilated_human_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN, 0x28283e, 0x345350, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_ADVENTURER_SPAWN_EGG = ITEMS.register("assimilated_adventurer_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ADVENTURER, 0x041628, 0x0b3c6e, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_VILLAGER_SPAWN_EGG = ITEMS.register("assimilated_villager_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER, 0x281604, 0x6e3d0a, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_human_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN_HEAD, 0x28283e, 0x345350, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG = ITEMS.register("assimilated_villager_head_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER_HEAD, 0x281603, 0x6e5d0a, new Item.Properties()));
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER_HEAD, 0x281604, 0x6e3d0a, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_ADVENTURER_HEAD_SPAWN_EGG = ITEMS.register("assimilated_adventurer_head_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ADVENTURER_HEAD, 0x041628, 0x0b3c6e, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_COW_SPAWN_EGG = ITEMS.register("assimilated_cow_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_COW, 0x281604, 0x3f2306, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_SHEEP_SPAWN_EGG = ITEMS.register("assimilated_sheep_spawn_egg",
@@ -64,6 +69,8 @@ public class ItemRegistry {
             () -> new SubtractionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PARASCORE = ITEMS.register("parascore",
             () -> new Parascore(new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATION_STAFF = ITEMS.register("assimilation_staff",
+            () -> new AssimilationStaff(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("springer_fragment",
             () -> new BaseItem(new Item.Properties()));
     public static final RegistryObject<Item> RIPPING_FLESH = ITEMS.register("ripping_flesh",

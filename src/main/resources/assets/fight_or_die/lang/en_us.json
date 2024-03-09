@@ -3,10 +3,20 @@
   "item.fight_or_die.shiller_spawn_egg": "Shiller Spawn Egg",
   "item.fight_or_die.springer_spawn_egg": "Springer Spawn Egg",
 
+  "tooltip.fight_or_die.assimilation_staff_text": "By hitting an entity with this staff, the entity will turn into it's assimilated counterpart if it has one.",
+  "tooltip.fight_or_die.parascore_text": "When right-clicked, this item will show you the current evolution points in the action bar.",
+
+  "tooltip.fight_or_die.addition_device_text": "When right-clicked, this item will grant 1000 evolution points (more or less depending on the configured value).",
+  "tooltip.fight_or_die.subtraction_device_text": "When right-clicked, this item will subtract 1000 evolution points (more or less depending on the configured value).",
+
   "item.fight_or_die.assimilated_human_spawn_egg": "Assimilated Human Spawn Egg",
   "item.fight_or_die.assimilated_villager_spawn_egg": "Assimilated Villager Spawn Egg",
+  "item.fight_or_die.assimilated_adventurer_spawn_egg": "Assimilated Adventurer Spawn Egg",
+
   "item.fight_or_die.assimilated_human_head_spawn_egg": "Assimilated Human Head Spawn Egg",
   "item.fight_or_die.assimilated_villager_head_spawn_egg": "Assimilated Villager Head Spawn Egg",
+  "item.fight_or_die.assimilated_adventurer_head_spawn_egg": "Assimilated Adventurer Head Spawn Egg",
+
   "item.fight_or_die.assimilated_cow_spawn_egg": "Assimilated Cow Spawn Egg",
   "item.fight_or_die.assimilated_sheep_spawn_egg": "Assimilated Sheep Spawn Egg",
   "item.fight_or_die.assimilated_pig_spawn_egg": "Assimilated Pig Spawn Egg",
@@ -22,6 +32,8 @@
   "item.fight_or_die.addition_device": "Addition Device",
   "item.fight_or_die.subtraction_device": "Subtraction Device",
   "item.fight_or_die.parascore": "Parascore",
+  "item.fight_or_die.assimilation_staff": "Assimilation Staff",
+
   "item.fight_or_die.springer_fragment": "Springer Fragment",
   "item.fight_or_die.ripping_flesh": "Ripping Flesh",
   "item.fight_or_die.sickened_heart": "Sickened Heart",
@@ -33,9 +45,13 @@
   "entity.fight_or_die.shiller": "Shiller",
   "entity.fight_or_die.springer": "Springer",
   "entity.fight_or_die.assimilated_human": "Assimilated Human",
+  "entity.fight_or_die.assimilated_adventurer": "Assimilated Adventurer",
   "entity.fight_or_die.assimilated_villager": "Assimilated Villager",
+
   "entity.fight_or_die.assimilated_human_head": "Assimilated Human Head",
   "entity.fight_or_die.assimilated_villager_head": "Assimilated Villager Head",
+  "entity.fight_or_die.assimilated_adventurer_head": "Assimilated Adventurer Head",
+
   "entity.fight_or_die.assimilated_cow": "Assimilated Cow",
   "entity.fight_or_die.assimilated_sheep": "Assimilated Sheep",
   "entity.fight_or_die.assimilated_pig": "Assimilated Pig",
@@ -43,7 +59,7 @@
   "entity.fight_or_die.assimilated_creeper": "Assimilated Creeper",
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",
-  "effect.fight_or_die.rage": "Rage",
+  "effect.fight_or_die.fury": "Fury",
 
   "subtitles.fight_or_die.player_phase0": "Weird sounds are coming from afar...",
   "subtitles.fight_or_die.player_phase1": "Was I here before?...",
@@ -65,6 +81,7 @@
   "subtitles.fight_or_die.entity.assimilated_creeper.death": "Assimilated Creeper dies",
 
   "subtitles.fight_or_die.entity.assimilated_human.ambient": "Assimilated Human growls",
+  "subtitles.fight_or_die.entity.assimilated_adventurer.ambient": "Assimilated Adventurer growls",
   "subtitles.fight_or_die.entity.assimilated_cow.ambient": "Assimilated Cow growls",
   "subtitles.fight_or_die.entity.assimilated_sheep.ambient": "Assimilated Sheep growls",
   "subtitles.fight_or_die.entity.assimilated_pig.ambient": "Assimilated Pig growls",
@@ -77,7 +94,8 @@
   "subtitles.fight_or_die.entity.turn" : "Mutation turns",
   "subtitles.fight_or_die.entity.head.ambient" : "Walking Head shrieks",
   "subtitles.fight_or_die.humanoid.death" : "Human mutation dies",
+  "subtitles.fight_or_die.stomach_growl" : "Stomach growls",
 
 
-  "itemGroup.fight_or_die.item": "Fight or Die Mutations"
+  "itemGroup.fight_or_die.item": "Fight or Die: Mutations"
 }

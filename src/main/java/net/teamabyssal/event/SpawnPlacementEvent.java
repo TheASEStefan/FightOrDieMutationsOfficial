@@ -26,6 +26,7 @@ public class SpawnPlacementEvent {
         event.register(EntityRegistry.ASSIMILATED_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityRegistry.ASSIMILATED_FOX.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityRegistry.ASSIMILATED_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AdvancedAssimilated::checkMonsterAdvancedAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_ADVENTURER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
 
 
     }

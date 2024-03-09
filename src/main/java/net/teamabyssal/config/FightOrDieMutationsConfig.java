@@ -46,12 +46,16 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> malruptor_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_head_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_head_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_head_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_head_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_head_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_head_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_sheep_health;
@@ -74,6 +78,7 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_enderman;
         public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_witch;
         public final ForgeConfigSpec.ConfigValue<Boolean> random_disturbing_sounds;
+        public final ForgeConfigSpec.ConfigValue<Boolean> stomach_growl_detection;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("Shiller");
@@ -87,6 +92,10 @@ public class FightOrDieMutationsConfig {
             this.assimilated_human_health = builder.comment("Default 20").defineInRange("Sets Assimilated Human's Max health", 20, 10, Double.MAX_VALUE);
             this.assimilated_human_damage = builder.comment("Default 8").defineInRange("Sets Assimilated Human's Damage", 8, 4, Double.MAX_VALUE);
             builder.pop();
+            builder.push("Assimilated Adventurer");
+            this.assimilated_adventurer_health = builder.comment("Default 20").defineInRange("Sets Assimilated Adventurer's Max health", 20, 10, Double.MAX_VALUE);
+            this.assimilated_adventurer_damage = builder.comment("Default 10").defineInRange("Sets Assimilated Adventurer's Damage", 10, 5, Double.MAX_VALUE);
+            builder.pop();
             builder.push("Assimilated Villager");
             this.assimilated_villager_health = builder.comment("Default 22").defineInRange("Sets Assimilated Villager's Max health", 22, 12, Double.MAX_VALUE);
             this.assimilated_villager_damage = builder.comment("Default 9").defineInRange("Sets Assimilated Villager's Damage", 9, 4, Double.MAX_VALUE);
@@ -98,6 +107,10 @@ public class FightOrDieMutationsConfig {
             builder.push("Assimilated Villager Head");
             this.assimilated_villager_head_health = builder.comment("Default 8").defineInRange("Sets Assimilated Villager Head's Max health", 8, 4, Double.MAX_VALUE);
             this.assimilated_villager_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Villager Head's Damage", 3, 1, Double.MAX_VALUE);
+            builder.pop();
+            builder.push("Assimilated Adventurer Head");
+            this.assimilated_adventurer_head_health = builder.comment("Default 8").defineInRange("Sets Assimilated Villager Head's Max health", 8, 4, Double.MAX_VALUE);
+            this.assimilated_adventurer_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Villager Head's Damage", 3, 1, Double.MAX_VALUE);
             builder.pop();
             builder.push("Assimilated Cow");
             this.assimilated_cow_health = builder.comment("Default 16").defineInRange("Sets Assimilated Cow's Max health", 16, 7, Double.MAX_VALUE);
@@ -126,7 +139,7 @@ public class FightOrDieMutationsConfig {
             this.dimension_parameters = builder.comment("Default minecraft:is_overworld").defineList("Dictates in what biome the parasites spawn",
                     Lists.newArrayList("minecraft:is_overworld") , o -> o instanceof String);
             this.spawns = builder.defineList("mob|weight|minimum|maximum",
-                    Lists.newArrayList("fight_or_die:shiller|45|1|3", "fight_or_die:springer|30|1|2", "fight_or_die:assimilated_human|28|1|2", "fight_or_die:assimilated_villager|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_sheep|25|1|2", "fight_or_die:assimilated_pig|25|1|2", "fight_or_die:assimilated_fox|22|1|2", "fight_or_die:assimilated_creeper|15|1|1") , o -> o instanceof String);
+                    Lists.newArrayList("fight_or_die:shiller|45|1|3", "fight_or_die:springer|30|1|2", "fight_or_die:assimilated_human|28|1|2", "fight_or_die:assimilated_adventurer|20|1|2", "fight_or_die:assimilated_villager|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_sheep|25|1|2", "fight_or_die:assimilated_pig|25|1|2", "fight_or_die:assimilated_fox|22|1|2", "fight_or_die:assimilated_creeper|15|1|1") , o -> o instanceof String);
             builder.pop();
 
             builder.push("Targeting Tasks");
@@ -165,6 +178,9 @@ public class FightOrDieMutationsConfig {
             builder.push("Ambience");
             this.random_disturbing_sounds = builder.comment("Default true").define("Should players hear disturbing sounds from time to time? (Note: this affects only one random player from the server)",true);
             builder.pop();
+            builder.push("Hints for Infected Animals");
+            this.stomach_growl_detection = builder.comment("Default true").define("Should certain animals that have mutation forms make stomach growl sounds from time to time if infected with the sickness?",true);
+            builder.pop();
 
 
         }
@@ -176,16 +192,28 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> phase4_points;
         public final ForgeConfigSpec.ConfigValue<Integer> phase5_points;
         public final ForgeConfigSpec.ConfigValue<Integer> devices_points;
+
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> name;
         public DataGen(ForgeConfigSpec.Builder builder) {
             builder.push("Phases");
             this.phase1_points = builder.comment("Default 1000").define("Sets points required to enter phase 1",1000);
-            this.phase2_points = builder.comment("Default 5000").define("Sets points required to enter phase 2",5000);
-            this.phase3_points = builder.comment("Default 25000").define("Sets points required to enter phase 3",25000);
-            this.phase4_points = builder.comment("Default 100000").define("Sets points required to enter phase 4",100000);
-            this.phase5_points = builder.comment("Default 250000").define("Sets points required to enter phase 5",250000);
+            this.phase2_points = builder.comment("Default 10000").define("Sets points required to enter phase 2",10000);
+            this.phase3_points = builder.comment("Default 50000").define("Sets points required to enter phase 3",50000);
+            this.phase4_points = builder.comment("Default 500000").define("Sets points required to enter phase 4",500000);
+            this.phase5_points = builder.comment("Default 200000").define("Sets points required to enter phase 5",2000000);
             builder.pop();
             builder.push("Device Points");
             this.devices_points = builder.comment("Default 1000").define("Sets points that will be added / subtracted by the devices",1000);
+            builder.pop();
+            builder.push("Adventurer Names");
+            this.name = builder.defineList("Assimilated Adventurer Possible Names",
+                    Lists.newArrayList(
+                            "ASEStefan", "Nightfox", "Kronoz", "DAKOTA", "JC", "Korben", "Beta",
+                    "Renovated", "TeamAbyssal", "XEliteXCraftersX", "TqLxQuanZ", "Ian", "Andy", "Spaghetti",
+                            "AnnoyingSrpFan123", "YOASOBI", "Quattro", "NotMilkyCat", "Daralexen", "Chickon98",
+                            "ChingChilly", "wRatte", "ivan", "PHO3N1X", "TaiwanIsTheTrueChina", "kevin",
+                            "WinVic", "Wikipedia", "Mr.Lambert", "Dr.Pilot", "Harbinger", "LukeUCraft",
+                            "purpleskittle", "Adrian", "Isha21", "WitherBean", "Dr.Korpus", "Dr.Simon") , o -> o instanceof String);
             builder.pop();
         }
 

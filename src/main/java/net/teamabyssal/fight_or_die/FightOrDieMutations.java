@@ -3,6 +3,7 @@ package net.teamabyssal.fight_or_die;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -96,6 +97,7 @@ public class FightOrDieMutations {
             EntityRenderers.register(EntityRegistry.ASSIMILATED_VILLAGER.get(), AssimilatedVillagerRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_VILLAGER_HEAD.get(), AssimilatedVillagerHeadRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_ADVENTURER_HEAD.get(), AssimilatedAdventurerHeadRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_COW.get(), AssimilatedCowRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_SHEEP.get(), AssimilatedSheepRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_PIG.get(), AssimilatedPigRenderer::new);

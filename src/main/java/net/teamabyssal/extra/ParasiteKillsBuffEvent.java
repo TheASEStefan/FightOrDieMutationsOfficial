@@ -24,8 +24,8 @@ public class ParasiteKillsBuffEvent {
             WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) world);
             int currentPhase = worldDataRegistry.getPhase();
                 if (!world.isClientSide && (entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primitive || entity instanceof Adapted)) {
-                    if (currentPhase >= 3 && Math.random() <= 0.7) {
-                        entity.addEffect(new MobEffectInstance(EffectRegistry.RAGE.get(), 400, 0), entity);
+                    if (currentPhase >= 3 && Math.random() <= 0.25) {
+                        entity.addEffect(new MobEffectInstance(EffectRegistry.FURY.get(), 400, 0), entity);
                     }
                 }
         }

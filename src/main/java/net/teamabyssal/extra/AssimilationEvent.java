@@ -1,10 +1,12 @@
 package net.teamabyssal.extra;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Pig;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -78,6 +81,33 @@ public class AssimilationEvent {
                 villager.level().playSound((Player) null, villager.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
                 if (villager.level() instanceof ServerLevel server) {
                     server.sendParticles(ParticleTypes.EXPLOSION, villager.getX(), villager.getY() + 1, villager.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    if (currentPhase < 3) {
+                        worldDataRegistry.setScore(currentScore + 5);
+                    }
+                    else if (currentPhase >= 3) {
+                        worldDataRegistry.setScore(currentScore + 10);
+                    }
+                }
+            }
+            else if (entity instanceof Player player && player.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_adventurer_assimilation.get() && Math.random() <= 0.85F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
+                Component name = player.getName();
+                AssimilatedAdventurerEntity assimilatedAdventurerEntity = EntityRegistry.ASSIMILATED_ADVENTURER.get().create(world);
+                ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+                ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
+                ItemStack feet = player.getItemBySlot(EquipmentSlot.FEET);
+                assert assimilatedAdventurerEntity != null;
+                assimilatedAdventurerEntity.setItemSlot(EquipmentSlot.HEAD , head);
+                assimilatedAdventurerEntity.setItemSlot(EquipmentSlot.LEGS , legs);
+                assimilatedAdventurerEntity.setItemSlot(EquipmentSlot.FEET , feet);
+                assimilatedAdventurerEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                assimilatedAdventurerEntity.setCustomName(name);
+                assimilatedAdventurerEntity.setDropChance(EquipmentSlot.HEAD , 0);
+                assimilatedAdventurerEntity.setDropChance(EquipmentSlot.LEGS , 0);
+                assimilatedAdventurerEntity.setDropChance(EquipmentSlot.FEET , 0);
+                world.addFreshEntity(assimilatedAdventurerEntity);
+                player.level().playSound((Player) null, player.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
+                if (player.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.EXPLOSION, player.getX(), player.getY() + 1, player.getZ(), 3, 0.4, 1.0, 0.4, 0);
                     if (currentPhase < 3) {
                         worldDataRegistry.setScore(currentScore + 5);
                     }

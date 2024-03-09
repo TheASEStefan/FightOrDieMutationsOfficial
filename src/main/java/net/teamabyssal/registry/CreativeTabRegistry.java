@@ -26,9 +26,11 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.ASSIMILATED_FOX_SPAWN_EGG.get());
 
         entries.accept(ItemRegistry.ASSIMILATED_HUMAN_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.ASSIMILATED_ADVENTURER_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_VILLAGER_SPAWN_EGG.get());
 
         entries.accept(ItemRegistry.ASSIMILATED_HUMAN_HEAD_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.ASSIMILATED_ADVENTURER_HEAD_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG.get());
 
         entries.accept(ItemRegistry.ASSIMILATED_CREEPER_SPAWN_EGG.get());
@@ -41,6 +43,7 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.ADDITION_DEVICE.get());
         entries.accept(ItemRegistry.SUBTRACTION_DEVICE.get());
         entries.accept(ItemRegistry.PARASCORE.get());
+        entries.accept(ItemRegistry.ASSIMILATION_STAFF.get());
 
         entries.accept(ItemRegistry.INFECTOR_THORAX.get());
         entries.accept(ItemRegistry.RIPPING_FLESH.get());

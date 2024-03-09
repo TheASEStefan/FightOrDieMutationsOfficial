@@ -14,6 +14,7 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.entity.categories.*;
+import net.teamabyssal.entity.custom.AssimilatedAdventurerHeadEntity;
 import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
 import net.teamabyssal.entity.custom.AssimilatedVillagerHeadEntity;
 import net.teamabyssal.entity.custom.MalruptorEntity;
@@ -76,7 +77,7 @@ public class LivingSpawnedModifications {
             AssimilatedHumanHeadEntity assimilatedHumanHeadEntity = (AssimilatedHumanHeadEntity) event.getEntity();
             Level world = assimilatedHumanHeadEntity.level();
             if (!world.isClientSide) {
-                if (Math.random() <= 0.85F) {
+                if (Math.random() <= 0.55F) {
                     assimilatedHumanHeadEntity.setKills(assimilatedHumanHeadEntity.getKills() + assimilatedHumanHeadEntity.getRandom().nextInt(3));
                 }
             }
@@ -85,8 +86,17 @@ public class LivingSpawnedModifications {
             AssimilatedVillagerHeadEntity assimilatedVillagerHeadEntity = (AssimilatedVillagerHeadEntity) event.getEntity();
             Level world = assimilatedVillagerHeadEntity.level();
             if (!world.isClientSide) {
-                if (Math.random() <= 0.85F) {
+                if (Math.random() <= 0.55F) {
                     assimilatedVillagerHeadEntity.setKills(assimilatedVillagerHeadEntity.getKills() + assimilatedVillagerHeadEntity.getRandom().nextInt(3));
+                }
+            }
+        }
+        else if (event.getEntity() instanceof AssimilatedAdventurerHeadEntity) {
+            AssimilatedAdventurerHeadEntity assimilatedAdventurerHeadEntity = (AssimilatedAdventurerHeadEntity) event.getEntity();
+            Level world = assimilatedAdventurerHeadEntity.level();
+            if (!world.isClientSide) {
+                if (Math.random() <= 0.55F) {
+                    assimilatedAdventurerHeadEntity.setKills(assimilatedAdventurerHeadEntity.getKills() + assimilatedAdventurerHeadEntity.getRandom().nextInt(3));
                 }
             }
         }

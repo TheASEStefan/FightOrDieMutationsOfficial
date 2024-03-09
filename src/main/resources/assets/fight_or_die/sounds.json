@@ -33,6 +33,12 @@
     ],
     "subtitle": "subtitles.fight_or_die.entity.assimilated_human.ambient"
   },
+  "entity.assimilated_adventurer.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_adventurer.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_adventurer.ambient"
+  },
   "entity.assimilated_cow.ambient": {
     "sounds": [
       "fight_or_die:mob/assimilated_cow.idle"
@@ -86,6 +92,13 @@
       "fight_or_die:mob/turn"
     ],
     "subtitle": "subtitles.fight_or_die.entity.turn"
+  },
+
+  "stomach_growl": {
+    "sounds": [
+      "fight_or_die:mob/stomach_growl"
+    ],
+    "subtitle": "subtitles.fight_or_die.stomach_growl"
   },
 
   "entity.head.ambient": {

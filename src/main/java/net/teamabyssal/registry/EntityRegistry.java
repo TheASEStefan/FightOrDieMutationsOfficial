@@ -48,6 +48,11 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(AssimilatedHumanEntity::new, PARASITE)
                             .sized(0.8f, 1.9f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_human").toString()));
+    public static final RegistryObject<EntityType<AssimilatedAdventurerEntity>> ASSIMILATED_ADVENTURER =
+            ENTITY_TYPES.register("assimilated_adventurer",
+                    () -> EntityType.Builder.of(AssimilatedAdventurerEntity::new, PARASITE)
+                            .sized(0.9f, 1.9f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_adventurer").toString()));
     public static final RegistryObject<EntityType<AssimilatedVillagerEntity>> ASSIMILATED_VILLAGER =
             ENTITY_TYPES.register("assimilated_villager",
                     () -> EntityType.Builder.of(AssimilatedVillagerEntity::new, PARASITE)
@@ -63,6 +68,11 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(AssimilatedVillagerHeadEntity::new, PARASITE)
                             .sized(0.7f, 0.8f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_villager_head").toString()));
+    public static final RegistryObject<EntityType<AssimilatedAdventurerHeadEntity>> ASSIMILATED_ADVENTURER_HEAD =
+            ENTITY_TYPES.register("assimilated_adventurer_head",
+                    () -> EntityType.Builder.of(AssimilatedAdventurerHeadEntity::new, PARASITE)
+                            .sized(0.7f, 0.8f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_adventurer_head").toString()));
     public static final RegistryObject<EntityType<AssimilatedCowEntity>> ASSIMILATED_COW =
             ENTITY_TYPES.register("assimilated_cow",
                     () -> EntityType.Builder.of(AssimilatedCowEntity::new, PARASITE)

@@ -39,7 +39,7 @@ public class PlayerPhaseEvent {
             if (event.level.getDifficulty() == Difficulty.NORMAL) {
                 if (Math.random() < 0.02F) {
                     if (currentPhase < 2) {
-                        worldDataRegistry.setScore(currentScore + 1);
+                        worldDataRegistry.setScore(currentScore + 2);
                     }
                     else if (currentPhase > 2) {
                         worldDataRegistry.setScore(currentScore - 1);
@@ -47,14 +47,14 @@ public class PlayerPhaseEvent {
                 }
                 if (Math.random() < 0.015F) {
                     if (currentScore > 0) {
-                        worldDataRegistry.setScore(currentScore + 3);
+                        worldDataRegistry.setScore(currentScore + 5);
                     }
                 }
             }
             else if (event.level.getDifficulty() == Difficulty.HARD) {
                 if (Math.random() < 0.02F) {
                     if (currentPhase < 2) {
-                        worldDataRegistry.setScore(currentScore + 1);
+                        worldDataRegistry.setScore(currentScore + 3);
                     }
                     else if (currentPhase > 2) {
                         worldDataRegistry.setScore(currentScore - 1);
@@ -62,7 +62,7 @@ public class PlayerPhaseEvent {
                 }
                 if (Math.random() < 0.025F) {
                     if (currentScore > 0) {
-                        worldDataRegistry.setScore(currentScore + 5);
+                        worldDataRegistry.setScore(currentScore + 10);
                     }
                 }
             }

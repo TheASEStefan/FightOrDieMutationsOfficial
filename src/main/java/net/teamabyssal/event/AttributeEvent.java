@@ -23,7 +23,9 @@ public class AttributeEvent {
         event.put(EntityRegistry.ASSIMILATED_FOX.get(), AssimilatedFoxEntity.createAttributes().build());
         event.put(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadEntity.createAttributes().build());
         event.put(EntityRegistry.ASSIMILATED_VILLAGER_HEAD.get(), AssimilatedVillagerHeadEntity.createAttributes().build());
+        event.put(EntityRegistry.ASSIMILATED_ADVENTURER_HEAD.get(), AssimilatedAdventurerHeadEntity.createAttributes().build());
         event.put(EntityRegistry.ASSIMILATED_CREEPER.get(), AssimilatedCreeperEntity.createAttributes().build());
+        event.put(EntityRegistry.ASSIMILATED_ADVENTURER.get(), AssimilatedAdventurerEntity.createAttributes().build());
 
     }
 

@@ -107,20 +107,6 @@ public class TurnClass {
                                 worldDataRegistry.setScore(currentScore + 2);
                             }
                         }
-                        else if (livingEntity instanceof Creeper creeper && FightOrDieMutationsConfig.SERVER.assimilated_creeper_assimilation.get()) {
-                            AssimilatedCreeperEntity assimilatedCreeperEntity = EntityRegistry.ASSIMILATED_CREEPER.get().create(world);
-                            assert assimilatedCreeperEntity != null;
-                            assimilatedCreeperEntity.moveTo(x, y, z);
-                            world.addFreshEntity(assimilatedCreeperEntity);
-                            creeper.discard();
-                            creeper.level().playSound((Player) null, creeper.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.3F, 1.0F);
-                            if (creeper.level() instanceof ServerLevel server) {
-                                server.sendParticles(ParticleTypes.EXPLOSION, creeper.getX(), creeper.getY() + 1, creeper.getZ(), 3, 0.4, 1.0, 0.4, 0);
-                                WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(server);
-                                int currentScore = worldDataRegistry.getScore();
-                                worldDataRegistry.setScore(currentScore + 5);
-                            }
-                        }
                     }
                 }
             }
