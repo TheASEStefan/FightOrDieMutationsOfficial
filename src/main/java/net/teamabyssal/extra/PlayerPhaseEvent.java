@@ -19,11 +19,8 @@ public class PlayerPhaseEvent {
     public static void PhaseEvent(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END && event.player instanceof ServerPlayer player && event.player.level() instanceof ServerLevel world) {
             WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry(world);
-            if (!worldDataRegistry.isCnt0() || !worldDataRegistry.isCnt1() || !worldDataRegistry.isCnt2() || !worldDataRegistry.isCnt3() || !worldDataRegistry.isCnt4() || !worldDataRegistry.isCnt5()) {
+            if (worldDataRegistry.canShowPhases()) {
                 WorldEventPhase.serverWorldTick(world, player);
-            }
-            if (Math.random() < 0.02F) {
-                player.sendSystemMessage(Component.literal("Score: " + worldDataRegistry.getScore()));
             }
         }
     }
@@ -76,32 +73,26 @@ public class PlayerPhaseEvent {
             int currentScore = worldDataRegistry.getScore();
             if (currentPhase == 0) {
                 worldDataRegistry.setScore(currentScore + 5);
-                player.sendSystemMessage(Component.literal("5 points have been added."));
                 worldDataRegistry.setDirty();
             }
             else if (currentPhase == 1) {
                 worldDataRegistry.setScore(currentScore + 10);
-                player.sendSystemMessage(Component.literal("10 points have been added."));
                 worldDataRegistry.setDirty();
             }
             else if (currentPhase == 2) {
                 worldDataRegistry.setScore(currentScore + 20);
-                player.sendSystemMessage(Component.literal("20 points have been added."));
                 worldDataRegistry.setDirty();
             }
             else if (currentPhase == 3) {
                 worldDataRegistry.setScore(currentScore + 40);
-                player.sendSystemMessage(Component.literal("40 points have been added."));
                 worldDataRegistry.setDirty();
             }
             else if (currentPhase == 4) {
                 worldDataRegistry.setScore(currentScore + 80);
-                player.sendSystemMessage(Component.literal("80 points have been added."));
                 worldDataRegistry.setDirty();
             }
             else if (currentPhase == 5) {
                 worldDataRegistry.setScore(currentScore + 160);
-                player.sendSystemMessage(Component.literal("160 points have been added."));
                 worldDataRegistry.setDirty();
 
             }

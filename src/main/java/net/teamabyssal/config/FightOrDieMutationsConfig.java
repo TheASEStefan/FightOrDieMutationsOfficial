@@ -151,7 +151,7 @@ public class FightOrDieMutationsConfig {
             builder.push("Assimilated Enderman");
             this.assimilated_enderman_health = builder.comment("Default 55").defineInRange("Sets Assimilated Enderman's Max health", 55, 20, Double.MAX_VALUE);
             this.assimilated_enderman_damage = builder.comment("Default 12").defineInRange("Sets Assimilated Enderman's Damage", 12, 5, Double.MAX_VALUE);
-            this.assimilated_enderman_reinforcement_rate = builder.comment("Default 0.95").defineInRange("Sets the chance of an enderman to bring reinforcements, the lower the number, the smaller the chance...", 0.95, 0.20, Double.MAX_VALUE);
+            this.assimilated_enderman_reinforcement_rate = builder.comment("Default 0.95").defineInRange("Sets the chance of an enderman to bring reinforcements, the lower the number, the smaller the chance", 0.95, 0.20, Double.MAX_VALUE);
             this.assimilated_enderman_reinforcements = builder.comment("Default true").define("Should Assimilated Endermans bring reinforcements with teleportation?",true);
             this.assimilated_enderman_teleportation = builder.comment("Default true").define("Should Assimilated Endermans use teleportation abilities?",true);
             this.assimilated_enderman_sensible_to_water = builder.comment("Default true").define("Should Assimilated Endermans take damage when in contact with water?",true);

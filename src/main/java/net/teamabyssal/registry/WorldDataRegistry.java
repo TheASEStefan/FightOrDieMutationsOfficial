@@ -108,9 +108,9 @@ public class WorldDataRegistry extends SavedData {
         setDirty();
     }
 
-
-
-
+    public boolean canShowPhases() {
+        return !this.isCnt0() || !this.isCnt1() || !this.isCnt2() || !this.isCnt3() || !this.isCnt4() || !this.isCnt5();
+    }
 
     public int getScore() {
         setDirty();
