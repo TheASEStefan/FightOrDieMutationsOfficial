@@ -20,7 +20,7 @@ public class ImpostorEvent {
             Entity entity = event.getEntity();
             if (entity instanceof Cow || entity instanceof Pig || entity instanceof Sheep || entity instanceof Fox) {
                 if (((Animal) entity).hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && FightOrDieMutationsConfig.SERVER.stomach_growl_detection.get()) {
-                    if (((Animal) entity).getRandom().nextInt(1000) == 0) {
+                    if (((Animal) entity).getRandom().nextInt(1200) == 0) {
                         entity.level().playSound((Player) null, entity.blockPosition(), SoundRegistry.STOMACH_GROWL.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
                     }
                 }

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -89,6 +90,22 @@ public class AssimilationEvent {
                     }
                 }
             }
+            else if (entity instanceof EnderMan enderMan && enderMan.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_enderman_assimilation.get() && Math.random() <= 0.75F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity()) && worldDataRegistry.getPhase() > 2) {
+                AssimilatedEndermanEntity assimilatedEndermanEntity = EntityRegistry.ASSIMILATED_ENDERMAN.get().create(world);
+                assert assimilatedEndermanEntity != null;
+                assimilatedEndermanEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                world.addFreshEntity(assimilatedEndermanEntity);
+                enderMan.level().playSound((Player) null, enderMan.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
+                if (enderMan.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.EXPLOSION, enderMan.getX(), enderMan.getY() + 1, enderMan.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                    if (currentPhase < 3) {
+                        worldDataRegistry.setScore(currentScore + 20);
+                    }
+                    else if (currentPhase >= 3) {
+                        worldDataRegistry.setScore(currentScore + 40);
+                    }
+                }
+            }
             else if (entity instanceof Player player && player.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_adventurer_assimilation.get() && Math.random() <= 0.85F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
                 Component name = player.getName();
                 AssimilatedAdventurerEntity assimilatedAdventurerEntity = EntityRegistry.ASSIMILATED_ADVENTURER.get().create(world);
@@ -116,6 +133,7 @@ public class AssimilationEvent {
                     }
                 }
             }
+
         }
     }
 

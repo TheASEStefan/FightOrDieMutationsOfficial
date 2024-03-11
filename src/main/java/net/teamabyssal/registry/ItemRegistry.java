@@ -37,6 +37,10 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ADVENTURER, 0x041628, 0x0b3c6e, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_VILLAGER_SPAWN_EGG = ITEMS.register("assimilated_villager_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER, 0x281604, 0x6e3d0a, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_ENDERMAN_SPAWN_EGG = ITEMS.register("assimilated_enderman_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ENDERMAN, 0x280428, 0x850d85, new Item.Properties()));
+    public static final RegistryObject<Item> ASSIMILATED_ENDERMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_enderman_head_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ENDERMAN_HEAD, 0x280428, 0x850d85, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_human_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN_HEAD, 0x28283e, 0x345350, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG = ITEMS.register("assimilated_villager_head_spawn_egg",

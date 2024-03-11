@@ -98,11 +98,13 @@ public class FightOrDieMutations {
             EntityRenderers.register(EntityRegistry.ASSIMILATED_HUMAN_HEAD.get(), AssimilatedHumanHeadRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_VILLAGER_HEAD.get(), AssimilatedVillagerHeadRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_ADVENTURER_HEAD.get(), AssimilatedAdventurerHeadRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_ENDERMAN_HEAD.get(), AssimilatedEndermanHeadRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_COW.get(), AssimilatedCowRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_SHEEP.get(), AssimilatedSheepRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_PIG.get(), AssimilatedPigRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_FOX.get(), AssimilatedFoxRenderer::new);
             EntityRenderers.register(EntityRegistry.ASSIMILATED_CREEPER.get(), AssimilatedCreeperRenderer::new);
+            EntityRenderers.register(EntityRegistry.ASSIMILATED_ENDERMAN.get(), AssimilatedEndermanRenderer::new);
 
 
 

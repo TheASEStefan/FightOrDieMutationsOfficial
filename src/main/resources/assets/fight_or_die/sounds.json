@@ -39,6 +39,31 @@
     ],
     "subtitle": "subtitles.fight_or_die.entity.assimilated_adventurer.ambient"
   },
+  "entity.assimilated_enderman_head.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_enderman_head.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_enderman_head.ambient"
+  },
+  "entity.assimilated_enderman.ambient": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_enderman.idle"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_enderman.ambient"
+  },
+  "entity.assimilated_enderman.death": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_enderman.death"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_enderman.death"
+  },
+  "entity.assimilated_enderman.hurt": {
+    "sounds": [
+      "fight_or_die:mob/assimilated_enderman.hurt1",
+      "fight_or_die:mob/assimilated_enderman.hurt2"
+    ],
+    "subtitle": "subtitles.fight_or_die.entity.assimilated_enderman.hurt"
+  },
   "entity.assimilated_cow.ambient": {
     "sounds": [
       "fight_or_die:mob/assimilated_cow.idle"

@@ -56,6 +56,10 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_head_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_head_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_head_damage;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_enderman_head_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_enderman_head_damage;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_head_teleportation;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_head_sensible_to_water;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_sheep_health;
@@ -66,17 +70,22 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_fox_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_damage;
-        public final ForgeConfigSpec.ConfigValue<Boolean> creeper_near_mutation_explosion;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_explosion_radius;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_enderman_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_enderman_damage;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_reinforcements;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_teleportation;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_sensible_to_water;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_enderman_reinforcement_rate;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_human_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_villager_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_adventurer_assimilation;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_cow_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_sheep_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_pig_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_fox_assimilation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_creeper_assimilation;
-        public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_enderman;
-        public final ForgeConfigSpec.ConfigValue<Boolean> springer_attacks_witch;
         public final ForgeConfigSpec.ConfigValue<Boolean> random_disturbing_sounds;
         public final ForgeConfigSpec.ConfigValue<Boolean> stomach_growl_detection;
 
@@ -109,8 +118,14 @@ public class FightOrDieMutationsConfig {
             this.assimilated_villager_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Villager Head's Damage", 3, 1, Double.MAX_VALUE);
             builder.pop();
             builder.push("Assimilated Adventurer Head");
-            this.assimilated_adventurer_head_health = builder.comment("Default 8").defineInRange("Sets Assimilated Villager Head's Max health", 8, 4, Double.MAX_VALUE);
-            this.assimilated_adventurer_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Villager Head's Damage", 3, 1, Double.MAX_VALUE);
+            this.assimilated_adventurer_head_health = builder.comment("Default 8").defineInRange("Sets Assimilated Adventurer Head's Max health", 8, 4, Double.MAX_VALUE);
+            this.assimilated_adventurer_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Adventurer Head's Damage", 3, 1, Double.MAX_VALUE);
+            builder.pop();
+            builder.push("Assimilated Enderman Head");
+            this.assimilated_enderman_head_health = builder.comment("Default 13").defineInRange("Sets Assimilated Enderman Head's Max health", 13, 7, Double.MAX_VALUE);
+            this.assimilated_enderman_head_damage = builder.comment("Default 5").defineInRange("Sets Assimilated Enderman Head's Damage", 5, 2, Double.MAX_VALUE);
+            this.assimilated_enderman_head_teleportation = builder.comment("Default true").define("Should Assimilated Enderman Heads use teleportation abilities?",true);
+            this.assimilated_enderman_head_sensible_to_water = builder.comment("Default true").define("Should Assimilated Enderman Heads take damage when in contact with water?",true);
             builder.pop();
             builder.push("Assimilated Cow");
             this.assimilated_cow_health = builder.comment("Default 16").defineInRange("Sets Assimilated Cow's Max health", 16, 7, Double.MAX_VALUE);
@@ -131,7 +146,15 @@ public class FightOrDieMutationsConfig {
             builder.push("Assimilated Creeper");
             this.assimilated_creeper_health = builder.comment("Default 12").defineInRange("Sets Assimilated Creeper's Max health", 12, 5, Double.MAX_VALUE);
             this.assimilated_creeper_damage = builder.comment("Default 5").defineInRange("Sets Assimilated Creeper's Damage", 5, 2, Double.MAX_VALUE);
-            this.creeper_near_mutation_explosion = builder.comment("Default true").define("Should assimilated creepers not explode if close to a sim creature or higher?",true);
+            this.assimilated_creeper_explosion_radius = builder.comment("Default 2.15").defineInRange("Sets Assimilated Creeper's Explosion Radius", 2.15, 1.1, Double.MAX_VALUE);
+            builder.pop();
+            builder.push("Assimilated Enderman");
+            this.assimilated_enderman_health = builder.comment("Default 55").defineInRange("Sets Assimilated Enderman's Max health", 55, 20, Double.MAX_VALUE);
+            this.assimilated_enderman_damage = builder.comment("Default 12").defineInRange("Sets Assimilated Enderman's Damage", 12, 5, Double.MAX_VALUE);
+            this.assimilated_enderman_reinforcement_rate = builder.comment("Default 0.95").defineInRange("Sets the chance of an enderman to bring reinforcements, the lower the number, the smaller the chance...", 0.95, 0.20, Double.MAX_VALUE);
+            this.assimilated_enderman_reinforcements = builder.comment("Default true").define("Should Assimilated Endermans bring reinforcements with teleportation?",true);
+            this.assimilated_enderman_teleportation = builder.comment("Default true").define("Should Assimilated Endermans use teleportation abilities?",true);
+            this.assimilated_enderman_sensible_to_water = builder.comment("Default true").define("Should Assimilated Endermans take damage when in contact with water?",true);
             builder.pop();
 
             builder.push("Spawns");
@@ -139,7 +162,7 @@ public class FightOrDieMutationsConfig {
             this.dimension_parameters = builder.comment("Default minecraft:is_overworld").defineList("Dictates in what biome the parasites spawn",
                     Lists.newArrayList("minecraft:is_overworld") , o -> o instanceof String);
             this.spawns = builder.defineList("mob|weight|minimum|maximum",
-                    Lists.newArrayList("fight_or_die:shiller|45|1|3", "fight_or_die:springer|30|1|2", "fight_or_die:assimilated_human|28|1|2", "fight_or_die:assimilated_adventurer|20|1|2", "fight_or_die:assimilated_villager|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_sheep|25|1|2", "fight_or_die:assimilated_pig|25|1|2", "fight_or_die:assimilated_fox|22|1|2", "fight_or_die:assimilated_creeper|15|1|1") , o -> o instanceof String);
+                    Lists.newArrayList("fight_or_die:shiller|45|1|3", "fight_or_die:springer|30|1|2", "fight_or_die:assimilated_human|28|1|2", "fight_or_die:assimilated_adventurer|20|1|2", "fight_or_die:assimilated_villager|25|1|2", "fight_or_die:assimilated_cow|25|1|2", "fight_or_die:assimilated_sheep|25|1|2", "fight_or_die:assimilated_pig|25|1|2", "fight_or_die:assimilated_fox|22|1|2", "fight_or_die:assimilated_creeper|9|1|1", "fight_or_die:assimilated_enderman|5|1|1") , o -> o instanceof String);
             builder.pop();
 
             builder.push("Targeting Tasks");
@@ -170,10 +193,7 @@ public class FightOrDieMutationsConfig {
             this.assimilated_villager_assimilation = builder.comment("Default true").define("Should villagers convert into their assimilated counterpart?",true);
             this.assimilated_adventurer_assimilation = builder.comment("Default true").define("Should players convert into their assimilated counterpart?",true);
             this.assimilated_creeper_assimilation = builder.comment("Default true").define("Should creepers convert into their assimilated counterpart?",true);
-            builder.pop();
-            builder.push("Springer Targeting Goals");
-            this.springer_attacks_enderman = builder.comment("Default true").define("Should springers target endermans?",true);
-            this.springer_attacks_witch = builder.comment("Default true").define("Should springers target witches?",true);
+            this.assimilated_enderman_assimilation = builder.comment("Default true").define("Should endermans convert into their assimilated counterpart?",true);
             builder.pop();
             builder.push("Ambience");
             this.random_disturbing_sounds = builder.comment("Default true").define("Should players hear disturbing sounds from time to time? (Note: this affects only one random player from the server)",true);
@@ -200,7 +220,7 @@ public class FightOrDieMutationsConfig {
             this.phase2_points = builder.comment("Default 10000").define("Sets points required to enter phase 2",10000);
             this.phase3_points = builder.comment("Default 50000").define("Sets points required to enter phase 3",50000);
             this.phase4_points = builder.comment("Default 500000").define("Sets points required to enter phase 4",500000);
-            this.phase5_points = builder.comment("Default 200000").define("Sets points required to enter phase 5",2000000);
+            this.phase5_points = builder.comment("Default 2000000").define("Sets points required to enter phase 5",2000000);
             builder.pop();
             builder.push("Device Points");
             this.devices_points = builder.comment("Default 1000").define("Sets points that will be added / subtracted by the devices",1000);
@@ -213,7 +233,8 @@ public class FightOrDieMutationsConfig {
                             "AnnoyingSrpFan123", "YOASOBI", "Quattro", "NotMilkyCat", "Daralexen", "Chickon98",
                             "ChingChilly", "wRatte", "ivan", "PHO3N1X", "TaiwanIsTheTrueChina", "kevin",
                             "WinVic", "Wikipedia", "Mr.Lambert", "Dr.Pilot", "Harbinger", "LukeUCraft",
-                            "purpleskittle", "Adrian", "Isha21", "WitherBean", "Dr.Korpus", "Dr.Simon") , o -> o instanceof String);
+                            "purpleskittle", "Adrian", "Isha21", "WitherBean", "Dr.Korpus", "Dr.Simon", "Dr.Robert",
+                            "MarioThePlumber", "Lelouch VI Britannia", "Light Yagami", "Mutationcraft") , o -> o instanceof String);
             builder.pop();
         }
 

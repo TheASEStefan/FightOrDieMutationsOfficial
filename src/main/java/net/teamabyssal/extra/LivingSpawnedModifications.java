@@ -14,10 +14,7 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.entity.categories.*;
-import net.teamabyssal.entity.custom.AssimilatedAdventurerHeadEntity;
-import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
-import net.teamabyssal.entity.custom.AssimilatedVillagerHeadEntity;
-import net.teamabyssal.entity.custom.MalruptorEntity;
+import net.teamabyssal.entity.custom.*;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EffectRegistry;
 import net.teamabyssal.registry.EntityRegistry;
@@ -97,6 +94,15 @@ public class LivingSpawnedModifications {
             if (!world.isClientSide) {
                 if (Math.random() <= 0.55F) {
                     assimilatedAdventurerHeadEntity.setKills(assimilatedAdventurerHeadEntity.getKills() + assimilatedAdventurerHeadEntity.getRandom().nextInt(3));
+                }
+            }
+        }
+        else if (event.getEntity() instanceof AssimilatedEndermanHeadEntity) {
+            AssimilatedEndermanHeadEntity assimilatedEndermanHeadEntity = (AssimilatedEndermanHeadEntity) event.getEntity();
+            Level world = assimilatedEndermanHeadEntity.level();
+            if (!world.isClientSide) {
+                if (Math.random() <= 0.55F) {
+                    assimilatedEndermanHeadEntity.setKills(assimilatedEndermanHeadEntity.getKills() + assimilatedEndermanHeadEntity.getRandom().nextInt(3));
                 }
             }
         }

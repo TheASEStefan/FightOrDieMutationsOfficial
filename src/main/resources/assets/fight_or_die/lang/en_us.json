@@ -16,6 +16,7 @@
   "item.fight_or_die.assimilated_human_head_spawn_egg": "Assimilated Human Head Spawn Egg",
   "item.fight_or_die.assimilated_villager_head_spawn_egg": "Assimilated Villager Head Spawn Egg",
   "item.fight_or_die.assimilated_adventurer_head_spawn_egg": "Assimilated Adventurer Head Spawn Egg",
+  "item.fight_or_die.assimilated_enderman_head_spawn_egg": "Assimilated Enderman Head Spawn Egg",
 
   "item.fight_or_die.assimilated_cow_spawn_egg": "Assimilated Cow Spawn Egg",
   "item.fight_or_die.assimilated_sheep_spawn_egg": "Assimilated Sheep Spawn Egg",
@@ -23,6 +24,7 @@
   "item.fight_or_die.assimilated_fox_spawn_egg": "Assimilated Fox Spawn Egg",
 
   "item.fight_or_die.assimilated_creeper_spawn_egg": "Assimilated Creeper Spawn Egg",
+  "item.fight_or_die.assimilated_enderman_spawn_egg": "Assimilated Enderman Spawn Egg",
 
   "item.fight_or_die.primitive_tormenter_spawn_egg": "Primitive Tormenter Spawn Egg",
   "item.fight_or_die.adapted_tormenter_spawn_egg": "Adapted Tormenter Spawn Egg",
@@ -51,12 +53,15 @@
   "entity.fight_or_die.assimilated_human_head": "Assimilated Human Head",
   "entity.fight_or_die.assimilated_villager_head": "Assimilated Villager Head",
   "entity.fight_or_die.assimilated_adventurer_head": "Assimilated Adventurer Head",
+  "entity.fight_or_die.assimilated_enderman_head": "Assimilated Enderman Head",
 
   "entity.fight_or_die.assimilated_cow": "Assimilated Cow",
   "entity.fight_or_die.assimilated_sheep": "Assimilated Sheep",
   "entity.fight_or_die.assimilated_pig": "Assimilated Pig",
   "entity.fight_or_die.assimilated_fox": "Assimilated Fox",
+
   "entity.fight_or_die.assimilated_creeper": "Assimilated Creeper",
+  "entity.fight_or_die.assimilated_enderman": "Assimilated Enderman",
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",
   "effect.fight_or_die.fury": "Fury",
@@ -79,6 +84,12 @@
 
   "subtitles.fight_or_die.entity.assimilated_creeper.ambient": "Assimilated Creeper growls and fizzles!",
   "subtitles.fight_or_die.entity.assimilated_creeper.death": "Assimilated Creeper dies",
+
+  "subtitles.fight_or_die.entity.assimilated_enderman.ambient": "Assimilated Enderman shrieks",
+  "subtitles.fight_or_die.entity.assimilated_enderman.death": "Assimilated Enderman dies",
+  "subtitles.fight_or_die.entity.assimilated_enderman.hurt": "Assimilated Enderman hurts",
+
+  "subtitles.fight_or_die.entity.assimilated_enderman_head.ambient": "Walking Head shrieks",
 
   "subtitles.fight_or_die.entity.assimilated_human.ambient": "Assimilated Human growls",
   "subtitles.fight_or_die.entity.assimilated_adventurer.ambient": "Assimilated Adventurer growls",

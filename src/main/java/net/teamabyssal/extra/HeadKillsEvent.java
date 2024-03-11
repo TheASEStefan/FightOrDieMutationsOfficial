@@ -8,18 +8,18 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssal.entity.custom.AssimilatedAdventurerHeadEntity;
+import net.teamabyssal.entity.custom.AssimilatedEndermanHeadEntity;
 import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
 import net.teamabyssal.entity.custom.AssimilatedVillagerHeadEntity;
-import net.teamabyssal.entity.custom.MalruptorEntity;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
-public class MalruptorKillsEvent {
+public class HeadKillsEvent {
 
     @SubscribeEvent
-    public static void MalruptorKillEvent(LivingDeathEvent event) {
+    public static void HeadKillsEvent(LivingDeathEvent event) {
         if (event != null && event.getEntity() != null && !event.getEntity().level().isClientSide && event.getSource().getEntity() != null) {
 
             if (EntityRegistry.PARASITES.contains(event.getSource().getEntity()) && event.getEntity() != null) {
@@ -49,6 +49,13 @@ public class MalruptorKillsEvent {
                 Level world = assimilatedAdventurerHeadEntity.level();
                 if (!world.isClientSide && assimilatedAdventurerHeadEntity.isAlive()) {
                     assimilatedAdventurerHeadEntity.setKills(assimilatedAdventurerHeadEntity.getKills() + 1);
+                }
+            }
+            else if (event.getSource().getEntity() instanceof AssimilatedEndermanHeadEntity) {
+                AssimilatedEndermanHeadEntity assimilatedEndermanHeadEntity = (AssimilatedEndermanHeadEntity) event.getSource().getEntity();
+                Level world = assimilatedEndermanHeadEntity.level();
+                if (!world.isClientSide && assimilatedEndermanHeadEntity.isAlive()) {
+                    assimilatedEndermanHeadEntity.setKills(assimilatedEndermanHeadEntity.getKills() + 1);
                 }
             }
         }

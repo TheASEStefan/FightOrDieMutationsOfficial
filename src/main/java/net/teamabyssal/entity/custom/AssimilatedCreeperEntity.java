@@ -55,13 +55,13 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     private final byte box = 10;
     private final byte half_box = box / 2;
     private final float extraRadius = ((IMathHelper.HEX + Mth.clamp(3, IMathHelper.HEX, IMathHelper.PI) + (IMathHelper.DELTA / 3)) / 10);
-    private final float explosionRadius = (float) (IMathHelper.HEX * 2.2);
+    private final float explosionRadius = (float) (IMathHelper.HEX * FightOrDieMutationsConfig.SERVER.assimilated_creeper_explosion_radius.get());
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedCreeperEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.setMaxUpStep(1.0F);
     }
 
-    Horse horse;
 
     @Override
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {

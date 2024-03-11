@@ -28,6 +28,10 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> ENTITY_MALRUPTOR_INFECT = soundRegistry("entity.malruptor.infect");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_HUMAN_AMBIENT  = soundRegistry("entity.assimilated_human.ambient");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_ADVENTURER_AMBIENT  = soundRegistry("entity.assimilated_adventurer.ambient");
+    public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_ENDERMAN_HEAD_AMBIENT  = soundRegistry("entity.assimilated_enderman_head.ambient");
+    public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_ENDERMAN_AMBIENT  = soundRegistry("entity.assimilated_enderman.ambient");
+    public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_ENDERMAN_DEATH  = soundRegistry("entity.assimilated_enderman.death");
+    public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_ENDERMAN_HURT  = soundRegistry("entity.assimilated_enderman.hurt");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_COW_AMBIENT  = soundRegistry("entity.assimilated_cow.ambient");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_SHEEP_AMBIENT  = soundRegistry("entity.assimilated_sheep.ambient");
     public static final RegistryObject<SoundEvent> ENTITY_ASSIMILATED_PIG_AMBIENT  = soundRegistry("entity.assimilated_pig.ambient");

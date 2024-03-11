@@ -15,7 +15,7 @@ public class MalruptorRenderer extends GeoEntityRenderer<MalruptorEntity> {
 
     @Override public void render(MalruptorEntity entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource bufferIn, int packedLightIn) {
         stack.pushPose();
-        stack.scale(0.6F, 0.9F, 0.9F);
+        stack.scale(0.8F, 0.9F, 0.8F);
         super.render(entity, entityYaw, partialTicks, stack, bufferIn, packedLightIn);
         stack.popPose();
     }

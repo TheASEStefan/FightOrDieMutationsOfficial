@@ -229,15 +229,15 @@ public class AssimilatedAdventurerModel<T extends AssimilatedAdventurerEntity> e
 			speed = 1.45F;
 		}
 		else if (entity.isDeadOrDying()) {
-			this.right_arm.xRot = Mth.cos(limbSwing * 0.8F) * -2.5F * limbSwingAmount * 100;
-			this.right_arm.yRot = Mth.cos(limbSwing * 0.8F) * -2.5F * limbSwingAmount * 100;
+			this.right_arm.xRot = Mth.cos(limbSwing * 0.8F) * -2.5F * limbSwingAmount * 1000;
+			this.right_arm.yRot = Mth.cos(limbSwing * 0.8F) * -2.5F * limbSwingAmount * 1000;
 
-			this.left_arm.xRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 100;
-			this.left_arm.yRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 100;
+			this.left_arm.xRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 1000;
+			this.left_arm.yRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 1000;
 
-			this.head.xRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 100;
-			this.head.yRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 100;
-			this.head.zRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 100;
+			this.head.xRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 1000;
+			this.head.yRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 1000;
+			this.head.zRot = Mth.cos(limbSwing * 0.8F) * 2.5F * limbSwingAmount * 1000;
 
 			speed = 3.55F;
 		}
