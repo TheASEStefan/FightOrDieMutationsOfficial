@@ -70,7 +70,7 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
                 return 2.0 + entity.getBbWidth() * entity.getBbWidth();
             }
         });
-        this.goalSelector.addGoal(4, new HumanBreakDoorGoal(this) {
+        this.goalSelector.addGoal(7, new HumanBreakDoorGoal(this) {
             @Override
             public void start() {
                 this.mob.swing(InteractionHand.MAIN_HAND);

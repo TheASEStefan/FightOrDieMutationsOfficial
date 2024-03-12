@@ -72,7 +72,7 @@ public class AssimilatedVillagerEntity extends Assimilated implements GeoEntity 
                 return 2.0 + entity.getBbWidth() * entity.getBbWidth();
             }
         });
-        this.goalSelector.addGoal(4, new OpenDoorGoal(this, true) {
+        this.goalSelector.addGoal(7, new OpenDoorGoal(this, true) {
             @Override
             public void start() {
                 this.mob.swing(InteractionHand.MAIN_HAND);
