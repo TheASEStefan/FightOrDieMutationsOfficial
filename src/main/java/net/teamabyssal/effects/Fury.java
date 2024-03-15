@@ -20,8 +20,8 @@ public class Fury extends MobEffect {
             if (this == EffectRegistry.FURY.get()) {
                     if (entity.level() instanceof ServerLevel world) {
                         world.sendParticles(ParticleTypes.FLAME, entity.getX(), entity.getEyeY() - 0.2, entity.getZ(), 23, 0.2, 0.4, 0.1, 0);
-                        for (int index = 0; index <= 1 + entity.getRandom().nextInt(6); index++) {
-                            world.sendParticles(ParticleTypes.FLAME, entity.getRandomX(0.6), entity.getEyeY() - 0.2, entity.getRandomZ(0.8), 8, 0.2, 0.4, 0.1, 0);
+                        for (int index = 0; index <= 1 + entity.getRandom().nextInt(2); index++) {
+                            world.sendParticles(ParticleTypes.FLAME, entity.getRandomX(0.5), entity.getRandomY() + 0.25D, entity.getRandomZ(0.5), 2, 0.1, 0.1, 0.1, (entity.getRandom().nextDouble() - 0.5D) * 0.25D);
                         }
                     }
 

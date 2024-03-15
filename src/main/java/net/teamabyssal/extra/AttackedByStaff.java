@@ -10,6 +10,7 @@ import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -112,6 +113,17 @@ public class AttackedByStaff {
                         fox.discard();
                         if (fox.level() instanceof ServerLevel server) {
                             server.sendParticles(ParticleTypes.EXPLOSION, fox.getX(), fox.getY() + 1, fox.getZ(), 3, 0.4, 1.0, 0.4, 0);
+                        }
+                    }
+                    else if (entity instanceof EnderMan enderMan && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_enderman_assimilation.get()) {
+                        AssimilatedEndermanEntity assimilatedEndermanEntity = EntityRegistry.ASSIMILATED_ENDERMAN.get().create(world);
+                        assert assimilatedEndermanEntity != null;
+                        assimilatedEndermanEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        world.addFreshEntity(assimilatedEndermanEntity);
+                        enderMan.level().playSound((Player) null, enderMan.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
+                        enderMan.discard();
+                        if (enderMan.level() instanceof ServerLevel server) {
+                            server.sendParticles(ParticleTypes.EXPLOSION, enderMan.getX(), enderMan.getY() + 1, enderMan.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
 

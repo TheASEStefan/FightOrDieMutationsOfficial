@@ -17,6 +17,7 @@
   "item.fight_or_die.assimilated_villager_head_spawn_egg": "Assimilated Villager Head Spawn Egg",
   "item.fight_or_die.assimilated_adventurer_head_spawn_egg": "Assimilated Adventurer Head Spawn Egg",
   "item.fight_or_die.assimilated_enderman_head_spawn_egg": "Assimilated Enderman Head Spawn Egg",
+  "item.fight_or_die.assimilated_creeper_head_spawn_egg": "Assimilated Creeper Head Spawn Egg",
 
   "item.fight_or_die.assimilated_cow_spawn_egg": "Assimilated Cow Spawn Egg",
   "item.fight_or_die.assimilated_sheep_spawn_egg": "Assimilated Sheep Spawn Egg",
@@ -54,6 +55,7 @@
   "entity.fight_or_die.assimilated_villager_head": "Assimilated Villager Head",
   "entity.fight_or_die.assimilated_adventurer_head": "Assimilated Adventurer Head",
   "entity.fight_or_die.assimilated_enderman_head": "Assimilated Enderman Head",
+  "entity.fight_or_die.assimilated_creeper_head": "Assimilated Creeper Head",
 
   "entity.fight_or_die.assimilated_cow": "Assimilated Cow",
   "entity.fight_or_die.assimilated_sheep": "Assimilated Sheep",
@@ -65,6 +67,7 @@
 
   "effect.fight_or_die.hive_sickness": "Hive Sickness",
   "effect.fight_or_die.fury": "Fury",
+  "effect.fight_or_die.germilis": "Germilis",
 
   "subtitles.fight_or_die.player_phase0": "Weird sounds are coming from afar...",
   "subtitles.fight_or_die.player_phase1": "Was I here before?...",

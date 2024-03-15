@@ -7,10 +7,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.teamabyssal.entity.custom.AssimilatedAdventurerHeadEntity;
-import net.teamabyssal.entity.custom.AssimilatedEndermanHeadEntity;
-import net.teamabyssal.entity.custom.AssimilatedHumanHeadEntity;
-import net.teamabyssal.entity.custom.AssimilatedVillagerHeadEntity;
+import net.teamabyssal.entity.custom.*;
 import net.teamabyssal.fight_or_die.FightOrDieMutations;
 import net.teamabyssal.registry.EntityRegistry;
 import net.teamabyssal.registry.WorldDataRegistry;
@@ -56,6 +53,13 @@ public class HeadKillsEvent {
                 Level world = assimilatedEndermanHeadEntity.level();
                 if (!world.isClientSide && assimilatedEndermanHeadEntity.isAlive()) {
                     assimilatedEndermanHeadEntity.setKills(assimilatedEndermanHeadEntity.getKills() + 1);
+                }
+            }
+            else if (event.getSource().getEntity() instanceof AssimilatedCreeperHeadEntity) {
+                AssimilatedCreeperHeadEntity assimilatedCreeperHeadEntity = (AssimilatedCreeperHeadEntity) event.getSource().getEntity();
+                Level world = assimilatedCreeperHeadEntity.level();
+                if (!world.isClientSide && assimilatedCreeperHeadEntity.isAlive()) {
+                    assimilatedCreeperHeadEntity.setKills(assimilatedCreeperHeadEntity.getKills() + 1);
                 }
             }
         }

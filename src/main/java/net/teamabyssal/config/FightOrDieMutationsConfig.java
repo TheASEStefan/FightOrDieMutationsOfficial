@@ -60,6 +60,9 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_enderman_head_damage;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_head_teleportation;
         public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_enderman_head_sensible_to_water;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_head_health;
+        public final ForgeConfigSpec.ConfigValue<Double> assimilated_creeper_head_damage;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_creeper_head_explosion;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_cow_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_sheep_health;
@@ -120,6 +123,11 @@ public class FightOrDieMutationsConfig {
             builder.push("Assimilated Adventurer Head");
             this.assimilated_adventurer_head_health = builder.comment("Default 8").defineInRange("Sets Assimilated Adventurer Head's Max health", 8, 4, Double.MAX_VALUE);
             this.assimilated_adventurer_head_damage = builder.comment("Default 3").defineInRange("Sets Assimilated Adventurer Head's Damage", 3, 1, Double.MAX_VALUE);
+            builder.pop();
+            builder.push("Assimilated Creeper Head");
+            this.assimilated_creeper_head_health = builder.comment("Default 9").defineInRange("Sets Assimilated Creeper Head's Max health", 9, 4, Double.MAX_VALUE);
+            this.assimilated_creeper_head_damage = builder.comment("Default 4").defineInRange("Sets Assimilated Creeper Head's Damage", 4, 2, Double.MAX_VALUE);
+            this.assimilated_creeper_head_explosion = builder.comment("Default true").define("Should Assimilated Creeper Heads explode when in contact when close to it's target?",true);
             builder.pop();
             builder.push("Assimilated Enderman Head");
             this.assimilated_enderman_head_health = builder.comment("Default 13").defineInRange("Sets Assimilated Enderman Head's Max health", 13, 7, Double.MAX_VALUE);

@@ -67,7 +67,7 @@ public class Assimilated extends Monster {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, this::targetPredicate));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Animal.class, true, this::animalPredicate));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Animal.class, true, this::animalPredicate));
     }
 
     private boolean animalPredicate(LivingEntity liv) {

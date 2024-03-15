@@ -83,6 +83,11 @@ public class EntityRegistry {
                     () -> EntityType.Builder.of(AssimilatedEndermanHeadEntity::new, PARASITE)
                             .sized(0.95f, 1.35f)
                             .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_enderman_head").toString()));
+    public static final RegistryObject<EntityType<AssimilatedCreeperHeadEntity>> ASSIMILATED_CREEPER_HEAD =
+            ENTITY_TYPES.register("assimilated_creeper_head",
+                    () -> EntityType.Builder.of(AssimilatedCreeperHeadEntity::new, PARASITE)
+                            .sized(0.75f, 0.85f)
+                            .build(new ResourceLocation(FightOrDieMutations.MODID, "assimilated_creeper_head").toString()));
     public static final RegistryObject<EntityType<AssimilatedCowEntity>> ASSIMILATED_COW =
             ENTITY_TYPES.register("assimilated_cow",
                     () -> EntityType.Builder.of(AssimilatedCowEntity::new, PARASITE)

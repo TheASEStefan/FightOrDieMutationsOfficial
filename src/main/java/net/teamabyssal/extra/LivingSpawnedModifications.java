@@ -106,6 +106,15 @@ public class LivingSpawnedModifications {
                 }
             }
         }
+        else if (event.getEntity() instanceof AssimilatedCreeperHeadEntity) {
+            AssimilatedCreeperHeadEntity assimilatedCreeperHeadEntity = (AssimilatedCreeperHeadEntity) event.getEntity();
+            Level world = assimilatedCreeperHeadEntity.level();
+            if (!world.isClientSide) {
+                if (Math.random() <= 0.55F) {
+                    assimilatedCreeperHeadEntity.setKills(assimilatedCreeperHeadEntity.getKills() + assimilatedCreeperHeadEntity.getRandom().nextInt(3));
+                }
+            }
+        }
 
 
 

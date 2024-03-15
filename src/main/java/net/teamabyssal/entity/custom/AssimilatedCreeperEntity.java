@@ -192,7 +192,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
         cloud.setDuration(cloud.getDuration() / 3);
         cloud.setRadiusPerTick(-cloud.getRadius() / (float)cloud.getDuration());
         cloud.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 6000, 1));
-        cloud.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 1));
+        cloud.addEffect(new MobEffectInstance(EffectRegistry.GERMILIS.get(), 400, 0));
 
         this.level().addFreshEntity(cloud);
     }
@@ -237,15 +237,26 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
 
     @Override
     public void die(DamageSource source) {
-        if (this.getTarget() != null) {
-            Entity attackTarget = this.getTarget();
-            if (!(attackTarget instanceof Player || attackTarget instanceof IronGolem) && Math.random() <= 0.75F) {
-                this.explodeThis();
+        if (Math.random() <= 0.75F) {
+            if (this.getTarget() != null) {
+                Entity attackTarget = this.getTarget();
+                if (!(attackTarget instanceof Player || attackTarget instanceof IronGolem)) {
+                    this.explodeThis();
+                }
             }
+        }
+        else {
+            this.DropCreeperHead(this);
         }
 
 
         super.die(source);
+    }
+
+    private void DropCreeperHead(Entity entity) {
+        AssimilatedCreeperHeadEntity assimilatedCreeperHeadEntity = new AssimilatedCreeperHeadEntity(EntityRegistry.ASSIMILATED_CREEPER_HEAD.get(), entity.level());
+        assimilatedCreeperHeadEntity.moveTo(entity.getX(),entity.getY(),entity.getZ());
+        entity.level().addFreshEntity(assimilatedCreeperHeadEntity);
     }
 
 

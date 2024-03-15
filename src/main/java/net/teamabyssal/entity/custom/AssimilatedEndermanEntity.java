@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -67,6 +68,8 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
     public boolean isSensitiveToWater() {
         return FightOrDieMutationsConfig.SERVER.assimilated_enderman_sensible_to_water.get();
     }
+
+    IronGolem ironGolem;
 
     @Override
     protected void registerGoals() {
@@ -136,7 +139,7 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
                 this.setTarget(this.getTarget());
             }
 
-            if (this.getRandom().nextInt(28) == 0 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+            if (this.getRandom().nextInt(27) == 0 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
                 this.teleportToTarget();
                 this.setTarget(this.getTarget());
                 if (FightOrDieMutationsConfig.SERVER.assimilated_enderman_reinforcements.get() && Math.random() <= FightOrDieMutationsConfig.SERVER.assimilated_enderman_reinforcement_rate.get()) {
@@ -247,7 +250,7 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
     }
 
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.getEntity() != null && Math.random() <= 0.75 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+        if (pSource.getEntity() != null && Math.random() <= 0.9 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
             this.shortTp();
         }
         if (this.isInvulnerableTo(pSource)) {

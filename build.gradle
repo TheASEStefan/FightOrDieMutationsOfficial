@@ -8,7 +8,7 @@ plugins {
 }
 
 
-version = '1.20.1-1.0.0'
+version = '1.20.1-1.0.1'
 group = 'net.teamabyssal.fight_or_die' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'fight_or_die'
 

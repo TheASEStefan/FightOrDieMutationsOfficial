@@ -77,7 +77,7 @@ public class MalruptorInfectsGoal extends Goal {
             this.mob.getNavigation().moveTo(this.partner, this.speedModifier);
             if (this.mob.distanceTo(this.partner) <= 1.2F && this.mob.getTarget() == null && !this.partner.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && this.mob.getRandom().nextInt(10) == 0) {
                 this.spawnLingeringCloud();
-                this.partner.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 12000, 0), this.partner);
+                this.partner.addEffect(new MobEffectInstance(EffectRegistry.HIVE_SICKNESS.get(), 60000, 0), this.partner);
                 this.partner.level().playSound((Player) null, this.partner.blockPosition(), SoundRegistry.ENTITY_MALRUPTOR_INFECT.get(), SoundSource.HOSTILE, 1.2F, 1.0F);
 
             }

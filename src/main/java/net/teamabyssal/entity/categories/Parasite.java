@@ -84,9 +84,6 @@ public class Parasite extends Monster {
         });
     }
 
-    Bat bat;
-
-    SpawnPlacements spawnPlacements;
 
     public static boolean checkMonsterParasiteRules(EntityType<? extends Parasite> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
 

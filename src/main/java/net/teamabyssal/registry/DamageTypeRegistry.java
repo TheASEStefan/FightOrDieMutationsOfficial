@@ -14,14 +14,14 @@ public class DamageTypeRegistry {
     public static ResourceKey<DamageType> create(String id) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(FightOrDieMutations.MODID,id));
     }
-    public static final ResourceKey<DamageType> HIVE_SICKNESS_DAMAGE = create("hive_sickness_damage");
+    public static final ResourceKey<DamageType> GERMILIS_DAMAGE = create("germilis_damage");
     public static DamageSource damageSource(Entity entity, ResourceKey<DamageType> registryKey){
         return new DamageSource(entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(registryKey));
     }
     public static DamageSource damageSource(Entity entity, ResourceKey<DamageType> registryKey ,@Nullable Entity entity2){
         return new DamageSource(entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(registryKey),entity2);
     }
-    public static DamageSource hive_sickness_damage(LivingEntity entity){
-        return damageSource(entity, HIVE_SICKNESS_DAMAGE);
+    public static DamageSource germilis_damage(LivingEntity entity){
+        return damageSource(entity, GERMILIS_DAMAGE);
     }
 }

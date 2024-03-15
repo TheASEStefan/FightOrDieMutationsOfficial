@@ -75,13 +75,13 @@ public class Infector extends Monster {
                 return super.canContinueToUse() && this.mob.getTarget() == null;
             }
         });
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Animal.class, true, this::animalPredicate));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Animal.class, true, this::animalPredicate));
     }
 
     private boolean animalPredicate(LivingEntity liv) {
         Level level = liv.level();
         if (level instanceof ServerLevel serverLevel) {
-            return WorldDataRegistry.getWorldDataRegistry(serverLevel).getPhase() > 3;
+            return WorldDataRegistry.getWorldDataRegistry(serverLevel).getPhase() > 3 || this.hasEffect(EffectRegistry.FURY.get());
         }
         return false;
     }
