@@ -9,7 +9,7 @@ plugins {
 
 
 version = '1.20.1-1.0.1'
-group = 'net.teamabyssal.fight_or_die' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'net.teamabyssalofficial.fight_or_die' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'fight_or_die'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
