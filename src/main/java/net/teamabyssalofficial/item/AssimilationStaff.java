@@ -21,6 +21,6 @@ public class AssimilationStaff extends Item implements Utility, Staff {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        pTooltipComponents.add(Component.translatable("tooltip.fight_or_die.assimilation_staff_text").setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_AQUA)));
+        pTooltipComponents.add(Component.translatable("tooltip.fight_or_die.mutation_staff_text").setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_AQUA)));
     }
 }

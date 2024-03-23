@@ -9,10 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.teamabyssalofficial.fight_or_die.FightOrDieMutations;
-import net.teamabyssalofficial.item.AdditionDevice;
-import net.teamabyssalofficial.item.AssimilationStaff;
-import net.teamabyssalofficial.item.Parascore;
-import net.teamabyssalofficial.item.SubtractionDevice;
+import net.teamabyssalofficial.item.*;
 import net.teamabyssalofficial.item.categories.BaseItem;
 
 import java.util.ArrayList;
@@ -26,33 +23,33 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x110202, new Item.Properties()));
     public static final RegistryObject<Item> MALRUPTOR_SPAWN_EGG = ITEMS.register("springer_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.MALRUPTOR, 0x000000, 0x110202, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_HUMAN_SPAWN_EGG = ITEMS.register("assimilated_human_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_HUMAN_SPAWN_EGG = ITEMS.register("mutated_human_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN, 0x28283e, 0x345350, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_ADVENTURER_SPAWN_EGG = ITEMS.register("assimilated_adventurer_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_ADVENTURER_SPAWN_EGG = ITEMS.register("mutated_player_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ADVENTURER, 0x041628, 0x0b3c6e, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_VILLAGER_SPAWN_EGG = ITEMS.register("assimilated_villager_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_VILLAGER_SPAWN_EGG = ITEMS.register("mutated_villager_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER, 0x281604, 0x6e3d0a, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_ENDERMAN_SPAWN_EGG = ITEMS.register("assimilated_enderman_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_ENDERMAN_SPAWN_EGG = ITEMS.register("mutated_enderman_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ENDERMAN, 0x280428, 0x850d85, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_ENDERMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_enderman_head_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_ENDERMAN_HEAD_SPAWN_EGG = ITEMS.register("mutated_enderman_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ENDERMAN_HEAD, 0x280428, 0x850d85, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("assimilated_human_head_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_HUMAN_HEAD_SPAWN_EGG = ITEMS.register("mutated_human_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_HUMAN_HEAD, 0x28283e, 0x345350, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG = ITEMS.register("assimilated_villager_head_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_VILLAGER_HEAD_SPAWN_EGG = ITEMS.register("mutated_villager_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_VILLAGER_HEAD, 0x281604, 0x6e3d0a, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_ADVENTURER_HEAD_SPAWN_EGG = ITEMS.register("assimilated_adventurer_head_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_ADVENTURER_HEAD_SPAWN_EGG = ITEMS.register("mutated_player_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_ADVENTURER_HEAD, 0x041628, 0x0b3c6e, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_CREEPER_HEAD_SPAWN_EGG = ITEMS.register("assimilated_creeper_head_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_CREEPER_HEAD_SPAWN_EGG = ITEMS.register("mutated_creeper_head_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_CREEPER_HEAD, 0x042804, 0x10a510, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_COW_SPAWN_EGG = ITEMS.register("assimilated_cow_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_COW_SPAWN_EGG = ITEMS.register("mutated_cow_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_COW, 0x281604, 0x3f2306, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_SHEEP_SPAWN_EGG = ITEMS.register("assimilated_sheep_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_SHEEP_SPAWN_EGG = ITEMS.register("mutated_sheep_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_SHEEP, 0xfacbcb, 0x560808, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_PIG_SPAWN_EGG = ITEMS.register("assimilated_pig_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_PIG_SPAWN_EGG = ITEMS.register("mutated_pig_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_PIG, 0x280416, 0x9b1057, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_FOX_SPAWN_EGG = ITEMS.register("assimilated_fox_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_FOX_SPAWN_EGG = ITEMS.register("mutated_fox_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_FOX, 0x3f2306, 0x9d570e, new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATED_CREEPER_SPAWN_EGG = ITEMS.register("assimilated_creeper_spawn_egg",
+    public static final RegistryObject<Item> ASSIMILATED_CREEPER_SPAWN_EGG = ITEMS.register("mutated_creeper_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_CREEPER, 0x042804, 0x10a510, new Item.Properties()));
     public static final RegistryObject<Item> PRIMITIVE_TORMENTER_SPAWN_EGG = ITEMS.register("primitive_tormenter_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x000000, new Item.Properties()));
@@ -70,12 +67,14 @@ public class ItemRegistry {
             () -> new SubtractionDevice(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PARASCORE = ITEMS.register("parascore",
             () -> new Parascore(new Item.Properties()));
-    public static final RegistryObject<Item> ASSIMILATION_STAFF = ITEMS.register("assimilation_staff",
+    public static final RegistryObject<Item> ASSIMILATION_STAFF = ITEMS.register("mutation_staff",
             () -> new AssimilationStaff(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INFECTOR_THORAX = ITEMS.register("springer_fragment",
             () -> new BaseItem(new Item.Properties()));
     public static final RegistryObject<Item> RIPPING_FLESH = ITEMS.register("ripping_flesh",
             () -> new BaseItem(new Item.Properties()));
+    public static final RegistryObject<Item> MELDED_FLESH = ITEMS.register("melded_flesh",
+            () -> new MeldedFlesh(new Item.Properties()));
     public static final RegistryObject<Item> ROTTEN_BRAIN = ITEMS.register("rotten_brain",
             () -> new BaseItem(new Item.Properties()));
     public static final RegistryObject<Item> SICKENED_HEART = ITEMS.register("sickened_heart",

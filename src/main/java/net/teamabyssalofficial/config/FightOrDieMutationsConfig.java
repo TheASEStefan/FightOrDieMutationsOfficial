@@ -48,6 +48,7 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_adventurer_damage;
+        public final ForgeConfigSpec.ConfigValue<Boolean> assimilated_adventurer_breaks_blocks;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_health;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_villager_damage;
         public final ForgeConfigSpec.ConfigValue<Double> assimilated_human_head_health;
@@ -107,6 +108,7 @@ public class FightOrDieMutationsConfig {
             builder.push("Assimilated Adventurer");
             this.assimilated_adventurer_health = builder.comment("Default 20").defineInRange("Sets Assimilated Adventurer's Max health", 20, 10, Double.MAX_VALUE);
             this.assimilated_adventurer_damage = builder.comment("Default 10").defineInRange("Sets Assimilated Adventurer's Damage", 10, 5, Double.MAX_VALUE);
+            this.assimilated_adventurer_breaks_blocks = builder.comment("Default true").define("Should the mutated adventurer break blocks?",true);
             builder.pop();
             builder.push("Assimilated Villager");
             this.assimilated_villager_health = builder.comment("Default 22").defineInRange("Sets Assimilated Villager's Max health", 22, 12, Double.MAX_VALUE);
@@ -222,6 +224,8 @@ public class FightOrDieMutationsConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> devices_points;
 
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> name;
+
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> mutated_player_items;
         public DataGen(ForgeConfigSpec.Builder builder) {
             builder.push("Phases");
             this.phase1_points = builder.comment("Default 1000").define("Sets points required to enter phase 1",1000);
@@ -229,6 +233,10 @@ public class FightOrDieMutationsConfig {
             this.phase3_points = builder.comment("Default 50000").define("Sets points required to enter phase 3",50000);
             this.phase4_points = builder.comment("Default 500000").define("Sets points required to enter phase 4",500000);
             this.phase5_points = builder.comment("Default 2000000").define("Sets points required to enter phase 5",2000000);
+            builder.pop();
+            builder.push("Main Hand Items for the Mutated Player");
+            this.mutated_player_items = builder.defineList("Main Hand Slot for the Mutated Player",
+                    Lists.newArrayList("minecraft:stone_sword|20" , "minecraft:stone_axe|20", "minecraft:iron_axe|15", "minecraft:iron_pickaxe|35", "minecraft:stone_pickaxe|25" , "minecraft:iron_sword|25") , o -> o instanceof String);
             builder.pop();
             builder.push("Device Points");
             this.devices_points = builder.comment("Default 1000").define("Sets points that will be added / subtracted by the devices",1000);

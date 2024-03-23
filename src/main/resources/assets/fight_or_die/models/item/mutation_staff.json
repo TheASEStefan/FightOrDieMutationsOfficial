@@ -1,6 +1,6 @@
 {
   "parent": "fight_or_die:item/degree90",
   "textures": {
-    "layer0": "fight_or_die:item/assimilation_staff"
+    "layer0": "fight_or_die:item/mutation_staff"
   }
 }

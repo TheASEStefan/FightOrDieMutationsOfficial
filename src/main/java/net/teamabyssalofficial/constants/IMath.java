@@ -24,6 +24,12 @@ public class IMath extends IMathHelper {
 
     });
 
+    public static boolean equalsApprox(float a, float b){
+        float diff = Math.abs(b - a);
+        float tolerance = 0.1f/100 * b;
+        return diff < tolerance;
+    }
+
     public static float sqrt(float pValue) {
         return (float) Math.sqrt((double) pValue);
     }

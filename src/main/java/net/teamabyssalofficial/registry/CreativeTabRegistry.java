@@ -53,6 +53,8 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.SICKENED_HEART.get());
         entries.accept(ItemRegistry.ROTTEN_BRAIN.get());
 
+        entries.accept(ItemRegistry.MELDED_FLESH.get());
+
         entries.accept(BlockRegistry.HIVE_BLOCK.get());
         entries.accept(BlockRegistry.HIVE_TUNNEL_BLOCK.get());
 

@@ -216,13 +216,7 @@ public class AssimilatedAdventurerModel<T extends AssimilatedAdventurerEntity> e
 		this.left_arm.getChild("bone2").zRot = Mth.cos(limbSwing * 0.8F) * 0.8F * limbSwingAmount * speed;
 		this.left_arm.getChild("bone3").zRot = -Mth.cos(limbSwing * 0.8F) * 0.8F * limbSwingAmount * speed;
 
-		if (entity.getItemBySlot(EquipmentSlot.MAINHAND) != ItemStack.EMPTY) {
-			this.right_arm.xRot = -89.5F + headPitch /  ( 90F / (float) Math.PI);;
-		}
-		else if (entity.getItemBySlot(EquipmentSlot.OFFHAND) != ItemStack.EMPTY){
-			this.left_arm.xRot = -89.5F + headPitch /  ( 90F / (float) Math.PI);;
-		}
-		else if (entity.isAggressive()) {
+		if (entity.isAggressive()) {
 			this.right_arm.xRot = -90F - (Mth.sin(ageInTicks / 4) / 7);
 			this.left_arm.xRot = -90F - (Mth.sin(ageInTicks / 4) / 7);
 

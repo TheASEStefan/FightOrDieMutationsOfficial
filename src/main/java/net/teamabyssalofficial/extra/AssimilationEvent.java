@@ -12,7 +12,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -107,15 +107,21 @@ public class AssimilationEvent {
                 ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
                 ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
                 ItemStack feet = player.getItemBySlot(EquipmentSlot.FEET);
+                ItemStack mainHand = player.getItemBySlot(EquipmentSlot.MAINHAND);
                 assert assimilatedAdventurerEntity != null;
                 assimilatedAdventurerEntity.setItemSlot(EquipmentSlot.HEAD , head);
                 assimilatedAdventurerEntity.setItemSlot(EquipmentSlot.LEGS , legs);
                 assimilatedAdventurerEntity.setItemSlot(EquipmentSlot.FEET , feet);
+                Item item = player.getMainHandItem().getItem();
+                if (item instanceof AxeItem || item instanceof SwordItem || item instanceof PickaxeItem) {
+                    assimilatedAdventurerEntity.setItemSlot(EquipmentSlot.MAINHAND, mainHand);
+                }
                 assimilatedAdventurerEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                 assimilatedAdventurerEntity.setCustomName(name);
                 assimilatedAdventurerEntity.setDropChance(EquipmentSlot.HEAD , 0);
                 assimilatedAdventurerEntity.setDropChance(EquipmentSlot.LEGS , 0);
                 assimilatedAdventurerEntity.setDropChance(EquipmentSlot.FEET , 0);
+                assimilatedAdventurerEntity.setDropChance(EquipmentSlot.MAINHAND , 0);
                 world.addFreshEntity(assimilatedAdventurerEntity);
                 player.level().playSound((Player) null, player.blockPosition(), SoundEvents.ZOMBIE_INFECT, SoundSource.HOSTILE, 1.2F, 1.0F);
                 if (player.level() instanceof ServerLevel server) {
