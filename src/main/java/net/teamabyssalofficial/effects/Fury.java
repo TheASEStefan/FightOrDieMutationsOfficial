@@ -16,7 +16,7 @@ public class Fury extends MobEffect {
 
 
     public void applyEffectTick(LivingEntity entity, int intense) {
-        if (entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primitive || entity instanceof Adapted) {
+        if (entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primordial || entity instanceof Developed) {
             if (this == EffectRegistry.FURY.get()) {
                     if (entity.level() instanceof ServerLevel world) {
                         world.sendParticles(ParticleTypes.FLAME, entity.getX(), entity.getEyeY() - 0.2, entity.getZ(), 23, 0.2, 0.4, 0.1, 0);

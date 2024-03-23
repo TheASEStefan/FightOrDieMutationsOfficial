@@ -1,7 +1,6 @@
 package net.teamabyssalofficial.extra;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,7 +22,7 @@ public class ParasiteKillsBuffEvent {
             Level world = entity.level();
             WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) world);
             int currentPhase = worldDataRegistry.getPhase();
-                if (!world.isClientSide && (entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primitive || entity instanceof Adapted)) {
+                if (!world.isClientSide && (entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primordial || entity instanceof Developed)) {
                     if (currentPhase >= 3 && Math.random() <= 0.25) {
                         entity.addEffect(new MobEffectInstance(EffectRegistry.FURY.get(), 400, 0), entity);
                         entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0), entity);

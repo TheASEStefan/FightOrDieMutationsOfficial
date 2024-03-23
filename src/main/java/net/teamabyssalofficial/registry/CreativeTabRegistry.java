@@ -38,9 +38,8 @@ public class CreativeTabRegistry {
         entries.accept(ItemRegistry.ASSIMILATED_CREEPER_SPAWN_EGG.get());
         entries.accept(ItemRegistry.ASSIMILATED_ENDERMAN_SPAWN_EGG.get());
 
-        entries.accept(ItemRegistry.PRIMITIVE_TORMENTER_SPAWN_EGG.get());
-        entries.accept(ItemRegistry.ADAPTED_TORMENTER_SPAWN_EGG.get());
-        entries.accept(ItemRegistry.INCOMPLETE_FORM_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.PRIMORDIAL_TORMENTER_SPAWN_EGG.get());
+        entries.accept(ItemRegistry.DEVELOPED_TORMENTER_SPAWN_EGG.get());
         entries.accept(ItemRegistry.FAILED_FORM_SPAWN_EGG.get());
 
         entries.accept(ItemRegistry.ADDITION_DEVICE.get());

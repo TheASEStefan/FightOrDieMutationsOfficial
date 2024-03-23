@@ -51,11 +51,9 @@ public class ItemRegistry {
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_FOX, 0x3f2306, 0x9d570e, new Item.Properties()));
     public static final RegistryObject<Item> ASSIMILATED_CREEPER_SPAWN_EGG = ITEMS.register("mutated_creeper_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.ASSIMILATED_CREEPER, 0x042804, 0x10a510, new Item.Properties()));
-    public static final RegistryObject<Item> PRIMITIVE_TORMENTER_SPAWN_EGG = ITEMS.register("primitive_tormenter_spawn_egg",
+    public static final RegistryObject<Item> PRIMORDIAL_TORMENTER_SPAWN_EGG = ITEMS.register("primordial_tormenter_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x000000, new Item.Properties()));
-    public static final RegistryObject<Item> ADAPTED_TORMENTER_SPAWN_EGG = ITEMS.register("adapted_tormenter_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x000000, new Item.Properties()));
-    public static final RegistryObject<Item> INCOMPLETE_FORM_SPAWN_EGG = ITEMS.register("incomplete_form_spawn_egg",
+    public static final RegistryObject<Item> DEVELOPED_TORMENTER_SPAWN_EGG = ITEMS.register("developed_tormenter_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x000000, new Item.Properties()));
     public static final RegistryObject<Item> FAILED_FORM_SPAWN_EGG = ITEMS.register("failed_form_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityRegistry.SHILLER, 0x000000, 0x000000, new Item.Properties()));

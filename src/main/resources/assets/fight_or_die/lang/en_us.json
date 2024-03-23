@@ -29,9 +29,8 @@
   "item.fight_or_die.mutated_creeper_spawn_egg": "Mutated Creeper Spawn Egg",
   "item.fight_or_die.mutated_enderman_spawn_egg": "Mutated Enderman Spawn Egg",
 
-  "item.fight_or_die.primitive_tormenter_spawn_egg": "Primitive Tormenter Spawn Egg",
-  "item.fight_or_die.adapted_tormenter_spawn_egg": "Adapted Tormenter Spawn Egg",
-  "item.fight_or_die.incomplete_form_spawn_egg": "Incomplete Form Spawn Egg",
+  "item.fight_or_die.primordial_tormenter_spawn_egg": "Primordial Tormenter Spawn Egg",
+  "item.fight_or_die.developed_tormenter_spawn_egg": "Developed Tormenter Spawn Egg",
   "item.fight_or_die.failed_form_spawn_egg": "Failed Form Spawn Egg",
 
   "item.fight_or_die.addition_device": "Addition Device",
