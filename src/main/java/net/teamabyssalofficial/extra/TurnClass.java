@@ -11,14 +11,11 @@ import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.teamabyssalofficial.config.FightOrDieMutationsConfig;
-import net.teamabyssalofficial.constants.PossibleAssimilated;
+import net.teamabyssalofficial.constants.PossibleMutated;
 import net.teamabyssalofficial.entity.custom.*;
 import net.teamabyssalofficial.fight_or_die.FightOrDieMutations;
 import net.teamabyssalofficial.registry.*;
@@ -35,7 +32,7 @@ public class TurnClass {
             double x = livingEntity.getX();
             double y = livingEntity.getY();
             double z = livingEntity.getZ();
-            PossibleAssimilated assimilated = ((PossibleAssimilated) livingEntity);
+            PossibleMutated assimilated = ((PossibleMutated) livingEntity);
 
             if (assimilated.IgetAssimilationProgress() > 0 && livingEntity.hasEffect(EffectRegistry.HIVE_SICKNESS.get())) {
                 assimilated.IsetAssimilationProgress(assimilated.IgetAssimilationProgress() + 1);
@@ -50,7 +47,7 @@ public class TurnClass {
                 }
                 if (assimilated.IgetAssimilationProgress() == 60) {
                     if (livingEntity.hasEffect(EffectRegistry.HIVE_SICKNESS.get())) {
-                        if (livingEntity instanceof Sheep sheep && FightOrDieMutationsConfig.SERVER.assimilated_sheep_assimilation.get()) {
+                        if (livingEntity instanceof Sheep sheep && FightOrDieMutationsConfig.SERVER.mutated_sheep_mutation.get()) {
                             AssimilatedSheepEntity assimilatedSheepEntity = EntityRegistry.ASSIMILATED_SHEEP.get().create(world);
                             assert assimilatedSheepEntity != null;
                             assimilatedSheepEntity.moveTo(x, y, z);
@@ -65,7 +62,7 @@ public class TurnClass {
                             }
 
                         }
-                        else if (livingEntity instanceof Cow cow && FightOrDieMutationsConfig.SERVER.assimilated_cow_assimilation.get()) {
+                        else if (livingEntity instanceof Cow cow && FightOrDieMutationsConfig.SERVER.mutated_cow_mutation.get()) {
                             AssimilatedCowEntity assimilatedCowEntity = EntityRegistry.ASSIMILATED_COW.get().create(world);
                             assert assimilatedCowEntity != null;
                             assimilatedCowEntity.moveTo(x, y, z);
@@ -79,7 +76,7 @@ public class TurnClass {
                                 worldDataRegistry.setScore(currentScore + 2);
                             }
                         }
-                        else if (livingEntity instanceof Pig pig && FightOrDieMutationsConfig.SERVER.assimilated_pig_assimilation.get()) {
+                        else if (livingEntity instanceof Pig pig && FightOrDieMutationsConfig.SERVER.mutated_pig_mutation.get()) {
                             AssimilatedPigEntity assimilatedPigEntity = EntityRegistry.ASSIMILATED_PIG.get().create(world);
                             assert assimilatedPigEntity != null;
                             assimilatedPigEntity.moveTo(x, y, z);
@@ -93,7 +90,7 @@ public class TurnClass {
                                 worldDataRegistry.setScore(currentScore + 2);
                             }
                         }
-                        else if (livingEntity instanceof Fox fox && FightOrDieMutationsConfig.SERVER.assimilated_fox_assimilation.get()) {
+                        else if (livingEntity instanceof Fox fox && FightOrDieMutationsConfig.SERVER.mutated_fox_mutation.get()) {
                             AssimilatedFoxEntity assimilatedFoxEntity = EntityRegistry.ASSIMILATED_FOX.get().create(world);
                             assert assimilatedFoxEntity != null;
                             assimilatedFoxEntity.moveTo(x, y, z);

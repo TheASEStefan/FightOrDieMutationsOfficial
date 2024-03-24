@@ -23,10 +23,10 @@ import net.teamabyssalofficial.fight_or_die.FightOrDieMutations;
 import net.teamabyssalofficial.registry.*;
 
 @Mod.EventBusSubscriber(modid = FightOrDieMutations.MODID)
-public class AssimilationEvent {
+public class MutationEvent {
 
     @SubscribeEvent
-    public static void AssimilationEventFDM(LivingDeathEvent event) {
+    public static void MutationEventFDM(LivingDeathEvent event) {
         if (event != null && event.getEntity() != null && !event.getEntity().level().isClientSide) {
             Level world = event.getEntity().level();
             double x = event.getEntity().getX();
@@ -37,7 +37,7 @@ public class AssimilationEvent {
             int currentPhase = worldDataRegistry.getPhase();
             int currentScore = worldDataRegistry.getScore();
 
-            if (entity instanceof Zombie zombie && zombie.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_human_assimilation.get() && Math.random() <= 0.95F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
+            if (entity instanceof Zombie zombie && zombie.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_human_mutation.get() && Math.random() <= 0.95F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
                 AssimilatedHumanEntity assimilatedHumanEntity = EntityRegistry.ASSIMILATED_HUMAN.get().create(world);
                 assert assimilatedHumanEntity != null;
                 assimilatedHumanEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -53,7 +53,7 @@ public class AssimilationEvent {
                     }
                 }
             }
-            else if (entity instanceof Creeper creeper && creeper.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_creeper_assimilation.get() && Math.random() <= 0.90F) {
+            else if (entity instanceof Creeper creeper && creeper.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_creeper_mutation.get() && Math.random() <= 0.90F) {
                 AssimilatedCreeperEntity assimilatedCreeperEntity = EntityRegistry.ASSIMILATED_CREEPER.get().create(world);
                 assert assimilatedCreeperEntity != null;
                 assimilatedCreeperEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -69,7 +69,7 @@ public class AssimilationEvent {
                     }
                 }
             }
-            else if (entity instanceof Villager villager && villager.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_villager_assimilation.get() && Math.random() <= 0.85F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
+            else if (entity instanceof Villager villager && villager.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_villager_mutation.get() && Math.random() <= 0.85F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
                 AssimilatedVillagerEntity assimilatedVillagerEntity = EntityRegistry.ASSIMILATED_VILLAGER.get().create(world);
                 assert assimilatedVillagerEntity != null;
                 assimilatedVillagerEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -85,7 +85,7 @@ public class AssimilationEvent {
                     }
                 }
             }
-            else if (entity instanceof EnderMan enderMan && enderMan.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_enderman_assimilation.get() && Math.random() <= 0.75F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity()) && worldDataRegistry.getPhase() > 2) {
+            else if (entity instanceof EnderMan enderMan && enderMan.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_enderman_mutation.get() && Math.random() <= 0.75F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity()) && worldDataRegistry.getPhase() > 2) {
                 AssimilatedEndermanEntity assimilatedEndermanEntity = EntityRegistry.ASSIMILATED_ENDERMAN.get().create(world);
                 assert assimilatedEndermanEntity != null;
                 assimilatedEndermanEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -101,7 +101,7 @@ public class AssimilationEvent {
                     }
                 }
             }
-            else if (entity instanceof Player player && player.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_adventurer_assimilation.get() && Math.random() <= 0.85F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
+            else if (entity instanceof Player player && player.hasEffect(EffectRegistry.HIVE_SICKNESS.get()) && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_player_mutation.get() && Math.random() <= 0.85F && event.getSource().getEntity() != null && EntityRegistry.PARASITES.contains(event.getSource().getEntity())) {
                 Component name = player.getName();
                 AssimilatedAdventurerEntity assimilatedAdventurerEntity = EntityRegistry.ASSIMILATED_ADVENTURER.get().create(world);
                 ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);

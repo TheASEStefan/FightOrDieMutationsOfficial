@@ -42,13 +42,13 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 
 
-public class AssimilatedCreeperEntity extends AdvancedAssimilated implements GeoEntity {
+public class AssimilatedCreeperEntity extends AdvancedMutated implements GeoEntity {
     private final int minDamage = 2;
     private final int maxDamage = 4;
     private final byte box = 10;
     private final byte half_box = box / 2;
     private final float extraRadius = ((IMathHelper.HEX + Mth.clamp(3, IMathHelper.HEX, IMathHelper.PI) + (IMathHelper.DELTA / 3)) / 10);
-    private final float explosionRadius = (float) (IMathHelper.HEX * FightOrDieMutationsConfig.SERVER.assimilated_creeper_explosion_radius.get());
+    private final float explosionRadius = (float) (IMathHelper.HEX * FightOrDieMutationsConfig.SERVER.mutated_creeper_explosion_radius.get());
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedCreeperEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -84,8 +84,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35)
                 .add(Attributes.JUMP_STRENGTH, 0.25)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_creeper_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_creeper_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.mutated_creeper_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.mutated_creeper_damage.get())
                 .add(Attributes.ARMOR, 6D);
 
     }
@@ -118,7 +118,7 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
     }
 
     private boolean explosionPredicate(LivingEntity liv) {
-        return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated);
+        return !(liv instanceof Mutated || liv instanceof AdvancedMutated);
     }
 
 
@@ -165,8 +165,8 @@ public class AssimilatedCreeperEntity extends AdvancedAssimilated implements Geo
             double y = this.getY();
             double z = this.getZ();
 
-            boolean flag1 = !world.getEntitiesOfClass(Assimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
-            boolean flag2 = !world.getEntitiesOfClass(AdvancedAssimilated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
+            boolean flag1 = !world.getEntitiesOfClass(Mutated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
+            boolean flag2 = !world.getEntitiesOfClass(AdvancedMutated.class, AABB.ofSize(new Vec3(x, y, z), box, box, box), e -> true).isEmpty();
 
             if (flag1 || flag2) {
                 if (world instanceof ServerLevel world1) {

@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.teamabyssalofficial.config.FightOrDieMutationsConfig;
 import net.teamabyssalofficial.entity.ai.CustomMeleeAttackGoal;
-import net.teamabyssalofficial.entity.categories.Assimilated;
+import net.teamabyssalofficial.entity.categories.Mutated;
 import net.teamabyssalofficial.extra.ScreenShakeEntity;
 import net.teamabyssalofficial.registry.EffectRegistry;
 import net.teamabyssalofficial.registry.EntityRegistry;
@@ -41,7 +41,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
+public class AssimilatedHumanEntity extends Mutated implements GeoEntity {
 
     static final Predicate<Difficulty> DOOR_BREAKING_PREDICATE = (p_34082_) -> {
         return p_34082_ == Difficulty.NORMAL || p_34082_ == Difficulty.HARD;
@@ -84,8 +84,8 @@ public class AssimilatedHumanEntity extends Assimilated implements GeoEntity {
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_human_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_human_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.mutated_human_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.mutated_human_damage.get())
                 .add(Attributes.ARMOR, 4D);
 
     }

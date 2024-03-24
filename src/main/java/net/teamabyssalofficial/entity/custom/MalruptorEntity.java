@@ -64,8 +64,8 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.1D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.malruptor_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.malruptor_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.springer_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.springer_damage.get())
                 .add(Attributes.ARMOR, 2.0D);
     }
 
@@ -182,7 +182,7 @@ public class MalruptorEntity extends Infector implements GeoEntity, Evolved, Hun
     }
 
     private boolean targetPredicate(LivingEntity liv) {
-        return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
+        return !(liv instanceof Mutated || liv instanceof AdvancedMutated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
     }
 
 

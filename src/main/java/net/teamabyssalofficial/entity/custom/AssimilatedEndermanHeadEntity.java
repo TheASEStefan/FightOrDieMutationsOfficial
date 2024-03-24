@@ -71,12 +71,12 @@ public class AssimilatedEndermanHeadEntity extends Head implements GeoEntity, Hu
         this.moveControl = new WallMovementControl(this);
         this.navigation = new WallClimberNavigation(this, pLevel);
         this.setMaxUpStep(1.0F);
-        if (FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_sensible_to_water.get())
+        if (FightOrDieMutationsConfig.SERVER.mutated_enderman_head_sensible_to_water.get())
             this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
     }
 
     public boolean isSensitiveToWater() {
-        return FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_sensible_to_water.get();
+        return FightOrDieMutationsConfig.SERVER.mutated_enderman_head_sensible_to_water.get();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AssimilatedEndermanHeadEntity extends Head implements GeoEntity, Hu
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D, 0.0F) {
             @Override
             public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_sensible_to_water.get();
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.mutated_enderman_head_sensible_to_water.get();
             }
         });
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
@@ -111,8 +111,8 @@ public class AssimilatedEndermanHeadEntity extends Head implements GeoEntity, Hu
                 .add(Attributes.FOLLOW_RANGE, 64D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.mutated_enderman_head_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.mutated_enderman_head_damage.get())
                 .add(Attributes.ARMOR, 1D);
 
     }
@@ -141,7 +141,7 @@ public class AssimilatedEndermanHeadEntity extends Head implements GeoEntity, Hu
         }
 
         if (this.isAlive() && this.getTarget() != null) {
-            if (this.getRandom().nextInt(45) == 0 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_teleportation.get())
+            if (this.getRandom().nextInt(45) == 0 && FightOrDieMutationsConfig.SERVER.mutated_enderman_head_teleportation.get())
                 this.teleportToTarget();
         }
         super.tick();
@@ -204,19 +204,19 @@ public class AssimilatedEndermanHeadEntity extends Head implements GeoEntity, Hu
     }
 
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.getEntity() != null && Math.random() <= 0.75 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_teleportation.get()) {
+        if (pSource.getEntity() != null && Math.random() <= 0.75 && FightOrDieMutationsConfig.SERVER.mutated_enderman_head_teleportation.get()) {
             this.shortTp();
         }
         if (this.isInvulnerableTo(pSource)) {
             return false;
         } else {
             boolean flag = pSource.getDirectEntity() instanceof ThrownPotion;
-            if (pSource.is(DamageTypeTags.IS_PROJECTILE) && FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_teleportation.get()) {
+            if (pSource.is(DamageTypeTags.IS_PROJECTILE) && FightOrDieMutationsConfig.SERVER.mutated_enderman_head_teleportation.get()) {
                 this.shortTp();
             }
             if (!pSource.is(DamageTypeTags.IS_PROJECTILE) && !flag) {
                 boolean flag2 = super.hurt(pSource, pAmount);
-                if (!this.level().isClientSide() && !(pSource.getEntity() instanceof LivingEntity) && this.random.nextInt(10) != 0 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_teleportation.get()) {
+                if (!this.level().isClientSide() && !(pSource.getEntity() instanceof LivingEntity) && this.random.nextInt(10) != 0 && FightOrDieMutationsConfig.SERVER.mutated_enderman_head_teleportation.get()) {
                     this.shortTp();
                 }
 
@@ -225,7 +225,7 @@ public class AssimilatedEndermanHeadEntity extends Head implements GeoEntity, Hu
                 boolean flag1 = flag && this.hurtWithCleanWater(pSource, (ThrownPotion)pSource.getDirectEntity(), pAmount);
 
                 for(int i = 0; i < 64; ++i) {
-                    if (this.shortTp() && FightOrDieMutationsConfig.SERVER.assimilated_enderman_head_teleportation.get()) {
+                    if (this.shortTp() && FightOrDieMutationsConfig.SERVER.mutated_enderman_head_teleportation.get()) {
                         return true;
                     }
                 }

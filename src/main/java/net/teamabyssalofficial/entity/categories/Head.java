@@ -70,7 +70,7 @@ public class Head extends Monster {
     }
 
     private boolean targetPredicate(LivingEntity liv) {
-        return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
+        return !(liv instanceof Mutated || liv instanceof AdvancedMutated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
     }
 
 

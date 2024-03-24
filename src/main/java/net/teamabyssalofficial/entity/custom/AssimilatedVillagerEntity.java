@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.teamabyssalofficial.config.FightOrDieMutationsConfig;
 import net.teamabyssalofficial.entity.ai.CustomMeleeAttackGoal;
-import net.teamabyssalofficial.entity.categories.Assimilated;
+import net.teamabyssalofficial.entity.categories.Mutated;
 import net.teamabyssalofficial.extra.ScreenShakeEntity;
 import net.teamabyssalofficial.registry.EffectRegistry;
 import net.teamabyssalofficial.registry.EntityRegistry;
@@ -45,7 +45,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class AssimilatedVillagerEntity extends Assimilated implements GeoEntity {
+public class AssimilatedVillagerEntity extends Mutated implements GeoEntity {
 
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -91,8 +91,8 @@ public class AssimilatedVillagerEntity extends Assimilated implements GeoEntity 
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_villager_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_villager_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.mutated_villager_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.mutated_villager_damage.get())
                 .add(Attributes.ARMOR, 4D);
 
     }

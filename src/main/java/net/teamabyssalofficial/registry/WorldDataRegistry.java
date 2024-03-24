@@ -180,37 +180,37 @@ public class WorldDataRegistry extends SavedData {
     public void phaseHandlerEvent(ServerLevel world, ServerPlayer player) {
         if (getPhase() == 0 && !cnt0) {
             cnt0 = true;
-            player.sendSystemMessage(Component.literal("Zero"));
+            player.sendSystemMessage(Component.literal("0"));
             player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE0.get(), SoundSource.MASTER, 1.2F, 1.0F);
 
         }
         else if (getPhase() == 1 && !cnt1) {
             cnt1 = true;
-            player.sendSystemMessage(Component.literal("First"));
+            player.sendSystemMessage(Component.literal("1"));
             player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE1.get(), SoundSource.MASTER, 1.6F, 1.0F);
 
         }
         else if (getPhase() == 2 && !cnt2) {
             cnt2 = true;
-            player.sendSystemMessage(Component.literal("Second"));
+            player.sendSystemMessage(Component.literal("2"));
             player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE2.get(), SoundSource.MASTER, 1.6F, 1.0F);
 
         }
         else if (getPhase() == 3 && !cnt3) {
             cnt3 = true;
-            player.sendSystemMessage(Component.literal("Third"));
+            player.sendSystemMessage(Component.literal("3"));
             player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE3.get(), SoundSource.MASTER, 1.2F, 1.0F);
 
         }
         else if (getPhase() == 4 && !cnt4) {
             cnt4 = true;
-            player.sendSystemMessage(Component.literal("Fourth"));
+            player.sendSystemMessage(Component.literal("4"));
             player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE4.get(), SoundSource.MASTER, 1.4F, 1.0F);
 
         }
         else if (getPhase() == 5 && !cnt5) {
             cnt5 = true;
-            player.sendSystemMessage(Component.literal("Fifth"));
+            player.sendSystemMessage(Component.literal("5"));
             player.level().playSound((Player) null, player.blockPosition(), SoundRegistry.PHASE5.get(), SoundSource.MASTER, 1.4F, 1.0F);
 
         }

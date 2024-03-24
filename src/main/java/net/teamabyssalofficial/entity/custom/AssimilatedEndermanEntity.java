@@ -36,8 +36,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.teamabyssalofficial.config.FightOrDieMutationsConfig;
 import net.teamabyssalofficial.entity.ai.CustomMeleeAttackGoal;
-import net.teamabyssalofficial.entity.categories.AdvancedAssimilated;
-import net.teamabyssalofficial.entity.categories.Assimilated;
+import net.teamabyssalofficial.entity.categories.AdvancedMutated;
+import net.teamabyssalofficial.entity.categories.Mutated;
 import net.teamabyssalofficial.registry.EntityRegistry;
 import net.teamabyssalofficial.registry.SoundRegistry;
 import net.teamabyssalofficial.registry.WorldDataRegistry;
@@ -53,19 +53,19 @@ import java.util.List;
 import java.util.Random;
 
 
-public class AssimilatedEndermanEntity extends AdvancedAssimilated implements GeoEntity {
+public class AssimilatedEndermanEntity extends AdvancedMutated implements GeoEntity {
 
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AssimilatedEndermanEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setMaxUpStep(1.0F);
-        if (FightOrDieMutationsConfig.SERVER.assimilated_enderman_sensible_to_water.get())
+        if (FightOrDieMutationsConfig.SERVER.mutated_enderman_sensible_to_water.get())
             this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
     }
 
     public boolean isSensitiveToWater() {
-        return FightOrDieMutationsConfig.SERVER.assimilated_enderman_sensible_to_water.get();
+        return FightOrDieMutationsConfig.SERVER.mutated_enderman_sensible_to_water.get();
     }
 
     IronGolem ironGolem;
@@ -79,7 +79,7 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D, 0.0F) {
             @Override
             public boolean canUse() {
-                return super.canUse() && FightOrDieMutationsConfig.SERVER.assimilated_enderman_sensible_to_water.get();
+                return super.canUse() && FightOrDieMutationsConfig.SERVER.mutated_enderman_sensible_to_water.get();
             }
         });
         this.goalSelector.addGoal(4, new CustomMeleeAttackGoal(this, 1.5, false) {
@@ -97,8 +97,8 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
                 .add(Attributes.FOLLOW_RANGE, 64D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_enderman_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_enderman_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.mutated_enderman_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.mutated_enderman_damage.get())
                 .add(Attributes.ARMOR, 4D);
 
     }
@@ -133,15 +133,15 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
     @Override
     public void tick() {
         if(this.getTarget() != null) {
-            if (this.getRandom().nextInt(200) == 0 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+            if (this.getRandom().nextInt(200) == 0 && FightOrDieMutationsConfig.SERVER.mutated_enderman_teleportation.get()) {
                 this.shortTp();
                 this.setTarget(this.getTarget());
             }
 
-            if (this.getRandom().nextInt(25) == 0 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+            if (this.getRandom().nextInt(25) == 0 && FightOrDieMutationsConfig.SERVER.mutated_enderman_teleportation.get()) {
                 this.teleportToTarget();
                 this.setTarget(this.getTarget());
-                if (FightOrDieMutationsConfig.SERVER.assimilated_enderman_reinforcements.get() && Math.random() <= FightOrDieMutationsConfig.SERVER.assimilated_enderman_reinforcement_rate.get()) {
+                if (FightOrDieMutationsConfig.SERVER.mutated_enderman_reinforcements.get() && Math.random() <= FightOrDieMutationsConfig.SERVER.mutated_enderman_reinforcement_rate.get()) {
                     this.teleportAlly();
                     this.setTarget(this.getTarget());
                 }
@@ -182,7 +182,7 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
           for (int i = 0; i < 1; ++i) {
             int randomIndex = random.nextInt(entities.size());
                 Entity entity = entities.get(randomIndex);
-                if (entity instanceof LivingEntity livingEntity && livingEntity instanceof Assimilated) {
+                if (entity instanceof LivingEntity livingEntity && livingEntity instanceof Mutated) {
                     double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 2.0D;
                     double d1 = this.getY() + Mth.absMax(0D, 0.5D);
                     double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 2.0D;
@@ -249,19 +249,19 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
     }
 
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.getEntity() != null && Math.random() <= 0.9 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+        if (pSource.getEntity() != null && Math.random() <= 0.9 && FightOrDieMutationsConfig.SERVER.mutated_enderman_teleportation.get()) {
             this.shortTp();
         }
         if (this.isInvulnerableTo(pSource)) {
             return false;
         } else {
             boolean flag = pSource.getDirectEntity() instanceof ThrownPotion;
-            if (pSource.is(DamageTypeTags.IS_PROJECTILE) && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+            if (pSource.is(DamageTypeTags.IS_PROJECTILE) && FightOrDieMutationsConfig.SERVER.mutated_enderman_teleportation.get()) {
                 this.shortTp();
             }
             if (!pSource.is(DamageTypeTags.IS_PROJECTILE) && !flag) {
                 boolean flag2 = super.hurt(pSource, pAmount);
-                if (!this.level().isClientSide() && !(pSource.getEntity() instanceof LivingEntity) && this.random.nextInt(10) != 0 && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+                if (!this.level().isClientSide() && !(pSource.getEntity() instanceof LivingEntity) && this.random.nextInt(10) != 0 && FightOrDieMutationsConfig.SERVER.mutated_enderman_teleportation.get()) {
                     this.teleport();
                 }
 
@@ -270,7 +270,7 @@ public class AssimilatedEndermanEntity extends AdvancedAssimilated implements Ge
                 boolean flag1 = flag && this.hurtWithCleanWater(pSource, (ThrownPotion)pSource.getDirectEntity(), pAmount);
 
                 for(int i = 0; i < 64; ++i) {
-                    if (this.teleport() && FightOrDieMutationsConfig.SERVER.assimilated_enderman_teleportation.get()) {
+                    if (this.teleport() && FightOrDieMutationsConfig.SERVER.mutated_enderman_teleportation.get()) {
                         return true;
                     }
                 }

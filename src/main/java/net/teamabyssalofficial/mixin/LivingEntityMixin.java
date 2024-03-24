@@ -5,7 +5,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.LivingEntity;
-import net.teamabyssalofficial.constants.PossibleAssimilated;
+import net.teamabyssalofficial.constants.PossibleMutated;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin implements PossibleAssimilated {
+public class LivingEntityMixin implements PossibleMutated {
     @Unique
     private SynchedEntityData dataTracker(){
         return ((LivingEntity) (Object) this).getEntityData();

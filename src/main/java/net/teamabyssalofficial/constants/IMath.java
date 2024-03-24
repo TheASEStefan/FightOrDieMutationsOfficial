@@ -7,9 +7,8 @@ import net.minecraft.Util;
 /*
 @Author = ASEStefan, Minecraft
 @Name = Math and Animation Formulas
-@Description = This class adds various formulas that might already be in the game but I just want to make my own ones around the ones already existing
-because I will animate models with these formulas, just like I do with Molang in Blockbench.
-@Idea = Me, Molang
+@Description = This class adds various formulas that might already be in the game but I just want to make my own ones around the ones already existing.
+@Idea = Me
  */
 
 public class IMath extends IMathHelper {

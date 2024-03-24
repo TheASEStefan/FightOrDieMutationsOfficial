@@ -33,10 +33,10 @@ import net.teamabyssalofficial.registry.EffectRegistry;
 import net.teamabyssalofficial.registry.EntityRegistry;
 import net.teamabyssalofficial.registry.WorldDataRegistry;
 
-public class AdvancedAssimilated extends Monster {
-    public static final EntityDataAccessor<Integer> AGGRESSION_TICKS = SynchedEntityData.defineId(AdvancedAssimilated.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> PERSISTENT = SynchedEntityData.defineId(AdvancedAssimilated.class, EntityDataSerializers.BOOLEAN);
-    public AdvancedAssimilated(EntityType<? extends Monster> type, Level level) {
+public class AdvancedMutated extends Monster {
+    public static final EntityDataAccessor<Integer> AGGRESSION_TICKS = SynchedEntityData.defineId(AdvancedMutated.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> PERSISTENT = SynchedEntityData.defineId(AdvancedMutated.class, EntityDataSerializers.BOOLEAN);
+    public AdvancedMutated(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 20.0F);
         this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -2.0F);
@@ -128,10 +128,10 @@ public class AdvancedAssimilated extends Monster {
     }
 
     private boolean targetPredicate(LivingEntity liv) {
-        return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
+        return !(liv instanceof Mutated || liv instanceof AdvancedMutated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
     }
 
-    public static boolean checkMonsterAdvancedAssimilatedRules(EntityType<? extends AdvancedAssimilated> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
+    public static boolean checkMonsterAdvancedAssimilatedRules(EntityType<? extends AdvancedMutated> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
 
         WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) levelAccessor.getLevel());
         int currentPhase = worldDataRegistry.getPhase();

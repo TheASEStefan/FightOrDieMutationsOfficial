@@ -88,8 +88,8 @@ public class AssimilatedCreeperHeadEntity extends Head implements GeoEntity, Hun
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_creeper_head_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_creeper_head_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.mutated_creeper_head_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.mutated_creeper_head_damage.get())
                 .add(Attributes.ARMOR, 1D);
 
     }
@@ -108,7 +108,7 @@ public class AssimilatedCreeperHeadEntity extends Head implements GeoEntity, Hun
             this.EvolveIntoSimCreeper(this);
         }
 
-        if (this.isAlive() && this.getTarget() != null && FightOrDieMutationsConfig.SERVER.assimilated_creeper_head_explosion.get())
+        if (this.isAlive() && this.getTarget() != null && FightOrDieMutationsConfig.SERVER.mutated_creeper_head_explosion.get())
             if (this.distanceTo(this.getTarget()) <= 1.15F)
                 this.explodeThis();
         super.tick();

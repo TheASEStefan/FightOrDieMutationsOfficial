@@ -27,10 +27,10 @@ import net.teamabyssalofficial.entity.ai.*;
 import net.teamabyssalofficial.registry.*;
 
 
-public class Assimilated extends Monster {
+public class Mutated extends Monster {
 
 
-    public Assimilated(EntityType<? extends Monster> type, Level level) {
+    public Mutated(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 10.0F);
         this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0F);
@@ -79,10 +79,10 @@ public class Assimilated extends Monster {
     }
 
     private boolean targetPredicate(LivingEntity liv) {
-        return !(liv instanceof Assimilated || liv instanceof AdvancedAssimilated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
+        return !(liv instanceof Mutated || liv instanceof AdvancedMutated || liv instanceof Parasite || liv instanceof Infector || liv instanceof Head || liv instanceof Animal || liv instanceof Squid || liv instanceof ArmorStand || liv instanceof AbstractFish || liv instanceof Bat || FightOrDieMutationsConfig.SERVER.blacklist.get().contains(liv.getEncodeId()));
     }
 
-    public static boolean checkMonsterAssimilatedRules(EntityType<? extends Assimilated> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
+    public static boolean checkMonsterAssimilatedRules(EntityType<? extends Mutated> entityType, ServerLevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource source) {
 
         WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) levelAccessor.getLevel());
         int currentPhase = worldDataRegistry.getPhase();

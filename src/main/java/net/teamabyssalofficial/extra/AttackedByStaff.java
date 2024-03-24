@@ -38,7 +38,7 @@ public class AttackedByStaff {
             if (event.getSource().getEntity() instanceof Player player && entity != null && !world.isClientSide) {
                 if (player.getMainHandItem() != ItemStack.EMPTY && player.getMainHandItem().getItem() == ItemRegistry.ASSIMILATION_STAFF.get()) {
 
-                    if (entity instanceof Zombie zombie && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_human_assimilation.get()) {
+                    if (entity instanceof Zombie zombie && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_human_mutation.get()) {
                         AssimilatedHumanEntity assimilatedHumanEntity = EntityRegistry.ASSIMILATED_HUMAN.get().create(world);
                         assert assimilatedHumanEntity != null;
                         assimilatedHumanEntity.moveTo(x, y, z);
@@ -49,7 +49,7 @@ public class AttackedByStaff {
                             server.sendParticles(ParticleTypes.EXPLOSION, zombie.getX(), zombie.getY() + 1, zombie.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
-                    else if (entity instanceof Creeper creeper && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_creeper_assimilation.get()) {
+                    else if (entity instanceof Creeper creeper && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_creeper_mutation.get()) {
                         AssimilatedCreeperEntity assimilatedCreeperEntity = EntityRegistry.ASSIMILATED_CREEPER.get().create(world);
                         assert assimilatedCreeperEntity != null;
                         assimilatedCreeperEntity.moveTo(x, y, z);
@@ -60,7 +60,7 @@ public class AttackedByStaff {
                             server.sendParticles(ParticleTypes.EXPLOSION, creeper.getX(), creeper.getY() + 1, creeper.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
-                    else if (entity instanceof Villager villager && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_villager_assimilation.get()) {
+                    else if (entity instanceof Villager villager && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_villager_mutation.get()) {
                         AssimilatedVillagerEntity assimilatedVillagerEntity = EntityRegistry.ASSIMILATED_VILLAGER.get().create(world);
                         assert assimilatedVillagerEntity != null;
                         assimilatedVillagerEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -71,7 +71,7 @@ public class AttackedByStaff {
                             server.sendParticles(ParticleTypes.EXPLOSION, villager.getX(), villager.getY() + 1, villager.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
-                    else if (entity instanceof Cow cow && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_cow_assimilation.get()) {
+                    else if (entity instanceof Cow cow && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_cow_mutation.get()) {
                         AssimilatedCowEntity assimilatedCowEntity = EntityRegistry.ASSIMILATED_COW.get().create(world);
                         assert assimilatedCowEntity != null;
                         assimilatedCowEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -82,7 +82,7 @@ public class AttackedByStaff {
                             server.sendParticles(ParticleTypes.EXPLOSION, cow.getX(), cow.getY() + 1, cow.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
-                    else if (entity instanceof Sheep sheep && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_sheep_assimilation.get()) {
+                    else if (entity instanceof Sheep sheep && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_sheep_mutation.get()) {
                         AssimilatedSheepEntity assimilatedSheepEntity = EntityRegistry.ASSIMILATED_SHEEP.get().create(world);
                         assert assimilatedSheepEntity != null;
                         assimilatedSheepEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -93,7 +93,7 @@ public class AttackedByStaff {
                             server.sendParticles(ParticleTypes.EXPLOSION, sheep.getX(), sheep.getY() + 1, sheep.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
-                    else if (entity instanceof Pig pig && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_pig_assimilation.get()) {
+                    else if (entity instanceof Pig pig && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_pig_mutation.get()) {
                         AssimilatedPigEntity assimilatedPigEntity = EntityRegistry.ASSIMILATED_PIG.get().create(world);
                         assert assimilatedPigEntity != null;
                         assimilatedPigEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -104,7 +104,7 @@ public class AttackedByStaff {
                             server.sendParticles(ParticleTypes.EXPLOSION, pig.getX(), pig.getY() + 1, pig.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
-                    else if (entity instanceof Fox fox && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_fox_assimilation.get()) {
+                    else if (entity instanceof Fox fox && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_fox_mutation.get()) {
                         AssimilatedFoxEntity assimilatedFoxEntity = EntityRegistry.ASSIMILATED_FOX.get().create(world);
                         assert assimilatedFoxEntity != null;
                         assimilatedFoxEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -115,7 +115,7 @@ public class AttackedByStaff {
                             server.sendParticles(ParticleTypes.EXPLOSION, fox.getX(), fox.getY() + 1, fox.getZ(), 3, 0.4, 1.0, 0.4, 0);
                         }
                     }
-                    else if (entity instanceof EnderMan enderMan && !world.isClientSide && FightOrDieMutationsConfig.SERVER.assimilated_enderman_assimilation.get()) {
+                    else if (entity instanceof EnderMan enderMan && !world.isClientSide && FightOrDieMutationsConfig.SERVER.mutated_enderman_mutation.get()) {
                         AssimilatedEndermanEntity assimilatedEndermanEntity = EntityRegistry.ASSIMILATED_ENDERMAN.get().create(world);
                         assert assimilatedEndermanEntity != null;
                         assimilatedEndermanEntity.moveTo(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());

@@ -42,33 +42,33 @@ public class LivingSpawnedModifications {
             Villager abstractVillager = (Villager) event.getEntity();
             abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Infector.class, 16.0F, 0.7F, 0.75F));
             abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Parasite.class, 16.0F, 0.7F, 0.75F));
-            abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Assimilated.class, 16.0F, 0.7F, 0.75F));
+            abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Mutated.class, 16.0F, 0.7F, 0.75F));
             abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Head.class, 16.0F, 0.7F, 0.75F));
-            abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, AdvancedAssimilated.class, 16.0F, 0.7F, 0.75F));
+            abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, AdvancedMutated.class, 16.0F, 0.7F, 0.75F));
         }
         else if (event.getEntity() instanceof WanderingTrader) {
             WanderingTrader wanderingTraderEntity = (WanderingTrader) event.getEntity();
             wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Infector.class, 16.0F, 0.7F, 0.75F));
             wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Parasite.class, 16.0F, 0.7F, 0.75F));
-            wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Assimilated.class, 16.0F, 0.7F, 0.75F));
+            wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Mutated.class, 16.0F, 0.7F, 0.75F));
             wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Head.class, 16.0F, 0.7F, 0.75F));
-            wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, AdvancedAssimilated.class, 16.0F, 0.7F, 0.75F));
+            wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, AdvancedMutated.class, 16.0F, 0.7F, 0.75F));
         }
         else if (event.getEntity() instanceof Zombie) {
             Zombie zombie = (Zombie) event.getEntity();
             zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, Infector.class, true));
             zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, Parasite.class, true));
-            zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, Assimilated.class, true));
+            zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, Mutated.class, true));
             zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, Head.class, true));
-            zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, AdvancedAssimilated.class, true));
+            zombie.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(zombie, AdvancedMutated.class, true));
         }
         else if (event.getEntity() instanceof IronGolem) {
             IronGolem ironGolem = (IronGolem) event.getEntity();
             ironGolem.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(ironGolem, Infector.class, true));
             ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Parasite.class, true));
-            ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Assimilated.class, true));
+            ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Mutated.class, true));
             ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, Head.class, true));
-            ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, AdvancedAssimilated.class, true));
+            ironGolem.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(ironGolem, AdvancedMutated.class, true));
         }
         else if (event.getEntity() instanceof AssimilatedHumanHeadEntity) {
             AssimilatedHumanHeadEntity assimilatedHumanHeadEntity = (AssimilatedHumanHeadEntity) event.getEntity();

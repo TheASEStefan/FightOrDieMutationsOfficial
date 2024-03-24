@@ -5,8 +5,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.teamabyssalofficial.entity.categories.AdvancedAssimilated;
-import net.teamabyssalofficial.entity.categories.Assimilated;
+import net.teamabyssalofficial.entity.categories.AdvancedMutated;
+import net.teamabyssalofficial.entity.categories.Mutated;
 import net.teamabyssalofficial.entity.categories.Infector;
 import net.teamabyssalofficial.entity.categories.Parasite;
 import net.teamabyssalofficial.fight_or_die.FightOrDieMutations;
@@ -21,16 +21,16 @@ public class SpawnPlacementEvent {
 
         event.register(EntityRegistry.MALRUPTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Infector::checkMonsterInfectorRules, SpawnPlacementRegisterEvent.Operation.AND);
 
-        event.register(EntityRegistry.ASSIMILATED_HUMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
-        event.register(EntityRegistry.ASSIMILATED_VILLAGER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
-        event.register(EntityRegistry.ASSIMILATED_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
-        event.register(EntityRegistry.ASSIMILATED_SHEEP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
-        event.register(EntityRegistry.ASSIMILATED_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
-        event.register(EntityRegistry.ASSIMILATED_FOX.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
-        event.register(EntityRegistry.ASSIMILATED_ADVENTURER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Assimilated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_HUMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mutated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_VILLAGER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mutated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mutated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_SHEEP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mutated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mutated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_FOX.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mutated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_ADVENTURER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mutated::checkMonsterAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
 
-        event.register(EntityRegistry.ASSIMILATED_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AdvancedAssimilated::checkMonsterAdvancedAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
-        event.register(EntityRegistry.ASSIMILATED_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AdvancedAssimilated::checkMonsterAdvancedAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AdvancedMutated::checkMonsterAdvancedAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityRegistry.ASSIMILATED_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AdvancedMutated::checkMonsterAdvancedAssimilatedRules, SpawnPlacementRegisterEvent.Operation.AND);
 
 
     }

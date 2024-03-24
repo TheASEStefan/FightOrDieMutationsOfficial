@@ -22,7 +22,7 @@ public class ParasiteKillsBuffEvent {
             Level world = entity.level();
             WorldDataRegistry worldDataRegistry = WorldDataRegistry.getWorldDataRegistry((ServerLevel) world);
             int currentPhase = worldDataRegistry.getPhase();
-                if (!world.isClientSide && (entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primordial || entity instanceof Developed)) {
+                if (!world.isClientSide && (entity instanceof Parasite || entity instanceof Head || entity instanceof Mutated || entity instanceof Infector || entity instanceof AdvancedMutated || entity instanceof Primordial || entity instanceof Developed)) {
                     if (currentPhase >= 3 && Math.random() <= 0.25) {
                         entity.addEffect(new MobEffectInstance(EffectRegistry.FURY.get(), 400, 0), entity);
                         entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0), entity);

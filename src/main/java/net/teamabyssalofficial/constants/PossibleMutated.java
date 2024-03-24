@@ -1,6 +1,6 @@
 package net.teamabyssalofficial.constants;
 
-public interface PossibleAssimilated {
+public interface PossibleMutated {
     int IgetAssimilationProgress();
     void IsetAssimilationProgress(int i);
 }

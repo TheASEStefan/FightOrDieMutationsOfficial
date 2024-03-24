@@ -24,7 +24,7 @@ public class Germilis extends MobEffect {
     }
 
     public void applyEffectTick(LivingEntity entity, int intense) {
-        if (!(entity instanceof Parasite || entity instanceof Head || entity instanceof Assimilated || entity instanceof Infector || entity instanceof AdvancedAssimilated || entity instanceof Primordial || entity instanceof Developed)) {
+        if (!(entity instanceof Parasite || entity instanceof Head || entity instanceof Mutated || entity instanceof Infector || entity instanceof AdvancedMutated || entity instanceof Primordial || entity instanceof Developed)) {
             if (this == EffectRegistry.GERMILIS.get()) {
                 entity.hurt(DamageTypeRegistry.germilis_damage(entity), 1.0F);
             }

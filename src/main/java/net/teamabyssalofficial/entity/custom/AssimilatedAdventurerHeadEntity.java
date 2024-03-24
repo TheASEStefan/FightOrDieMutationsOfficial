@@ -84,8 +84,8 @@ public class AssimilatedAdventurerHeadEntity extends Head implements GeoEntity, 
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.15D)
-                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.assimilated_adventurer_head_health.get())
-                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.assimilated_adventurer_head_damage.get())
+                .add(Attributes.MAX_HEALTH, FightOrDieMutationsConfig.SERVER.mutated_player_head_health.get())
+                .add(Attributes.ATTACK_DAMAGE, FightOrDieMutationsConfig.SERVER.mutated_player_head_damage.get())
                 .add(Attributes.ARMOR, 1D);
 
     }
